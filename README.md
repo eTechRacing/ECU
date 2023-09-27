@@ -1,4 +1,7 @@
-# ADCAN
+# SHIELD
+
+ADCAN files moved to ADCAN-Legacy branch
+
 _Pendent de publicar en angles
 
 La shield ha de ser una placa versàtil i robusta que serveixi per implementar fàcilment elements comuns que comparteixen diverses plaques. L’avantatge d’implementar una shield és la de disposar d’una base coneguda, provada i fiable per, 
