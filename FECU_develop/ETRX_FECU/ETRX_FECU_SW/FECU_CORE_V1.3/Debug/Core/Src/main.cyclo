@@ -1,0 +1,13 @@
+../Core/Src/main.c:98:5:main	1
+../Core/Src/main.c:160:6:SystemClock_Config	4
+../Core/Src/main.c:215:13:MX_ADC1_Init	9
+../Core/Src/main.c:321:13:MX_CAN1_Init	2
+../Core/Src/main.c:358:13:MX_CAN2_Init	2
+../Core/Src/main.c:395:13:MX_TIM5_Init	4
+../Core/Src/main.c:438:13:MX_DMA_Init	1
+../Core/Src/main.c:456:13:MX_GPIO_Init	1
+../Core/Src/main.c:491:6:HAL_CAN_RxFifo0MsgPendingCallback	1
+../Core/Src/main.c:499:6:HAL_CAN_RxFifo1MsgPendingCallback	2
+../Core/Src/main.c:519:6:HAL_ADC_ConvCpltCallback	2
+../Core/Src/main.c:546:6:MPU_Config	1
+../Core/Src/main.c:577:6:Error_Handler	1

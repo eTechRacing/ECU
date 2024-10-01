@@ -1,0 +1,90 @@
+Removed Pin From Net: NetName=PC1 Pin=J101-11
+Removed Pin From Net: NetName=PC2 Pin=J101-13
+Removed Pin From Net: NetName=PC3 Pin=J101-15
+Removed Pin From Net: NetName=PA0 Pin=J101-17
+Removed Pin From Net: NetName=PA1 Pin=J101-19
+Removed Pin From Net: NetName=AGND Pin=J101-20
+Removed Pin From Net: NetName=PA2 Pin=J101-21
+Removed Pin From Net: NetName=VDDA Pin=J101-22
+Removed Pin From Net: NetName=VDDA Pin=J101-24
+Removed Pin From Net: NetName=PA6 Pin=J101-26
+Removed Pin From Net: NetName=PA5 Pin=J101-27
+Removed Pin From Net: NetName=PA7 Pin=J101-28
+Removed Pin From Net: NetName=GND Pin=J102-1
+Removed Pin From Net: NetName=I2C2_SDA Pin=J102-2
+Removed Pin From Net: NetName=I2C2_SCL Pin=J102-4
+Removed Pin From Net: NetName=PE10 Pin=J102-16
+Removed Pin From Net: NetName=PE9 Pin=J102-18
+Removed Pin From Net: NetName=PE8 Pin=J102-20
+Removed Pin From Net: NetName=VDDA Pin=J102-27
+Removed Pin From Net: NetName=PD8 Pin=J103-5
+Removed Pin From Net: NetName=GND Pin=J103-6
+Removed Pin From Net: NetName=PD9 Pin=J103-7
+Removed Pin From Net: NetName=PD10 Pin=J103-9
+Removed Pin From Net: NetName=PD15 Pin=J103-15
+Removed Pin From Net: NetName=PC6 Pin=J103-17
+Removed Pin From Net: NetName=LV tr Pin=J103-18
+Removed Pin From Net: NetName=PC7 Pin=J103-19
+Removed Pin From Net: NetName=LV tr Pin=J103-20
+Removed Pin From Net: NetName=PC8 Pin=J103-21
+Removed Pin From Net: NetName=LV tr Pin=J103-22
+Removed Pin From Net: NetName=PC9 Pin=J103-23
+Removed Pin From Net: NetName=LV tr Pin=J103-24
+Removed Pin From Net: NetName=PA8 Pin=J103-25
+Removed Pin From Net: NetName=LV tr Pin=J103-26
+Removed Pin From Net: NetName=VDDA Pin=J103-28
+Removed Pin From Net: NetName=+5 Pin=J104-2
+Removed Pin From Net: NetName=+5 Pin=J104-4
+Removed Pin From Net: NetName=+5 Pin=J104-6
+Removed Pin From Net: NetName=ISC1_SCL Pin=J104-15
+Removed Pin From Net: NetName=I2C1_SDA Pin=J104-17
+Removed Pin From Net: NetName=LV tr Pin=J104-20
+Removed Pin From Net: NetName=LV tr Pin=J104-22
+Removed Pin From Net: NetName=LV tr Pin=J104-24
+Removed Pin From Net: NetName=LV tr Pin=J104-26
+Removed Pin From Net: NetName=VDDA Pin=J104-28
+Added Pin To Net: NetName=PA5 Pin=J101-1
+Added Pin To Net: NetName=PA7 Pin=J101-2
+Added Pin To Net: NetName=PA6 Pin=J101-4
+Added Pin To Net: NetName=VDDA Pin=J101-6
+Added Pin To Net: NetName=PA2 Pin=J101-7
+Added Pin To Net: NetName=VDDA Pin=J101-8
+Added Pin To Net: NetName=PA1 Pin=J101-9
+Added Pin To Net: NetName=AGND Pin=J101-10
+Added Pin To Net: NetName=PA0 Pin=J101-11
+Added Pin To Net: NetName=PC3 Pin=J101-13
+Added Pin To Net: NetName=PC2 Pin=J101-15
+Added Pin To Net: NetName=PC1 Pin=J101-17
+Added Pin To Net: NetName=VDDA Pin=J102-1
+Added Pin To Net: NetName=PE8 Pin=J102-8
+Added Pin To Net: NetName=PE9 Pin=J102-10
+Added Pin To Net: NetName=PE10 Pin=J102-12
+Added Pin To Net: NetName=I2C2_SCL Pin=J102-26
+Added Pin To Net: NetName=GND Pin=J102-27
+Added Pin To Net: NetName=I2C2_SDA Pin=J102-28
+Added Pin To Net: NetName=VDDA Pin=J103-2
+Added Pin To Net: NetName=PA8 Pin=J103-3
+Added Pin To Net: NetName=LV tr Pin=J103-4
+Added Pin To Net: NetName=PC9 Pin=J103-5
+Added Pin To Net: NetName=LV tr Pin=J103-6
+Added Pin To Net: NetName=PC8 Pin=J103-7
+Added Pin To Net: NetName=LV tr Pin=J103-8
+Added Pin To Net: NetName=PC7 Pin=J103-9
+Added Pin To Net: NetName=LV tr Pin=J103-10
+Added Pin To Net: NetName=PC6 Pin=J103-11
+Added Pin To Net: NetName=LV tr Pin=J103-12
+Added Pin To Net: NetName=PD15 Pin=J103-13
+Added Pin To Net: NetName=PD8 Pin=J103-21
+Added Pin To Net: NetName=PD9 Pin=J103-23
+Added Pin To Net: NetName=PD10 Pin=J103-25
+Added Pin To Net: NetName=GND Pin=J103-28
+Added Pin To Net: NetName=VDDA Pin=J104-2
+Added Pin To Net: NetName=LV tr Pin=J104-4
+Added Pin To Net: NetName=LV tr Pin=J104-6
+Added Pin To Net: NetName=LV tr Pin=J104-8
+Added Pin To Net: NetName=LV tr Pin=J104-10
+Added Pin To Net: NetName=I2C1_SDA Pin=J104-11
+Added Pin To Net: NetName=ISC1_SCL Pin=J104-13
+Added Pin To Net: NetName=+5 Pin=J104-24
+Added Pin To Net: NetName=+5 Pin=J104-26
+Added Pin To Net: NetName=+5 Pin=J104-28

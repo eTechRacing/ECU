@@ -1,0 +1,15 @@
+../Core/Src/can_comunication.c:28:7:filtercanconfig	1
+../Core/Src/can_comunication.c:47:7:message_cantx_AIR_State	1
+../Core/Src/can_comunication.c:63:7:message_cantx_Temperature_State	1
+../Core/Src/can_comunication.c:85:7:message_cantx_Charger_Parameters	1
+../Core/Src/can_comunication.c:103:7:message_cantx_Keep_Alive	1
+../Core/Src/can_comunication.c:121:7:message_cantx_Shutdown	1
+../Core/Src/can_comunication.c:137:7:message_cantx_SoC_SoH	1
+../Core/Src/can_comunication.c:160:10:combined_bits	1
+../Core/Src/can_comunication.c:178:7:message_cantx_Voltage_State	1
+../Core/Src/can_comunication.c:239:16:uncombined_bytes	1
+../Core/Src/can_comunication.c:260:7:message_canrx_Syncronism	2
+../Core/Src/can_comunication.c:268:7:message_cantx_FECU_Data1	1
+../Core/Src/can_comunication.c:288:7:message_cantx_FECU_DATA2	1
+../Core/Src/can_comunication.c:306:7:message_cantx_FECU_SDC	1
+../Core/Src/can_comunication.c:319:7:message_cantx_FECU_Keep_Alive	1

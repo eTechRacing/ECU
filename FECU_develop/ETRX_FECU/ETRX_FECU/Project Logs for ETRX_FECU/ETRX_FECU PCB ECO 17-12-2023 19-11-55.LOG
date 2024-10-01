@@ -1,0 +1,56 @@
+Added Component: Designator=J1(J_NanoFit_2x6_V)
+Added Component: Designator=J2(J_NanoFit_2x6_V)
+Added Component: Designator=J3(J_NanoFit_2x6_V)
+Added Component: Designator=J4(J_NanoFit_2x6_V)
+Added Pin To Net: NetName=S1 Pin=J1-1
+Added Pin To Net: NetName=S2 Pin=J1-2
+Added Pin To Net: NetName=S3 Pin=J1-3
+Added Pin To Net: NetName=S4 Pin=J1-4
+Added Pin To Net: NetName=S5 Pin=J1-5
+Added Pin To Net: NetName=S6 Pin=J1-6
+Added Pin To Net: NetName=NetF1_1 Pin=J1-7
+Added Pin To Net: NetName=NetF2_1 Pin=J1-8
+Added Pin To Net: NetName=NetF3_1 Pin=J1-9
+Added Pin To Net: NetName=AGND Pin=J1-10
+Added Pin To Net: NetName=AGND Pin=J1-11
+Added Pin To Net: NetName=AGND Pin=J1-12
+Added Pin To Net: NetName=S7 Pin=J2-1
+Added Pin To Net: NetName=S8 Pin=J2-2
+Added Pin To Net: NetName=S9 Pin=J2-3
+Added Pin To Net: NetName=S10 Pin=J2-4
+Added Pin To Net: NetName=S11 Pin=J2-5
+Added Pin To Net: NetName=S12 Pin=J2-6
+Added Pin To Net: NetName=NetF4_1 Pin=J2-7
+Added Pin To Net: NetName=NetF5_1 Pin=J2-8
+Added Pin To Net: NetName=NetF6_1 Pin=J2-9
+Added Pin To Net: NetName=GND Pin=J2-10
+Added Pin To Net: NetName=AGND Pin=J2-11
+Added Pin To Net: NetName=AGND Pin=J2-12
+Added Pin To Net: NetName=VDDA Pin=J3-1
+Added Pin To Net: NetName=ISC1_SCL Pin=J3-2
+Added Pin To Net: NetName=I2C1_SDA Pin=J3-3
+Added Pin To Net: NetName=GND Pin=J3-4
+Added Pin To Net: NetName=I2C2_SCL Pin=J3-5
+Added Pin To Net: NetName=I2C2_SDA Pin=J3-6
+Added Pin To Net: NetName=PA5 Pin=J3-7
+Added Pin To Net: NetName=PA6 Pin=J3-8
+Added Pin To Net: NetName=PA7 Pin=J3-9
+Added Pin To Net: NetName=PD8 Pin=J3-10
+Added Pin To Net: NetName=PD9 Pin=J3-11
+Added Pin To Net: NetName=PD10 Pin=J3-12
+Added Pin To Net: NetName=PA8 Pin=J4-1
+Added Pin To Net: NetName=PC9 Pin=J4-2
+Added Pin To Net: NetName=PC8 Pin=J4-3
+Added Pin To Net: NetName=PC7 Pin=J4-4
+Added Pin To Net: NetName=PC6 Pin=J4-5
+Added Pin To Net: NetName=PD15 Pin=J4-6
+Added Pin To Net: NetName=LV tr Pin=J4-7
+Added Pin To Net: NetName=VDDA Pin=J4-8
+Added Pin To Net: NetName=+5 Pin=J4-9
+Added Pin To Net: NetName=GND Pin=J4-10
+Added Pin To Net: NetName=GND Pin=J4-11
+Added Pin To Net: NetName=GND Pin=J4-12
+Added Member To Class: ClassName=ETRX_FECU Member=Component J1 1053101112
+Added Member To Class: ClassName=ETRX_FECU Member=Component J2 1053101112
+Added Member To Class: ClassName=ETRX_FECU Member=Component J3 1053101112
+Added Member To Class: ClassName=ETRX_FECU Member=Component J4 1053101112

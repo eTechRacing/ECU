@@ -1,0 +1,64 @@
+Added Pin To Net: NetName=GND Pin=J1-4
+Added Pin To Net: NetName=GND Pin=J1-5
+Added Pin To Net: NetName=GND Pin=J1-6
+Added Pin To Net: NetName=GND Pin=J2-11
+Added Pin To Net: NetName=GND Pin=J2-12
+Add Pin To Net: Unknown Pin: Pin U1-3V3_1
+Add Pin To Net: Unknown Pin: Pin U1-3V3_2
+Add Pin To Net: Unknown Pin: Pin U1-3V3_3
+Add Pin To Net: Unknown Pin: Pin U1-3V3_4
+Add Pin To Net: Unknown Pin: Pin U1-3V3_5
+Add Pin To Net: Unknown Pin: Pin U1-3V3_6
+Add Pin To Net: Unknown Pin: Pin U1-3V3_7
+Add Pin To Net: Unknown Pin: Pin U1-3V3_8
+Add Pin To Net: Unknown Pin: Pin U1-5V_1
+Add Pin To Net: Unknown Pin: Pin U1-5V_2
+Add Pin To Net: Unknown Pin: Pin U1-5V_3
+Add Pin To Net: Unknown Pin: Pin U1-5V_4
+Add Pin To Net: Unknown Pin: Pin U1-5V_5
+Add Pin To Net: Unknown Pin: Pin U1-5V_6
+Add Pin To Net: Unknown Pin: Pin U1-5V_7
+Add Pin To Net: Unknown Pin: Pin U1-GND_1
+Add Pin To Net: Unknown Pin: Pin U1-GND_2
+Add Pin To Net: Unknown Pin: Pin U1-GND_3
+Add Pin To Net: Unknown Pin: Pin U1-GND_4
+Add Pin To Net: Unknown Pin: Pin U1-GND_5
+Add Pin To Net: Unknown Pin: Pin U1-GND_6
+Add Pin To Net: Unknown Pin: Pin U1-GND_7
+Add Pin To Net: Unknown Pin: Pin U1-GND_8
+Add Pin To Net: Unknown Pin: Pin U1-GND_9
+Add Pin To Net: Unknown Pin: Pin U1-GND_10
+Add Pin To Net: Unknown Pin: Pin U1-GND_11
+Add Pin To Net: Unknown Pin: Pin U1-LVtr_1
+Add Pin To Net: Unknown Pin: Pin U1-LVtr_2
+Add Pin To Net: Unknown Pin: Pin U1-LVtr_3
+Add Pin To Net: Unknown Pin: Pin U1-LVtr_4
+Add Pin To Net: Unknown Pin: Pin U1-PA0
+Add Pin To Net: Unknown Pin: Pin U1-PA1
+Add Pin To Net: Unknown Pin: Pin U1-PA2
+Add Pin To Net: Unknown Pin: Pin U1-PA5
+Add Pin To Net: Unknown Pin: Pin U1-PA6
+Add Pin To Net: Unknown Pin: Pin U1-PA7
+Add Pin To Net: Unknown Pin: Pin U1-PA8
+Add Pin To Net: Unknown Pin: Pin U1-PB1
+Add Pin To Net: Unknown Pin: Pin U1-PB2
+Add Pin To Net: Unknown Pin: Pin U1-PB6
+Add Pin To Net: Unknown Pin: Pin U1-PB7
+Add Pin To Net: Unknown Pin: Pin U1-PB10
+Add Pin To Net: Unknown Pin: Pin U1-PB11
+Add Pin To Net: Unknown Pin: Pin U1-PC1
+Add Pin To Net: Unknown Pin: Pin U1-PC2
+Add Pin To Net: Unknown Pin: Pin U1-PC3
+Add Pin To Net: Unknown Pin: Pin U1-PC6
+Add Pin To Net: Unknown Pin: Pin U1-PC7
+Add Pin To Net: Unknown Pin: Pin U1-PC8
+Add Pin To Net: Unknown Pin: Pin U1-PC9
+Add Pin To Net: Unknown Pin: Pin U1-PD8
+Add Pin To Net: Unknown Pin: Pin U1-PD9
+Add Pin To Net: Unknown Pin: Pin U1-PD10
+Add Pin To Net: Unknown Pin: Pin U1-PD15
+Add Pin To Net: Unknown Pin: Pin U1-PE7
+Add Pin To Net: Unknown Pin: Pin U1-PE8
+Add Pin To Net: Unknown Pin: Pin U1-PE9
+Add Pin To Net: Unknown Pin: Pin U1-PE10
+Add Class Member: Failed to add class member : Component U1 ETR_SHIELD_III

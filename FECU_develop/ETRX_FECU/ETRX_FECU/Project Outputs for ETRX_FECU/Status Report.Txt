@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [ETRX_FECU.PcbDoc]
+   Generated File[ETRX_FECU.TXT]
+   Generated File[ETRX_FECU.LDP]
+   Generated File[ETRX_FECU.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 10:31:21 On 12/04/2024

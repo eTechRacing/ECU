@@ -1,0 +1,12 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [PlacaSensor_MPXV7002.PcbDoc]
+   Generated File[PlacaSensor_MPXV7002.TXT]
+   Generated File[PlacaSensor_MPXV7002.LDP]
+   Generated File[PlacaSensor_MPXV7002.DRR]
+
+
+Files Generated   : 3
+Documents Printed : 0
+
+Finished Output Generation At 14:39:16 On 31/01/2024

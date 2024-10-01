@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=BL_Control Pin=J4-4
+Removed Pin From Net: NetName=BL_LEDs Pin=J4-5
+Added Pin To Net: NetName=BL_Control Pin=J4-10
+Added Pin To Net: NetName=BL_LEDs Pin=J4-11
+Add Net: Net with name "AGND" already exists

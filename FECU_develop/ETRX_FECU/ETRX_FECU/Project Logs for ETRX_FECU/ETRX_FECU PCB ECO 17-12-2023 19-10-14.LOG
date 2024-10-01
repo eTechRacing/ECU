@@ -1,0 +1,8 @@
+Change Component Footprint: Designator=J1 Old Footprint=J_NanoFit_2x6 New Footprint=J_NanoFit_2x6_V
+Change Component Footprint: Designator=J2 Old Footprint=J_NanoFit_2x6 New Footprint=J_NanoFit_2x6_V
+Change Component Footprint: Designator=J3 Old Footprint=J_NanoFit_2x6 New Footprint=J_NanoFit_2x6_V
+Change Component Footprint: Designator=J4 Old Footprint=J_NanoFit_2x6 New Footprint=J_NanoFit_2x6_V
+Change Component Comment : Designator=J1 Old Comment=105314-1112 New Comment=1053101112
+Change Component Comment : Designator=J2 Old Comment=105314-1112 New Comment=1053101112
+Change Component Comment : Designator=J3 Old Comment=105314-1112 New Comment=1053101112
+Change Component Comment : Designator=J4 Old Comment=105314-1112 New Comment=1053101112

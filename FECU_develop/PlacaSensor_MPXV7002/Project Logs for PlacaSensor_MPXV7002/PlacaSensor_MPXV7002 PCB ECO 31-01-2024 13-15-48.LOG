@@ -1,0 +1,21 @@
+Added Component: Designator=TP1(TestPoint)
+Add component (AddParameter): Name = ".Creator"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".PCBcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".SCHcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Category"; Value = "TestPoint"; VariantName = "[No Variations]"
+Added Component: Designator=TP2(TestPoint)
+Add component (AddParameter): Name = ".Creator"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".PCBcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".SCHcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Category"; Value = "TestPoint"; VariantName = "[No Variations]"
+Added Component: Designator=TP3(TestPoint)
+Add component (AddParameter): Name = ".Creator"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".PCBcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".SCHcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Category"; Value = "TestPoint"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+5 Pin=TP1-1
+Added Pin To Net: NetName=GND Pin=TP2-1
+Added Pin To Net: NetName=Vout Pin=TP3-1
+Added Member To Class: ClassName=PlacaSensor_MPXV7002 Member=Component TP1 TestPoint
+Added Member To Class: ClassName=PlacaSensor_MPXV7002 Member=Component TP2 TestPoint
+Added Member To Class: ClassName=PlacaSensor_MPXV7002 Member=Component TP3 TestPoint

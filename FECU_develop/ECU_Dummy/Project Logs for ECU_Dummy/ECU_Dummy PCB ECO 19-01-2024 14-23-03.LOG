@@ -1,0 +1,18 @@
+Added Pin To Net: NetName=J3_1 Pin=J3-1
+Added Pin To Net: NetName=J3_1 Pin=J21-24
+Added Net: Name=J3_1
+Added Pin To Net: NetName=J3_2 Pin=J3-2
+Added Pin To Net: NetName=J3_2 Pin=J21-22
+Added Net: Name=J3_2
+Added Pin To Net: NetName=J3_3 Pin=J3-3
+Added Pin To Net: NetName=J3_3 Pin=J21-20
+Added Net: Name=J3_3
+Added Pin To Net: NetName=J3_4 Pin=J3-4
+Added Pin To Net: NetName=J3_4 Pin=J21-18
+Added Net: Name=J3_4
+Added Pin To Net: NetName=J3_5 Pin=J3-5
+Added Pin To Net: NetName=J3_5 Pin=J21-16
+Added Net: Name=J3_5
+Added Pin To Net: NetName=J3_6 Pin=J3-6
+Added Pin To Net: NetName=J3_6 Pin=J21-14
+Added Net: Name=J3_6

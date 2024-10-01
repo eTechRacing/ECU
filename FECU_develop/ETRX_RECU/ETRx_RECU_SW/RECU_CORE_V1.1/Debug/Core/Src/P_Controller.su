@@ -1,0 +1,2 @@
+../Core/Src/P_Controller.c:12:5:P_Controller_Init	16	static
+../Core/Src/P_Controller.c:17:5:P_Controller_Update	40	static

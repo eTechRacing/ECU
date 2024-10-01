@@ -1,0 +1,7 @@
+Add Net: Net with name "AGND" already exists
+Added Pin To Net: NetName=BL_Control Pin=J4-4
+Added Pin To Net: NetName=BL_Control Pin=J101-9
+Added Net: Name=BL_Control
+Added Pin To Net: NetName=BL_LEDs Pin=J4-5
+Added Pin To Net: NetName=BL_LEDs Pin=J101-7
+Added Net: Name=BL_LEDs

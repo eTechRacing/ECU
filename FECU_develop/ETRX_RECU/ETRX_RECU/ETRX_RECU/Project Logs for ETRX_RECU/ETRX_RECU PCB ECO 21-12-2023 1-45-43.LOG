@@ -1,0 +1,2 @@
+Removed Pin From Net: NetName=VDDA Pin=J103-2
+Add Net: Net with name "AGND" already exists

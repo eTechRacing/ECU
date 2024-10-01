@@ -1,0 +1,3 @@
+Added Component: Designator=TP2(TESTPOINT_WIDE)
+Added Pin To Net: NetName=GND Pin=TP2-1
+Added Member To Class: ClassName=PlacaSensor_MPXV7002 Member=Component TP2 Test Point

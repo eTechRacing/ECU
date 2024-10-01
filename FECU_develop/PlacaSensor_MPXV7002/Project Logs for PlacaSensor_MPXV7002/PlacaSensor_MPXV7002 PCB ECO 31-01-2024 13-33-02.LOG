@@ -1,0 +1,4 @@
+Change Component Footprint: Designator=TP2 Old Footprint=TestPoint New Footprint=TESTPOINT_WIDE
+Change Component Comment : Designator=TP2 Old Comment=TestPoint New Comment=Test Point
+Change Component Kind : Designator=TP2 Old Kind=Standard (No BOM) New Kind=Standard
+Change component parameters: Designator = "TP2" ("TP2"); Footprint = "TestPoint"; UniqueID = "\CMYHIDAJ" ("\CMYHIDAJ")

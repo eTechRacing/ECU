@@ -1,0 +1,109 @@
+Removed Pin From Net: NetName=AGND Pin=J1-4
+Removed Pin From Net: NetName=AGND Pin=J1-5
+Removed Pin From Net: NetName=AGND Pin=J1-6
+Removed Pin From Net: NetName=AGND Pin=J2-11
+Removed Pin From Net: NetName=AGND Pin=J2-12
+Removed Pin From Net: NetName=PA5 Pin=J101-1
+Removed Pin From Net: NetName=PA7 Pin=J101-2
+Removed Pin From Net: NetName=PA6 Pin=J101-4
+Removed Pin From Net: NetName=PA2 Pin=J101-7
+Removed Pin From Net: NetName=PA1 Pin=J101-9
+Removed Pin From Net: NetName=AGND Pin=J101-10
+Removed Pin From Net: NetName=PA0 Pin=J101-11
+Removed Pin From Net: NetName=PC3 Pin=J101-13
+Removed Pin From Net: NetName=PC2 Pin=J101-15
+Removed Pin From Net: NetName=PC1 Pin=J101-17
+Removed Pin From Net: NetName=PB1 Pin=J102-4
+Removed Pin From Net: NetName=PB2 Pin=J102-6
+Removed Pin From Net: NetName=PE7 Pin=J102-8
+Removed Pin From Net: NetName=PE8 Pin=J102-10
+Removed Pin From Net: NetName=PE9 Pin=J102-12
+Removed Pin From Net: NetName=PE10 Pin=J102-14
+Removed Pin From Net: NetName=I2C2_SCL Pin=J102-26
+Removed Pin From Net: NetName=AGND Pin=J102-27
+Removed Pin From Net: NetName=I2C2_SDA Pin=J102-28
+Removed Pin From Net: NetName=PA8 Pin=J103-3
+Removed Pin From Net: NetName=PC9 Pin=J103-5
+Removed Pin From Net: NetName=PC8 Pin=J103-7
+Removed Pin From Net: NetName=PC7 Pin=J103-9
+Removed Pin From Net: NetName=PC6 Pin=J103-11
+Removed Pin From Net: NetName=PD15 Pin=J103-13
+Removed Pin From Net: NetName=PD10 Pin=J103-19
+Removed Pin From Net: NetName=PD9 Pin=J103-21
+Removed Pin From Net: NetName=PD8 Pin=J103-23
+Removed Pin From Net: NetName=AGND Pin=J103-24
+Removed Pin From Net: NetName=LV tr Pin=J104-4
+Removed Pin From Net: NetName=LV tr Pin=J104-6
+Removed Pin From Net: NetName=LV tr Pin=J104-8
+Removed Pin From Net: NetName=LV tr Pin=J104-10
+Removed Pin From Net: NetName=I2C1_SDA Pin=J104-11
+Removed Pin From Net: NetName=ISC1_SCL Pin=J104-13
+Removed Pin From Net: NetName=+5 Pin=J104-24
+Removed Pin From Net: NetName=+5 Pin=J104-26
+Removed Pin From Net: NetName=+5 Pin=J104-28
+Removed Member From Class: ClassName=[1] Shield Member=J101
+Removed Member From Class: ClassName=[1] Shield Member=J102
+Removed Member From Class: ClassName=[1] Shield Member=J103
+Removed Member From Class: ClassName=[1] Shield Member=J104
+Add Pin To Net: Unknown Pin: Pin U1-5V_1
+Add Pin To Net: Unknown Pin: Pin U1-5V_2
+Add Pin To Net: Unknown Pin: Pin U1-5V_3
+Add Pin To Net: Unknown Pin: Pin U1-5V_4
+Add Pin To Net: Unknown Pin: Pin U1-5V_5
+Add Pin To Net: Unknown Pin: Pin U1-5V_6
+Add Pin To Net: Unknown Pin: Pin U1-5V_7
+Add Pin To Net: Unknown Pin: Pin U1-GND_1
+Add Pin To Net: Unknown Pin: Pin U1-GND_2
+Add Pin To Net: Unknown Pin: Pin U1-GND_3
+Add Pin To Net: Unknown Pin: Pin U1-GND_4
+Add Pin To Net: Unknown Pin: Pin U1-GND_5
+Add Pin To Net: Unknown Pin: Pin U1-GND_6
+Add Pin To Net: Unknown Pin: Pin U1-GND_7
+Add Pin To Net: Unknown Pin: Pin U1-GND_8
+Add Pin To Net: Unknown Pin: Pin U1-GND_9
+Add Pin To Net: Unknown Pin: Pin U1-GND_10
+Add Pin To Net: Unknown Pin: Pin U1-GND_11
+Add Pin To Net: Unknown Pin: Pin U1-LVtr_1
+Add Pin To Net: Unknown Pin: Pin U1-LVtr_2
+Add Pin To Net: Unknown Pin: Pin U1-LVtr_3
+Add Pin To Net: Unknown Pin: Pin U1-LVtr_4
+Add Pin To Net: Unknown Pin: Pin U1-PA0
+Add Pin To Net: Unknown Pin: Pin U1-PA1
+Add Pin To Net: Unknown Pin: Pin U1-PA2
+Add Pin To Net: Unknown Pin: Pin U1-PA5
+Add Pin To Net: Unknown Pin: Pin U1-PA6
+Add Pin To Net: Unknown Pin: Pin U1-PA7
+Add Pin To Net: Unknown Pin: Pin U1-PA8
+Add Pin To Net: Unknown Pin: Pin U1-PB1
+Add Pin To Net: Unknown Pin: Pin U1-PB2
+Add Pin To Net: Unknown Pin: Pin U1-PB6
+Add Pin To Net: Unknown Pin: Pin U1-PB7
+Add Pin To Net: Unknown Pin: Pin U1-PB10
+Add Pin To Net: Unknown Pin: Pin U1-PB11
+Add Pin To Net: Unknown Pin: Pin U1-PC1
+Add Pin To Net: Unknown Pin: Pin U1-PC2
+Add Pin To Net: Unknown Pin: Pin U1-PC3
+Add Pin To Net: Unknown Pin: Pin U1-PC6
+Add Pin To Net: Unknown Pin: Pin U1-PC7
+Add Pin To Net: Unknown Pin: Pin U1-PC8
+Add Pin To Net: Unknown Pin: Pin U1-PC9
+Add Pin To Net: Unknown Pin: Pin U1-PD8
+Add Pin To Net: Unknown Pin: Pin U1-PD9
+Add Pin To Net: Unknown Pin: Pin U1-PD10
+Add Pin To Net: Unknown Pin: Pin U1-PD15
+Add Pin To Net: Unknown Pin: Pin U1-PE7
+Add Pin To Net: Unknown Pin: Pin U1-PE8
+Add Pin To Net: Unknown Pin: Pin U1-PE9
+Add Pin To Net: Unknown Pin: Pin U1-PE10
+Change Net Name : Old Net Name=AGND New Net Name=GND
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=RGB(130, 120, 114)
+Added Pin To Net: NetName=+3.3 Pin=J3-1
+Added Pin To Net: NetName=+3.3 Pin=J4-8
+Added Net: Name=+3.3
+Added Pin To Net: NetName=AGND Pin=J1-4
+Added Pin To Net: NetName=AGND Pin=J1-5
+Added Pin To Net: NetName=AGND Pin=J1-6
+Added Pin To Net: NetName=AGND Pin=J2-11
+Added Pin To Net: NetName=AGND Pin=J2-12
+Added Net: Name=AGND
+Add Class Member: Failed to add class member : Component U1 ETR_SHIELD_III

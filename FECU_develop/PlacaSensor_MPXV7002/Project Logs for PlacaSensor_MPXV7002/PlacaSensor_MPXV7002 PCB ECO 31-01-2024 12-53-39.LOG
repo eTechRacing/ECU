@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=GND Pin=MH2-1
+Removed Pin From Net: NetName=GND Pin=MH3-1
+Removed Pin From Net: NetName=GND Pin=MH4-1
+Removed Member From Class: ClassName=PlacaSensor_MPXV7002 Member=MH2
+Removed Member From Class: ClassName=PlacaSensor_MPXV7002 Member=MH3
+Removed Member From Class: ClassName=PlacaSensor_MPXV7002 Member=MH4

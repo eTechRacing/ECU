@@ -1,0 +1,5 @@
+Removed Member From Class: ClassName=[2]Sensors Member=C303
+Add Net: Net with name "AGND" already exists
+Added Member To Class: ClassName=[3]Power Member=Component C303 885012207103
+Added Member To Class: ClassName=[3]Power Member=Component C304 885012207103
+Added Member To Class: ClassName=[2]Sensors Member=Component C? 885012207103

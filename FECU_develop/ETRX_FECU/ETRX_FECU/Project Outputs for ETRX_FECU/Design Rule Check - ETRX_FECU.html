@@ -1,0 +1,449 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD23\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">12/04/2024</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">10:30:12</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc" class="file"><acronym title="C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc">C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">39</td></tr>
+</table>
+</td>
+</table><a name="IDRQ5YU2EXJNYLNGY3GAXXX3PDAKUWY5W4KGWCZJEHX3YDYP1U1WED"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCYP3IFVAB34YEHGZ3TSSIJ1JYDEPBEJMIECZRRG1QZIB3UZ2JF1M">Clearance Constraint (Gap=0.127mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDC4EC0RSKDYI2IUHPFOJHX3S2ZJGXJUFCG1GWLTHNHOJXSJYXSP4J">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZUACEURTY3OSO3VNIL4CRBVOOONJ0X5DB25GKTNTBSWSOV40DOYC">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFAF5OGZWZLXUKJDULD3PLYB4ZF4AUE0OFIXFG5O4JHWJAMCINKPC">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQ50SWIVJRWHXLMWNUBSRV0IWGCUGIMXV5OCPOPKMISJYPIYAW3QK">Width Constraint (Min=0.2mm) (Max=2mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEXLQSWCEVU5NPD5TMJ1OEWWMTIG3XHFIC2F1PXGUSSVQ55NLJYWE">Power Plane Connect Rule(Direct Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQFGXFSUJKJQONDTSOEOVWCNCIDGYSJF4NM22UYNX11JAQDFVSKAO">Hole Size Constraint (Min=0.2mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5EAWNT3KRC3FIN5V51EQXUXET2QZQZYE4FMF5FETTRCA5UNKYU">Hole To Hole Clearance (Gap=0.01mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSWSPFVZUH3BIEQBMBDWFT1KU2J4ZFW3FL1XBTUK0TQGBA5ZXKHAH">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">31</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2G4UCWKUI5DXOZVRCOY5NFQ1CIZFBRCMUHRNPRM3VJDKIN2JPRRF">Silk To Solder Mask (Clearance=0.1mm) (IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXXXSCFEMSTK4DQLEAX1ASKROOC5R0Z0IF5ZWWCJU2DVAOPUBXPSO">Silk to Silk (Clearance=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDPIJ1WO3M2L2XHC42OF0DRBY4DFRZVYUTIATSOBEZH1XAHEYTNLPF">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4WQRBU1IPXSGJZU5A0NORQXBOEP0VO3SFDHO0UGXOGFQC1KOVHRJ">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">39</td>
+</tr>
+</table><br><a name="IDQFGXFSUJKJQONDTSOEOVWCNCIDGYSJF4NM22UYNX11JAQDFVSKAO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=0.2mm) (Max=2.54mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2113.785mil|Location2.X=2241.019mil|Location1.Y=1889.769mil|Location2.Y=2017.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2113.785mil|Location2.X=2241.019mil|Location1.Y=1889.769mil|Location2.Y=2017.003mil|Absolute=True">Hole Size Constraint: (3.2mm &gt; 2.54mm) Pad MH1-1(55.306mm,49.616mm) on Multi-Layer Actual Hole Size = 3.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4475.989mil|Location2.X=4603.223mil|Location1.Y=1889.769mil|Location2.Y=2017.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4475.989mil|Location2.X=4603.223mil|Location1.Y=1889.769mil|Location2.Y=2017.003mil|Absolute=True">Hole Size Constraint: (3.2mm &gt; 2.54mm) Pad MH2-1(115.306mm,49.616mm) on Multi-Layer Actual Hole Size = 3.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4475.989mil|Location2.X=4603.223mil|Location1.Y=118.115mil|Location2.Y=245.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4475.989mil|Location2.X=4603.223mil|Location1.Y=118.115mil|Location2.Y=245.349mil|Absolute=True">Hole Size Constraint: (3.2mm &gt; 2.54mm) Pad MH3-1(115.306mm,4.616mm) on Multi-Layer Actual Hole Size = 3.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2113.785mil|Location2.X=2241.019mil|Location1.Y=118.115mil|Location2.Y=245.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2113.785mil|Location2.X=2241.019mil|Location1.Y=118.115mil|Location2.Y=245.349mil|Absolute=True">Hole Size Constraint: (3.2mm &gt; 2.54mm) Pad MH4-1(55.306mm,4.616mm) on Multi-Layer Actual Hole Size = 3.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=113.548mil|Location2.X=280.152mil|Location1.Y=1885.202mil|Location2.Y=2051.806mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=113.548mil|Location2.X=280.152mil|Location1.Y=1885.202mil|Location2.Y=2051.806mil|Absolute=True">Hole Size Constraint: (4.2mm &gt; 2.54mm) Pad MH5-1(5mm,50mm) on Multi-Layer Actual Hole Size = 4.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5625.359mil|Location2.X=5791.963mil|Location1.Y=1885.202mil|Location2.Y=2051.806mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5625.359mil|Location2.X=5791.963mil|Location1.Y=1885.202mil|Location2.Y=2051.806mil|Absolute=True">Hole Size Constraint: (4.2mm &gt; 2.54mm) Pad MH6-1(145mm,50mm) on Multi-Layer Actual Hole Size = 4.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5625.359mil|Location2.X=5791.963mil|Location1.Y=113.548mil|Location2.Y=280.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5625.359mil|Location2.X=5791.963mil|Location1.Y=113.548mil|Location2.Y=280.152mil|Absolute=True">Hole Size Constraint: (4.2mm &gt; 2.54mm) Pad MH7-1(145mm,5mm) on Multi-Layer Actual Hole Size = 4.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=113.548mil|Location2.X=280.152mil|Location1.Y=113.548mil|Location2.Y=280.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=113.548mil|Location2.X=280.152mil|Location1.Y=113.548mil|Location2.Y=280.152mil|Absolute=True">Hole Size Constraint: (4.2mm &gt; 2.54mm) Pad MH8-1(5mm,5mm) on Multi-Layer Actual Hole Size = 4.2mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDSWSPFVZUH3BIEQBMBDWFT1KU2J4ZFW3FL1XBTUK0TQGBA5ZXKHAH"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1706.973mil|Location2.X=1718.223mil|Location1.Y=1627.052mil|Location2.Y=1638.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1706.973mil|Location2.X=1718.223mil|Location1.Y=1627.052mil|Location2.Y=1638.302mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.16mm &lt; 0.254mm) Between Pad C201-1(42.95mm,40.64mm) on Top Layer And Via (43.5mm,42mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.16mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1588.863mil|Location2.X=1600.113mil|Location1.Y=1627.052mil|Location2.Y=1638.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1588.863mil|Location2.X=1600.113mil|Location1.Y=1627.052mil|Location2.Y=1638.302mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.16mm &lt; 0.254mm) Between Pad C201-2(41.05mm,40.64mm) on Top Layer And Via (40.5mm,42mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.16mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2008.855mil|Location2.X=2022.457mil|Location1.Y=605.833mil|Location2.Y=617.083mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2008.855mil|Location2.X=2022.457mil|Location1.Y=605.833mil|Location2.Y=617.083mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.214mm &lt; 0.254mm) Between Pad C209-1(51.75mm,16.383mm) on Top Layer And Via (51mm,15mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.214mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1194.257mil|Location2.X=1205.507mil|Location1.Y=584.926mil|Location2.Y=596.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1194.257mil|Location2.X=1205.507mil|Location1.Y=584.926mil|Location2.Y=596.176mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.054mm &lt; 0.254mm) Between Pad C210-2(31.054mm,15.113mm) on Top Layer And Via (30mm,15mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.054mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=547.21mil|Location2.X=558.46mil|Location1.Y=466.816mil|Location2.Y=478.066mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=547.21mil|Location2.X=558.46mil|Location1.Y=466.816mil|Location2.Y=478.066mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.184mm &lt; 0.254mm) Between Pad F6-1(14.859mm,11.938mm) on Top Layer And Via (13.5mm,12mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.184mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=662.367mil|Location2.X=673.617mil|Location1.Y=466.816mil|Location2.Y=478.066mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=662.367mil|Location2.X=673.617mil|Location1.Y=466.816mil|Location2.Y=478.066mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.034mm &lt; 0.254mm) Between Pad F6-2(17.709mm,11.938mm) on Top Layer And Via (16.5mm,12mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.034mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=185.372mil|Location2.X=196.622mil|Location1.Y=950.938mil|Location2.Y=962.282mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=185.372mil|Location2.X=196.622mil|Location1.Y=950.938mil|Location2.Y=962.282mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.023mm &lt; 0.254mm) Between Pad J2-12(5.65mm,24.979mm) on Multi-Layer And Via (4.5mm,24mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.023mm] / [Bottom Solder] Mask Sliver [0.023mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5504.218mil|Location2.X=5515.468mil|Location1.Y=833.882mil|Location2.Y=845.692mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5504.218mil|Location2.X=5515.468mil|Location1.Y=833.882mil|Location2.Y=845.692mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.225mm &lt; 0.254mm) Between Pad J3-1(140.87mm,22.028mm) on Multi-Layer And Via (139.5mm,21mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.225mm] / [Bottom Solder] Mask Sliver [0.225mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5472.81mil|Location2.X=5484.06mil|Location1.Y=833.6mil|Location2.Y=844.85mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5472.81mil|Location2.X=5484.06mil|Location1.Y=833.6mil|Location2.Y=844.85mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.04mm &lt; 0.254mm) Between Pad J3-2(138.37mm,22.028mm) on Multi-Layer And Via (139.5mm,21mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.04mm] / [Bottom Solder] Mask Sliver [0.04mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5543.976mil|Location2.X=5555.226mil|Location1.Y=721.592mil|Location2.Y=732.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5543.976mil|Location2.X=5555.226mil|Location1.Y=721.592mil|Location2.Y=732.842mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.046mm &lt; 0.254mm) Between Pad J3-7(140.87mm,19.528mm) on Multi-Layer And Via (141mm,18mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.046mm] / [Bottom Solder] Mask Sliver [0.046mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5432.006mil|Location2.X=5445.786mil|Location1.Y=721.875mil|Location2.Y=733.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5432.006mil|Location2.X=5445.786mil|Location1.Y=721.875mil|Location2.Y=733.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.085mm &lt; 0.254mm) Between Pad J3-8(138.37mm,19.528mm) on Multi-Layer And Via (138mm,18mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.085mm] / [Bottom Solder] Mask Sliver [0.085mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1895.907mil|Location2.X=1907.157mil|Location1.Y=1535.003mil|Location2.Y=1548.113mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1895.907mil|Location2.X=1907.157mil|Location1.Y=1535.003mil|Location2.Y=1548.113mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.222mm &lt; 0.254mm) Between Pad R201-2(49.075mm,40mm) on Top Layer And Via (47.879mm,38.989mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.222mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1899.021mil|Location2.X=1910.271mil|Location1.Y=1434.375mil|Location2.Y=1445.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1899.021mil|Location2.X=1910.271mil|Location1.Y=1434.375mil|Location2.Y=1445.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.044mm &lt; 0.254mm) Between Pad R203-2(49.075mm,37mm) on Top Layer And Via (48.006mm,36.576mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.044mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1638.458mil|Location2.X=1650.969mil|Location1.Y=1073.222mil|Location2.Y=1084.472mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1638.458mil|Location2.X=1650.969mil|Location1.Y=1073.222mil|Location2.Y=1084.472mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.254mm) Between Pad R206-1(41.075mm,28.194mm) on Top Layer And Via (42mm,27mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1657.378mil|Location2.X=1669.939mil|Location1.Y=1073.222mil|Location2.Y=1084.472mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1657.378mil|Location2.X=1669.939mil|Location1.Y=1073.222mil|Location2.Y=1084.472mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.038mm &lt; 0.254mm) Between Pad R206-2(42.925mm,28.194mm) on Top Layer And Via (42mm,27mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.038mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1896.521mil|Location2.X=1907.771mil|Location1.Y=969.375mil|Location2.Y=980.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1896.521mil|Location2.X=1907.771mil|Location1.Y=969.375mil|Location2.Y=980.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.171mm &lt; 0.254mm) Between Pad R211-2(49.075mm,25mm) on Top Layer And Via (47.879mm,24.765mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.171mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1244.049mil|Location2.X=1256.449mil|Location1.Y=1160.157mil|Location2.Y=1171.407mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1244.049mil|Location2.X=1256.449mil|Location1.Y=1160.157mil|Location2.Y=1171.407mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.016mm &lt; 0.254mm) Between Pad R221-1(32.421mm,28.829mm) on Top Layer And Via (31.5mm,30mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.016mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1224.75mil|Location2.X=1237.114mil|Location1.Y=1160.226mil|Location2.Y=1171.476mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1224.75mil|Location2.X=1237.114mil|Location1.Y=1160.226mil|Location2.Y=1171.476mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.02mm &lt; 0.254mm) Between Pad R221-2(30.571mm,28.829mm) on Top Layer And Via (31.5mm,30mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.02mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2692.013mil|Location2.X=2703.263mil|Location1.Y=904.375mil|Location2.Y=915.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2692.013mil|Location2.X=2703.263mil|Location1.Y=904.375mil|Location2.Y=915.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.196mm &lt; 0.254mm) Between Pad U101-3V3_3(69.568mm,23.222mm) on Top Layer And Via (68.072mm,23.114mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.196mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4029.169mil|Location2.X=4040.419mil|Location1.Y=940.066mil|Location2.Y=951.316mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4029.169mil|Location2.X=4040.419mil|Location1.Y=940.066mil|Location2.Y=951.316mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.069mm &lt; 0.254mm) Between Pad U101-5V_3(103.468mm,24.492mm) on Top Layer And Via (102mm,24mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4107.924mil|Location2.X=4119.174mil|Location1.Y=940.025mil|Location2.Y=951.275mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4107.924mil|Location2.X=4119.174mil|Location1.Y=940.025mil|Location2.Y=951.275mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.132mm &lt; 0.254mm) Between Pad U101-5V_3(103.468mm,24.492mm) on Top Layer And Via (105mm,24mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.132mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4027.933mil|Location2.X=4039.183mil|Location1.Y=928.667mil|Location2.Y=941.237mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4027.933mil|Location2.X=4039.183mil|Location1.Y=928.667mil|Location2.Y=941.237mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.153mm &lt; 0.254mm) Between Pad U101-5V_4(103.468mm,23.222mm) on Top Layer And Via (102mm,24mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.153mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4108.946mil|Location2.X=4120.196mil|Location1.Y=927.498mil|Location2.Y=940.3mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4108.946mil|Location2.X=4120.196mil|Location1.Y=927.498mil|Location2.Y=940.3mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.208mm &lt; 0.254mm) Between Pad U101-5V_4(103.468mm,23.222mm) on Top Layer And Via (105mm,24mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.208mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2846.831mil|Location2.X=2858.081mil|Location1.Y=928.667mil|Location2.Y=941.237mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2846.831mil|Location2.X=2858.081mil|Location1.Y=928.667mil|Location2.Y=941.237mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.153mm &lt; 0.254mm) Between Pad U101-PA0(73.468mm,23.222mm) on Top Layer And Via (72mm,24mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.153mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2848.075mil|Location2.X=2859.325mil|Location1.Y=703.036mil|Location2.Y=714.286mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2848.075mil|Location2.X=2859.325mil|Location1.Y=703.036mil|Location2.Y=714.286mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.068mm &lt; 0.254mm) Between Pad U101-PA4(73.468mm,18.142mm) on Top Layer And Via (72mm,18mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2926.815mil|Location2.X=2938.065mil|Location1.Y=703.036mil|Location2.Y=714.286mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2926.815mil|Location2.X=2938.065mil|Location1.Y=703.036mil|Location2.Y=714.286mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.132mm &lt; 0.254mm) Between Pad U101-PA4(73.468mm,18.142mm) on Top Layer And Via (75mm,18mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.132mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2848.067mil|Location2.X=2859.317mil|Location1.Y=940.066mil|Location2.Y=951.316mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2848.067mil|Location2.X=2859.317mil|Location1.Y=940.066mil|Location2.Y=951.316mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.068mm &lt; 0.254mm) Between Pad U101-PC3(73.468mm,24.492mm) on Top Layer And Via (72mm,24mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2848.075mil|Location2.X=2859.325mil|Location1.Y=1293.587mil|Location2.Y=1304.837mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2848.075mil|Location2.X=2859.325mil|Location1.Y=1293.587mil|Location2.Y=1304.837mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.068mm &lt; 0.254mm) Between Pad U101-PE2(73.468mm,33.382mm) on Top Layer And Via (72mm,33mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2846.111mil|Location2.X=2857.361mil|Location1.Y=1279.796mil|Location2.Y=1291.407mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2846.111mil|Location2.X=2857.361mil|Location1.Y=1279.796mil|Location2.Y=1291.407mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.216mm &lt; 0.254mm) Between Pad U101-PE5(73.468mm,32.112mm) on Top Layer And Via (72mm,33mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.216mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1353.596mil|Location2.X=1364.846mil|Location1.Y=1196.892mil|Location2.Y=1208.142mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1353.596mil|Location2.X=1364.846mil|Location1.Y=1196.892mil|Location2.Y=1208.142mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.189mm &lt; 0.254mm) Between Via (34.544mm,30.988mm) from Top Layer to Bottom Layer And Via (34.5mm,30mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.189mm] / [Bottom Solder] Mask Sliver [0.189mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1569.836mil|Location2.X=1581.086mil|Location1.Y=1656.823mil|Location2.Y=1669.917mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_FECU\ETRX_FECU\ETRX_FECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1569.836mil|Location2.X=1581.086mil|Location1.Y=1656.823mil|Location2.Y=1669.917mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.167mm &lt; 0.254mm) Between Via (39.624mm,42.41mm) from Top Layer to Bottom Layer And Via (40.5mm,42mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.167mm] / [Bottom Solder] Mask Sliver [0.167mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

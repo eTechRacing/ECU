@@ -1,0 +1,13 @@
+Change Component Footprint: Designator=J1 Old Footprint=J_MicroFit_2x2_v New Footprint=J_NanoFit_2x2_v
+Change Component Comment : Designator=J1 Old Comment=430450412 New Comment=J_NanoFit_2x2
+Change component parameters: Designator = "J1" ("J1"); Footprint = "J_MicroFit_2x2_v"; UniqueID = "\OLOTKSCU" ("\OLOTKSCU")
+Change component parameters (AddParameter): Name = "Category"; Value = "Uncategorized"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1Description"; Value = "https://www.molex.com/pdm_docs/ps/PS-105300-100-001.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1URL"; Value = "https://www.molex.com/pdm_docs/ps/PS-105300-100-001.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer 1"; Value = "Molex"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part Number 1"; Value = "1053101104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pricing 1"; Value = "1=1,43000, 10=1,18000, 50=0,74900, 100=0,72900, 500=0,71400, 1000=0,70700 (EUR)"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "RoHS"; Value = "Yes"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Stock 1"; Value = "255"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier 1"; Value = "Farnell"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier Part Number 1"; Value = "2820681"; VariantName = "[No Variations]"

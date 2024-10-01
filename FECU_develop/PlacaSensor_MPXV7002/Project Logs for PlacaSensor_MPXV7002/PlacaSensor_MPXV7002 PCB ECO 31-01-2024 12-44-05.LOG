@@ -1,0 +1,5 @@
+Added Component: Designator=S*(XDCR_MPXV7002DP)
+Added Pin To Net: NetName=+5 Pin=S*-2
+Added Pin To Net: NetName=GND Pin=S*-3
+Added Pin To Net: NetName=Vout Pin=S*-4
+Added Member To Class: ClassName=PlacaSensor_MPXV7002 Member=Component S* MPXV7002

@@ -1,0 +1,631 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD24\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">08/04/2024</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">0:32:51</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc" class="file"><acronym title="C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc">C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">97</td></tr>
+</table>
+</td>
+</table><a name="IDB1DV0ROBFW2TPN0FD2UQHS2IDFA0VTNKWFVZDADTTXUBAI4QIB3M"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDGJ1HTQJ0R44C0YZDYLCYYL3ACT4TXRSHAXFQKAVTP2A5D2WW0D">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5NAH40GCYONYMUTZN2AHXQR5JIDAZ2YOWDUMYOORXMUQJGVP22YC">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDX3MMYKVWUMJ5COYEWBNJ0DJJE3MEKNHBSEECXEIHDMHPJFWRV4B">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAK0AXSJJIVYCCGMRZBWRT521EKXEFE2JM5FOYNHGTH54404105VC">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDITF3N4V3DMRJ4J24YL5XB0R0RIOJBZXXOWUZBUMZLUDURJIUMI">Width Constraint (Min=0.2mm) (Max=1mm) (Preferred=0.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDM0IAQCWO1RDXJRNKZWCZ55POMOFVZPTVGJK3IID1L4U3IMW1IFZG">Power Plane Connect Rule(Direct Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBKEL0E3C3WSHPVJNGRNFD3D4VPKMG5YMKK3TW2H04NAUSWHXXPFK">Hole Size Constraint (Min=0.3mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTX2BHYMMZYP1O55NU4X4TZYF2IGQQ1WHWMBPY2PJ1EYRVG3BGARH">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZQMNLBF5U2NIOUXUS4VH0FNSAJK2GVNO1M1GJ4I00TX5WSFW4RKE">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">32</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWWAVQ2NQ1FRSEQNKKRGVCEKPFPT3F4HMZRZFQJKQLSB0THDW5VTH">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">55</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFFI2WFA2ZIMBETQXPBWC240YZL0ICJAAFOQ4UYHCEVRPRKB0GVFF">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDABTZNUYMNKAALR5NV3YNH3K4JILJVGOATRFNNWOAJ1GJW4NEF2ZJ">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYQ3EV2PY5AIAKIHK1D0EZLX53GJJKBWINLX25SK0NTROQPLJBOEG">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">97</td>
+</tr>
+</table><br><a name="IDBKEL0E3C3WSHPVJNGRNFD3D4VPKMG5YMKK3TW2H04NAUSWHXXPFK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=0.3mm) (Max=2.54mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=723.784mil|Location2.X=851.019mil|Location1.Y=1904.887mil|Location2.Y=2032.121mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=723.784mil|Location2.X=851.019mil|Location1.Y=1904.887mil|Location2.Y=2032.121mil|Absolute=True">Hole Size Constraint: (3.2mm &gt; 2.54mm) Pad MH1-1(20mm,50mm) on Multi-Layer Actual Hole Size = 3.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3085.989mil|Location2.X=3213.223mil|Location1.Y=1904.887mil|Location2.Y=2032.121mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3085.989mil|Location2.X=3213.223mil|Location1.Y=1904.887mil|Location2.Y=2032.121mil|Absolute=True">Hole Size Constraint: (3.2mm &gt; 2.54mm) Pad MH2-1(80mm,50mm) on Multi-Layer Actual Hole Size = 3.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3085.989mil|Location2.X=3213.223mil|Location1.Y=133.233mil|Location2.Y=260.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3085.989mil|Location2.X=3213.223mil|Location1.Y=133.233mil|Location2.Y=260.467mil|Absolute=True">Hole Size Constraint: (3.2mm &gt; 2.54mm) Pad MH3-1(80mm,5mm) on Multi-Layer Actual Hole Size = 3.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=723.784mil|Location2.X=851.019mil|Location1.Y=133.233mil|Location2.Y=260.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=723.784mil|Location2.X=851.019mil|Location1.Y=133.233mil|Location2.Y=260.467mil|Absolute=True">Hole Size Constraint: (3.2mm &gt; 2.54mm) Pad MH4-1(20mm,5mm) on Multi-Layer Actual Hole Size = 3.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5822.21mil|Location2.X=5988.814mil|Location1.Y=1885.202mil|Location2.Y=2051.806mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5822.21mil|Location2.X=5988.814mil|Location1.Y=1885.202mil|Location2.Y=2051.806mil|Absolute=True">Hole Size Constraint: (4.2mm &gt; 2.54mm) Pad MH5-1(150mm,50mm) on Multi-Layer Actual Hole Size = 4.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=113.548mil|Location2.X=280.152mil|Location1.Y=1885.202mil|Location2.Y=2051.806mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=113.548mil|Location2.X=280.152mil|Location1.Y=1885.202mil|Location2.Y=2051.806mil|Absolute=True">Hole Size Constraint: (4.2mm &gt; 2.54mm) Pad MH6-1(5mm,50mm) on Multi-Layer Actual Hole Size = 4.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5822.21mil|Location2.X=5988.814mil|Location1.Y=113.548mil|Location2.Y=280.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5822.21mil|Location2.X=5988.814mil|Location1.Y=113.548mil|Location2.Y=280.152mil|Absolute=True">Hole Size Constraint: (4.2mm &gt; 2.54mm) Pad MH7-1(150mm,5mm) on Multi-Layer Actual Hole Size = 4.2mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=113.548mil|Location2.X=280.152mil|Location1.Y=113.548mil|Location2.Y=280.152mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=113.548mil|Location2.X=280.152mil|Location1.Y=113.548mil|Location2.Y=280.152mil|Absolute=True">Hole Size Constraint: (4.2mm &gt; 2.54mm) Pad MH8-1(5mm,5mm) on Multi-Layer Actual Hole Size = 4.2mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDZQMNLBF5U2NIOUXUS4VH0FNSAJK2GVNO1M1GJ4I00TX5WSFW4RKE"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5414.022mil|Location2.X=5425.272mil|Location1.Y=314.578mil|Location2.Y=327.952mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5414.022mil|Location2.X=5425.272mil|Location1.Y=314.578mil|Location2.Y=327.952mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.029mm &lt; 0.254mm) Between Pad C201-1(137.094mm,8.89mm) on Bottom Layer And Via (138mm,8mm) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [0.029mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5807.398mil|Location2.X=5818.648mil|Location1.Y=790.705mil|Location2.Y=803.032mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5807.398mil|Location2.X=5818.648mil|Location1.Y=790.705mil|Location2.Y=803.032mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.13mm &lt; 0.254mm) Between Pad J1-10(146.725mm,20.828mm) on Multi-Layer And Via (148mm,20mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.13mm] / [Bottom Solder] Mask Sliver [0.13mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5834.048mil|Location2.X=5845.298mil|Location1.Y=789.595mil|Location2.Y=801.747mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5834.048mil|Location2.X=5845.298mil|Location1.Y=789.595mil|Location2.Y=801.747mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.088mm &lt; 0.254mm) Between Pad J1-4(149.225mm,20.828mm) on Multi-Layer And Via (148mm,20mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.088mm] / [Bottom Solder] Mask Sliver [0.088mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3003.175mil|Location2.X=3014.425mil|Location1.Y=153.535mil|Location2.Y=167.274mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3003.175mil|Location2.X=3014.425mil|Location1.Y=153.535mil|Location2.Y=167.274mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.17mm &lt; 0.254mm) Between Pad MH3-1(80mm,5mm) on Multi-Layer And Via (76mm,4mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.17mm] / [Bottom Solder] Mask Sliver [0.17mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3284.787mil|Location2.X=3296.037mil|Location1.Y=156.024mil|Location2.Y=169.787mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3284.787mil|Location2.X=3296.037mil|Location1.Y=156.024mil|Location2.Y=169.787mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.17mm &lt; 0.254mm) Between Pad MH3-1(80mm,5mm) on Multi-Layer And Via (84mm,4mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.17mm] / [Bottom Solder] Mask Sliver [0.17mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=640.97mil|Location2.X=652.22mil|Location1.Y=153.535mil|Location2.Y=167.274mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=640.97mil|Location2.X=652.22mil|Location1.Y=153.535mil|Location2.Y=167.274mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.17mm &lt; 0.254mm) Between Pad MH4-1(20mm,5mm) on Multi-Layer And Via (16mm,4mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.17mm] / [Bottom Solder] Mask Sliver [0.17mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=922.583mil|Location2.X=933.833mil|Location1.Y=156.024mil|Location2.Y=169.787mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=922.583mil|Location2.X=933.833mil|Location1.Y=156.024mil|Location2.Y=169.787mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.17mm &lt; 0.254mm) Between Pad MH4-1(20mm,5mm) on Multi-Layer And Via (24mm,4mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.17mm] / [Bottom Solder] Mask Sliver [0.17mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5755.121mil|Location2.X=5766.371mil|Location1.Y=1888.823mil|Location2.Y=1901.746mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5755.121mil|Location2.X=5766.371mil|Location1.Y=1888.823mil|Location2.Y=1901.746mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.019mm &lt; 0.254mm) Between Pad MH5-1(150mm,50mm) on Multi-Layer And Via (146mm,48mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.019mm] / [Bottom Solder] Mask Sliver [0.019mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6044.652mil|Location2.X=6055.902mil|Location1.Y=1890.496mil|Location2.Y=1903.464mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6044.652mil|Location2.X=6055.902mil|Location1.Y=1890.496mil|Location2.Y=1903.464mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.019mm &lt; 0.254mm) Between Pad MH5-1(150mm,50mm) on Multi-Layer And Via (154mm,48mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.019mm] / [Bottom Solder] Mask Sliver [0.019mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5268.395mil|Location2.X=5279.645mil|Location1.Y=525.177mil|Location2.Y=538.824mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5268.395mil|Location2.X=5279.645mil|Location1.Y=525.177mil|Location2.Y=538.824mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.04mm &lt; 0.254mm) Between Pad R204-2(134.656mm,12.7mm) on Bottom Layer And Via (133.604mm,13.589mm) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [0.04mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5265.863mil|Location2.X=5277.571mil|Location1.Y=543.999mil|Location2.Y=555.249mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5265.863mil|Location2.X=5277.571mil|Location1.Y=543.999mil|Location2.Y=555.249mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.242mm &lt; 0.254mm) Between Pad R210-1(134.747mm,14.732mm) on Top Layer And Via (133.604mm,13.589mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.242mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5268.485mil|Location2.X=5279.735mil|Location1.Y=528.204mil|Location2.Y=539.454mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5268.485mil|Location2.X=5279.735mil|Location1.Y=528.204mil|Location2.Y=539.454mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.016mm &lt; 0.254mm) Between Pad R210-2(134.747mm,12.882mm) on Top Layer And Via (133.604mm,13.589mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.016mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5417.033mil|Location2.X=5428.283mil|Location1.Y=1465.792mil|Location2.Y=1477.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5417.033mil|Location2.X=5428.283mil|Location1.Y=1465.792mil|Location2.Y=1477.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.106mm &lt; 0.254mm) Between Pad R302-1(136.906mm,37.374mm) on Top Layer And Via (138.14mm,37.374mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.106mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2592.8mil|Location2.X=2604.05mil|Location1.Y=639.099mil|Location2.Y=650.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2592.8mil|Location2.X=2604.05mil|Location1.Y=639.099mil|Location2.Y=650.349mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.049mm &lt; 0.254mm) Between Pad U1-CAN2H(66.511mm,16.872mm) on Top Layer And Via (66mm,16mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.049mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2654.197mil|Location2.X=2665.447mil|Location1.Y=778.02mil|Location2.Y=789.27mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2654.197mil|Location2.X=2665.447mil|Location1.Y=778.02mil|Location2.Y=789.27mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.198mm &lt; 0.254mm) Between Pad U1-GND_8(66.511mm,19.412mm) on Top Layer And Via (68mm,20mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.198mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2654.517mil|Location2.X=2665.767mil|Location1.Y=788.442mil|Location2.Y=801.813mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2654.517mil|Location2.X=2665.767mil|Location1.Y=788.442mil|Location2.Y=801.813mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.226mm &lt; 0.254mm) Between Pad U1-GND_9(66.511mm,20.682mm) on Top Layer And Via (68mm,20mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.226mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1470.599mil|Location2.X=1481.849mil|Location1.Y=889.806mil|Location2.Y=901.056mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1470.599mil|Location2.X=1481.849mil|Location1.Y=889.806mil|Location2.Y=901.056mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.068mm &lt; 0.254mm) Between Pad U1-PA0(36.511mm,23.222mm) on Top Layer And Via (37.973mm,22.652mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1472.923mil|Location2.X=1484.173mil|Location1.Y=927.974mil|Location2.Y=939.224mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1472.923mil|Location2.X=1484.173mil|Location1.Y=927.974mil|Location2.Y=939.224mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.189mm &lt; 0.254mm) Between Pad U1-PA0(36.511mm,23.222mm) on Top Layer And Via (38.089mm,23.828mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.189mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.253mil|Location2.X=1404.503mil|Location1.Y=849.375mil|Location2.Y=860.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.253mil|Location2.X=1404.503mil|Location1.Y=849.375mil|Location2.Y=860.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.056mm &lt; 0.254mm) Between Pad U1-PA1(36.511mm,21.952mm) on Top Layer And Via (35.052mm,21.717mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.056mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1471.213mil|Location2.X=1482.463mil|Location1.Y=876.178mil|Location2.Y=889.309mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1471.213mil|Location2.X=1482.463mil|Location1.Y=876.178mil|Location2.Y=889.309mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.108mm &lt; 0.254mm) Between Pad U1-PA1(36.511mm,21.952mm) on Top Layer And Via (37.973mm,22.652mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.108mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1318.666mil|Location2.X=1329.916mil|Location1.Y=719.375mil|Location2.Y=730.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1318.666mil|Location2.X=1329.916mil|Location1.Y=719.375mil|Location2.Y=730.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.149mm &lt; 0.254mm) Between Pad U1-PA6(32.611mm,18.142mm) on Top Layer And Via (34.163mm,18.415mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.149mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1319.242mil|Location2.X=1330.492mil|Location1.Y=636.851mil|Location2.Y=648.101mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1319.242mil|Location2.X=1330.492mil|Location1.Y=636.851mil|Location2.Y=648.101mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.241mm &lt; 0.254mm) Between Pad U1-PA7(32.611mm,16.872mm) on Top Layer And Via (34mm,16mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2435.32mil|Location2.X=2446.57mil|Location1.Y=639.099mil|Location2.Y=650.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2435.32mil|Location2.X=2446.57mil|Location1.Y=639.099mil|Location2.Y=650.349mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.049mm &lt; 0.254mm) Between Pad U1-PB15(62.611mm,16.872mm) on Top Layer And Via (62mm,16mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.049mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1939.375mil|Location2.X=1950.625mil|Location1.Y=1535.733mil|Location2.Y=1546.983mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1939.375mil|Location2.X=1950.625mil|Location1.Y=1535.733mil|Location2.Y=1546.983mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.044mm &lt; 0.254mm) Between Pad U1-PB6(49.295mm,38.177mm) on Top Layer And Via (49.403mm,39.624mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.044mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1473.118mil|Location2.X=1484.368mil|Location1.Y=938.881mil|Location2.Y=952.508mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1473.118mil|Location2.X=1484.368mil|Location1.Y=938.881mil|Location2.Y=952.508mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.204mm &lt; 0.254mm) Between Pad U1-PC3(36.511mm,24.492mm) on Top Layer And Via (38.089mm,23.828mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.204mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2501.717mil|Location2.X=2512.967mil|Location1.Y=1074.375mil|Location2.Y=1085.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2501.717mil|Location2.X=2512.967mil|Location1.Y=1074.375mil|Location2.Y=1085.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.248mm &lt; 0.254mm) Between Pad U1-PC6(62.611mm,27.032mm) on Top Layer And Via (64.262mm,27.432mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.248mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2501.717mil|Location2.X=2512.967mil|Location1.Y=1019.375mil|Location2.Y=1030.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2501.717mil|Location2.X=2512.967mil|Location1.Y=1019.375mil|Location2.Y=1030.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.248mm &lt; 0.254mm) Between Pad U1-PD15(62.611mm,25.762mm) on Top Layer And Via (64.262mm,26.035mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.248mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2498.761mil|Location2.X=2510.011mil|Location1.Y=775.253mil|Location2.Y=788.955mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2498.761mil|Location2.X=2510.011mil|Location1.Y=775.253mil|Location2.Y=788.955mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.101mm &lt; 0.254mm) Between Pad U1-PD8(62.611mm,19.412mm) on Top Layer And Via (64mm,20mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.101mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2499.213mil|Location2.X=2510.463mil|Location1.Y=788.918mil|Location2.Y=801.962mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2499.213mil|Location2.X=2510.463mil|Location1.Y=788.918mil|Location2.Y=801.962mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.134mm &lt; 0.254mm) Between Pad U1-PD9(62.611mm,20.682mm) on Top Layer And Via (64mm,20mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.134mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1472.938mil|Location2.X=1484.188mil|Location1.Y=1254.217mil|Location2.Y=1265.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1472.938mil|Location2.X=1484.188mil|Location1.Y=1254.217mil|Location2.Y=1265.467mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.186mm &lt; 0.254mm) Between Pad U1-PE5(36.511mm,32.112mm) on Top Layer And Via (38mm,32mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.186mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1317.426mil|Location2.X=1328.676mil|Location1.Y=1254.217mil|Location2.Y=1265.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1317.426mil|Location2.X=1328.676mil|Location1.Y=1254.217mil|Location2.Y=1265.467mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.086mm &lt; 0.254mm) Between Pad U1-PE6(32.611mm,32.112mm) on Top Layer And Via (34mm,32mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.086mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2734.226mil|Location2.X=2745.476mil|Location1.Y=1247.383mil|Location2.Y=1261.066mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2734.226mil|Location2.X=2745.476mil|Location1.Y=1247.383mil|Location2.Y=1261.066mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.142mm &lt; 0.254mm) Between Via (69.088mm,31.75mm) from Top Layer to Bottom Layer And Via (70mm,32mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.142mm] / [Bottom Solder] Mask Sliver [0.142mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDWWAVQ2NQ1FRSEQNKKRGVCEKPFPT3F4HMZRZFQJKQLSB0THDW5VTH"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5409.703mil|Location2.X=5420.953mil|Location1.Y=334.567mil|Location2.Y=345.817mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5409.703mil|Location2.X=5420.953mil|Location1.Y=334.567mil|Location2.Y=345.817mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.011mm &lt; 0.254mm) Between Pad C201-1(137.094mm,8.89mm) on Bottom Layer And Text "R202" (140.564mm,7.95mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.011mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5369.139mil|Location2.X=5380.389mil|Location1.Y=318.784mil|Location2.Y=330.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5369.139mil|Location2.X=5380.389mil|Location1.Y=318.784mil|Location2.Y=330.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C201-1(137.094mm,8.89mm) on Bottom Layer And Track (135.994mm,8.24mm)(136.294mm,8.24mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5369.139mil|Location2.X=5380.389mil|Location1.Y=369.966mil|Location2.Y=381.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5369.139mil|Location2.X=5380.389mil|Location1.Y=369.966mil|Location2.Y=381.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C201-1(137.094mm,8.89mm) on Bottom Layer And Track (135.994mm,9.54mm)(136.294mm,9.54mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5339.611mil|Location2.X=5350.861mil|Location1.Y=318.784mil|Location2.Y=330.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5339.611mil|Location2.X=5350.861mil|Location1.Y=318.784mil|Location2.Y=330.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C201-2(135.194mm,8.89mm) on Bottom Layer And Track (135.994mm,8.24mm)(136.294mm,8.24mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5339.611mil|Location2.X=5350.861mil|Location1.Y=369.966mil|Location2.Y=381.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5339.611mil|Location2.X=5350.861mil|Location1.Y=369.966mil|Location2.Y=381.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C201-2(135.194mm,8.89mm) on Bottom Layer And Track (135.994mm,9.54mm)(136.294mm,9.54mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5371.737mil|Location2.X=5382.987mil|Location1.Y=588.784mil|Location2.Y=600.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5371.737mil|Location2.X=5382.987mil|Location1.Y=588.784mil|Location2.Y=600.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C202-1(137.16mm,15.748mm) on Bottom Layer And Track (136.06mm,15.098mm)(136.36mm,15.098mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5371.737mil|Location2.X=5382.987mil|Location1.Y=639.966mil|Location2.Y=651.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5371.737mil|Location2.X=5382.987mil|Location1.Y=639.966mil|Location2.Y=651.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C202-1(137.16mm,15.748mm) on Bottom Layer And Track (136.06mm,16.398mm)(136.36mm,16.398mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5314.24mil|Location2.X=5321.906mil|Location1.Y=590.576mil|Location2.Y=598.243mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5314.24mil|Location2.X=5321.906mil|Location1.Y=590.576mil|Location2.Y=598.243mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad C202-2(135.26mm,15.748mm) on Bottom Layer And Text "R204" (135.077mm,14.173mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5342.21mil|Location2.X=5353.46mil|Location1.Y=588.784mil|Location2.Y=600.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5342.21mil|Location2.X=5353.46mil|Location1.Y=588.784mil|Location2.Y=600.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C202-2(135.26mm,15.748mm) on Bottom Layer And Track (136.06mm,15.098mm)(136.36mm,15.098mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5342.21mil|Location2.X=5353.46mil|Location1.Y=639.966mil|Location2.Y=651.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5342.21mil|Location2.X=5353.46mil|Location1.Y=639.966mil|Location2.Y=651.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C202-2(135.26mm,15.748mm) on Bottom Layer And Track (136.06mm,16.398mm)(136.36mm,16.398mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5374.139mil|Location2.X=5385.389mil|Location1.Y=718.784mil|Location2.Y=730.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5374.139mil|Location2.X=5385.389mil|Location1.Y=718.784mil|Location2.Y=730.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C203-1(137.221mm,19.05mm) on Bottom Layer And Track (136.121mm,18.4mm)(136.421mm,18.4mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5374.139mil|Location2.X=5385.389mil|Location1.Y=769.966mil|Location2.Y=781.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5374.139mil|Location2.X=5385.389mil|Location1.Y=769.966mil|Location2.Y=781.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C203-1(137.221mm,19.05mm) on Bottom Layer And Track (136.121mm,19.7mm)(136.421mm,19.7mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5344.611mil|Location2.X=5355.861mil|Location1.Y=718.784mil|Location2.Y=730.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5344.611mil|Location2.X=5355.861mil|Location1.Y=718.784mil|Location2.Y=730.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C203-2(135.321mm,19.05mm) on Bottom Layer And Track (136.121mm,18.4mm)(136.421mm,18.4mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5344.611mil|Location2.X=5355.861mil|Location1.Y=769.966mil|Location2.Y=781.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5344.611mil|Location2.X=5355.861mil|Location1.Y=769.966mil|Location2.Y=781.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C203-2(135.321mm,19.05mm) on Bottom Layer And Track (136.121mm,19.7mm)(136.421mm,19.7mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5374.139mil|Location2.X=5385.389mil|Location1.Y=868.784mil|Location2.Y=880.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5374.139mil|Location2.X=5385.389mil|Location1.Y=868.784mil|Location2.Y=880.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C204-1(137.221mm,22.86mm) on Bottom Layer And Track (136.121mm,22.21mm)(136.421mm,22.21mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5374.139mil|Location2.X=5385.389mil|Location1.Y=919.966mil|Location2.Y=931.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5374.139mil|Location2.X=5385.389mil|Location1.Y=919.966mil|Location2.Y=931.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C204-1(137.221mm,22.86mm) on Bottom Layer And Track (136.121mm,23.51mm)(136.421mm,23.51mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5344.611mil|Location2.X=5355.861mil|Location1.Y=868.784mil|Location2.Y=880.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5344.611mil|Location2.X=5355.861mil|Location1.Y=868.784mil|Location2.Y=880.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C204-2(135.321mm,22.86mm) on Bottom Layer And Track (136.121mm,22.21mm)(136.421mm,22.21mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5344.611mil|Location2.X=5355.861mil|Location1.Y=919.966mil|Location2.Y=931.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5344.611mil|Location2.X=5355.861mil|Location1.Y=919.966mil|Location2.Y=931.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C204-2(135.321mm,22.86mm) on Bottom Layer And Track (136.121mm,23.51mm)(136.421mm,23.51mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5254.139mil|Location2.X=5265.389mil|Location1.Y=698.784mil|Location2.Y=710.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5254.139mil|Location2.X=5265.389mil|Location1.Y=698.784mil|Location2.Y=710.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C205-1(134.173mm,18.542mm) on Top Layer And Track (133.073mm,17.892mm)(133.373mm,17.892mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5254.139mil|Location2.X=5265.389mil|Location1.Y=749.966mil|Location2.Y=761.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5254.139mil|Location2.X=5265.389mil|Location1.Y=749.966mil|Location2.Y=761.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C205-1(134.173mm,18.542mm) on Top Layer And Track (133.073mm,19.192mm)(133.373mm,19.192mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5224.611mil|Location2.X=5235.861mil|Location1.Y=698.784mil|Location2.Y=710.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5224.611mil|Location2.X=5235.861mil|Location1.Y=698.784mil|Location2.Y=710.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C205-2(132.273mm,18.542mm) on Top Layer And Track (133.073mm,17.892mm)(133.373mm,17.892mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5224.611mil|Location2.X=5235.861mil|Location1.Y=749.966mil|Location2.Y=761.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5224.611mil|Location2.X=5235.861mil|Location1.Y=749.966mil|Location2.Y=761.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C205-2(132.273mm,18.542mm) on Top Layer And Track (133.073mm,19.192mm)(133.373mm,19.192mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4863.784mil|Location2.X=4875.034mil|Location1.Y=864.611mil|Location2.Y=875.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4863.784mil|Location2.X=4875.034mil|Location1.Y=864.611mil|Location2.Y=875.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C206-1(124.333mm,21.529mm) on Top Layer And Track (123.683mm,22.329mm)(123.683mm,22.629mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4914.966mil|Location2.X=4926.216mil|Location1.Y=864.611mil|Location2.Y=875.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4914.966mil|Location2.X=4926.216mil|Location1.Y=864.611mil|Location2.Y=875.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C206-1(124.333mm,21.529mm) on Top Layer And Track (124.983mm,22.329mm)(124.983mm,22.629mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4863.784mil|Location2.X=4875.034mil|Location1.Y=894.139mil|Location2.Y=905.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4863.784mil|Location2.X=4875.034mil|Location1.Y=894.139mil|Location2.Y=905.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C206-2(124.333mm,23.429mm) on Top Layer And Track (123.683mm,22.329mm)(123.683mm,22.629mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4914.966mil|Location2.X=4926.216mil|Location1.Y=894.139mil|Location2.Y=905.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4914.966mil|Location2.X=4926.216mil|Location1.Y=894.139mil|Location2.Y=905.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C206-2(124.333mm,23.429mm) on Top Layer And Track (124.983mm,22.329mm)(124.983mm,22.629mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4729.611mil|Location2.X=4740.861mil|Location1.Y=838.784mil|Location2.Y=850.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4729.611mil|Location2.X=4740.861mil|Location1.Y=838.784mil|Location2.Y=850.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C207-1(119.7mm,22.098mm) on Top Layer And Track (120.5mm,21.448mm)(120.8mm,21.448mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4729.611mil|Location2.X=4740.861mil|Location1.Y=889.966mil|Location2.Y=901.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4729.611mil|Location2.X=4740.861mil|Location1.Y=889.966mil|Location2.Y=901.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C207-1(119.7mm,22.098mm) on Top Layer And Track (120.5mm,22.748mm)(120.8mm,22.748mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4759.139mil|Location2.X=4770.389mil|Location1.Y=838.784mil|Location2.Y=850.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4759.139mil|Location2.X=4770.389mil|Location1.Y=838.784mil|Location2.Y=850.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C207-2(121.6mm,22.098mm) on Top Layer And Track (120.5mm,21.448mm)(120.8mm,21.448mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4759.139mil|Location2.X=4770.389mil|Location1.Y=889.966mil|Location2.Y=901.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4759.139mil|Location2.X=4770.389mil|Location1.Y=889.966mil|Location2.Y=901.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C207-2(121.6mm,22.098mm) on Top Layer And Track (120.5mm,22.748mm)(120.8mm,22.748mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.139mil|Location2.X=4595.389mil|Location1.Y=828.784mil|Location2.Y=840.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.139mil|Location2.X=4595.389mil|Location1.Y=828.784mil|Location2.Y=840.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C208-1(117.155mm,21.844mm) on Top Layer And Track (116.055mm,21.194mm)(116.355mm,21.194mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.139mil|Location2.X=4595.389mil|Location1.Y=879.966mil|Location2.Y=891.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4584.139mil|Location2.X=4595.389mil|Location1.Y=879.966mil|Location2.Y=891.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C208-1(117.155mm,21.844mm) on Top Layer And Track (116.055mm,22.494mm)(116.355mm,22.494mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4554.611mil|Location2.X=4565.861mil|Location1.Y=828.784mil|Location2.Y=840.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4554.611mil|Location2.X=4565.861mil|Location1.Y=828.784mil|Location2.Y=840.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C208-2(115.255mm,21.844mm) on Top Layer And Track (116.055mm,21.194mm)(116.355mm,21.194mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4554.611mil|Location2.X=4565.861mil|Location1.Y=879.966mil|Location2.Y=891.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4554.611mil|Location2.X=4565.861mil|Location1.Y=879.966mil|Location2.Y=891.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C208-2(115.255mm,21.844mm) on Top Layer And Track (116.055mm,22.494mm)(116.355mm,22.494mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4283.784mil|Location2.X=4295.034mil|Location1.Y=932.21mil|Location2.Y=943.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4283.784mil|Location2.X=4295.034mil|Location1.Y=932.21mil|Location2.Y=943.46mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C209-1(109.601mm,23.246mm) on Top Layer And Track (108.951mm,24.046mm)(108.951mm,24.346mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4334.966mil|Location2.X=4346.216mil|Location1.Y=932.21mil|Location2.Y=943.46mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4334.966mil|Location2.X=4346.216mil|Location1.Y=932.21mil|Location2.Y=943.46mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C209-1(109.601mm,23.246mm) on Top Layer And Track (110.251mm,24.046mm)(110.251mm,24.346mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4283.784mil|Location2.X=4295.034mil|Location1.Y=961.737mil|Location2.Y=972.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4283.784mil|Location2.X=4295.034mil|Location1.Y=961.737mil|Location2.Y=972.987mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C209-2(109.601mm,25.146mm) on Top Layer And Track (108.951mm,24.046mm)(108.951mm,24.346mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4334.966mil|Location2.X=4346.216mil|Location1.Y=961.737mil|Location2.Y=972.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4334.966mil|Location2.X=4346.216mil|Location1.Y=961.737mil|Location2.Y=972.987mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C209-2(109.601mm,25.146mm) on Top Layer And Track (110.251mm,24.046mm)(110.251mm,24.346mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4268.784mil|Location2.X=4280.034mil|Location1.Y=699.139mil|Location2.Y=710.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4268.784mil|Location2.X=4280.034mil|Location1.Y=699.139mil|Location2.Y=710.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C210-1(109.22mm,18.476mm) on Top Layer And Track (108.57mm,17.376mm)(108.57mm,17.676mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4319.966mil|Location2.X=4331.216mil|Location1.Y=699.139mil|Location2.Y=710.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4319.966mil|Location2.X=4331.216mil|Location1.Y=699.139mil|Location2.Y=710.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C210-1(109.22mm,18.476mm) on Top Layer And Track (109.87mm,17.376mm)(109.87mm,17.676mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4268.784mil|Location2.X=4280.034mil|Location1.Y=669.611mil|Location2.Y=680.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4268.784mil|Location2.X=4280.034mil|Location1.Y=669.611mil|Location2.Y=680.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C210-2(109.22mm,16.576mm) on Top Layer And Track (108.57mm,17.376mm)(108.57mm,17.676mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4319.966mil|Location2.X=4331.216mil|Location1.Y=669.611mil|Location2.Y=680.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4319.966mil|Location2.X=4331.216mil|Location1.Y=669.611mil|Location2.Y=680.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C210-2(109.22mm,16.576mm) on Top Layer And Track (109.87mm,17.376mm)(109.87mm,17.676mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5368.784mil|Location2.X=5380.034mil|Location1.Y=1094.139mil|Location2.Y=1105.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5368.784mil|Location2.X=5380.034mil|Location1.Y=1094.139mil|Location2.Y=1105.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C211-1(137.16mm,28.509mm) on Bottom Layer And Track (136.51mm,27.409mm)(136.51mm,27.709mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5419.966mil|Location2.X=5431.216mil|Location1.Y=1094.139mil|Location2.Y=1105.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5419.966mil|Location2.X=5431.216mil|Location1.Y=1094.139mil|Location2.Y=1105.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C211-1(137.16mm,28.509mm) on Bottom Layer And Track (137.81mm,27.409mm)(137.81mm,27.709mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5368.784mil|Location2.X=5380.034mil|Location1.Y=1064.611mil|Location2.Y=1075.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5368.784mil|Location2.X=5380.034mil|Location1.Y=1064.611mil|Location2.Y=1075.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C211-2(137.16mm,26.609mm) on Bottom Layer And Track (136.51mm,27.409mm)(136.51mm,27.709mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5419.966mil|Location2.X=5431.216mil|Location1.Y=1064.611mil|Location2.Y=1075.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5419.966mil|Location2.X=5431.216mil|Location1.Y=1064.611mil|Location2.Y=1075.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C211-2(137.16mm,26.609mm) on Bottom Layer And Track (137.81mm,27.409mm)(137.81mm,27.709mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5329.139mil|Location2.X=5340.389mil|Location1.Y=1048.784mil|Location2.Y=1060.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5329.139mil|Location2.X=5340.389mil|Location1.Y=1048.784mil|Location2.Y=1060.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C304-1(136.078mm,27.432mm) on Top Layer And Track (134.978mm,26.782mm)(135.278mm,26.782mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5329.139mil|Location2.X=5340.389mil|Location1.Y=1099.966mil|Location2.Y=1111.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5329.139mil|Location2.X=5340.389mil|Location1.Y=1099.966mil|Location2.Y=1111.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C304-1(136.078mm,27.432mm) on Top Layer And Track (134.978mm,28.082mm)(135.278mm,28.082mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5299.611mil|Location2.X=5310.861mil|Location1.Y=1048.784mil|Location2.Y=1060.034mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5299.611mil|Location2.X=5310.861mil|Location1.Y=1048.784mil|Location2.Y=1060.034mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C304-2(134.178mm,27.432mm) on Top Layer And Track (134.978mm,26.782mm)(135.278mm,26.782mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5299.611mil|Location2.X=5310.861mil|Location1.Y=1099.966mil|Location2.Y=1111.216mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5299.611mil|Location2.X=5310.861mil|Location1.Y=1099.966mil|Location2.Y=1111.216mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C304-2(134.178mm,27.432mm) on Top Layer And Track (134.978mm,28.082mm)(135.278mm,28.082mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5353.784mil|Location2.X=5365.034mil|Location1.Y=1254.611mil|Location2.Y=1265.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5353.784mil|Location2.X=5365.034mil|Location1.Y=1254.611mil|Location2.Y=1265.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C305-1(136.779mm,31.435mm) on Top Layer And Track (136.129mm,32.235mm)(136.129mm,32.535mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5404.966mil|Location2.X=5416.216mil|Location1.Y=1254.611mil|Location2.Y=1265.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5404.966mil|Location2.X=5416.216mil|Location1.Y=1254.611mil|Location2.Y=1265.861mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C305-1(136.779mm,31.435mm) on Top Layer And Track (137.429mm,32.235mm)(137.429mm,32.535mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5353.784mil|Location2.X=5365.034mil|Location1.Y=1284.139mil|Location2.Y=1295.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5353.784mil|Location2.X=5365.034mil|Location1.Y=1284.139mil|Location2.Y=1295.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C305-2(136.779mm,33.335mm) on Top Layer And Track (136.129mm,32.235mm)(136.129mm,32.535mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5404.966mil|Location2.X=5416.216mil|Location1.Y=1284.139mil|Location2.Y=1295.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5404.966mil|Location2.X=5416.216mil|Location1.Y=1284.139mil|Location2.Y=1295.389mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.25mm &lt; 0.254mm) Between Pad C305-2(136.779mm,33.335mm) on Top Layer And Track (137.429mm,32.235mm)(137.429mm,32.535mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.25mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4869.857mil|Location2.X=4877.524mil|Location1.Y=1297.112mil|Location2.Y=1304.778mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4869.857mil|Location2.X=4877.524mil|Location1.Y=1297.112mil|Location2.Y=1304.778mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad R305-2(124.46mm,33.619mm) on Top Layer And Text "R301" (123.339mm,32.045mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDFFI2WFA2ZIMBETQXPBWC240YZL0ICJAAFOQ4UYHCEVRPRKB0GVFF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5364.844mil|Location2.X=5376.094mil|Location1.Y=710.404mil|Location2.Y=721.654mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5364.844mil|Location2.X=5376.094mil|Location1.Y=710.404mil|Location2.Y=721.654mil|Absolute=True">Silk To Silk Clearance Constraint: (0.226mm &lt; 0.254mm) Between Text "C202" (137.617mm,17.069mm) on Bottom Overlay And Track (136.121mm,18.4mm)(136.421mm,18.4mm) on Bottom Overlay Silk Text to Silk Clearance [0.226mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5709.202mil|Location2.X=5716.868mil|Location1.Y=1251.447mil|Location2.Y=1259.114mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\berna\OneDrive\download\New\download\Documentos\GitHub\FRONT-REAR_ECU\ETRX_RECU\ETRX_RECU\ETRX_RECU\ETRX_RECU.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5709.202mil|Location2.X=5716.868mil|Location1.Y=1251.447mil|Location2.Y=1259.114mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R308" (142.217mm,31.882mm) on Top Overlay And Track (145.129mm,29.562mm)(145.129mm,45.502mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

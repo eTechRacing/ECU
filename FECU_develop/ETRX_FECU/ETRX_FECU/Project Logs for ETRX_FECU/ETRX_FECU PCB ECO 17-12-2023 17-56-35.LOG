@@ -1,0 +1,15 @@
+Removed Pin From Net: NetName=PE9 Pin=C210-1
+Removed Pin From Net: NetName=PE9 Pin=R220-1
+Added Pin To Net: NetName=PE10 Pin=C210-1
+Add Pin To Net: Unknown Pin: Pin R215-1
+Add Pin To Net: Unknown Pin: Pin R215-2
+Add Pin To Net: Unknown Pin: Pin R217-1
+Add Pin To Net: Unknown Pin: Pin R217-2
+Add Pin To Net: Unknown Pin: Pin R219-1
+Add Pin To Net: Unknown Pin: Pin R219-2
+Added Pin To Net: NetName=PE10 Pin=R220-1
+Added Pin To Net: NetName=PB0 Pin=J102-28
+Added Net: Name=PB0
+Add Class Member: Failed to add class member : Component R215 12k5
+Add Class Member: Failed to add class member : Component R217 12k5
+Add Class Member: Failed to add class member : Component R219 12k5

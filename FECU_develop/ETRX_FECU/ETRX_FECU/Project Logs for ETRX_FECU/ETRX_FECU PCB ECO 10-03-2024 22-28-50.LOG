@@ -1,0 +1,3 @@
+Added Component: Designator=MH1(Mounting_Hole_M3)
+Added Pin To Net: NetName=GND Pin=MH1-1
+Added Member To Class: ClassName=ETRX_FECU Member=Component MH1 Mounting_Hole_M3

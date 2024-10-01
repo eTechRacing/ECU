@@ -1,0 +1,4 @@
+Change Component Designator: OldDesignator=C216 NewDesignator=C210
+Change Component Designator: OldDesignator=C? NewDesignator=C211
+Change Component Designator: OldDesignator=R22 NewDesignator=R222
+Add Net: Net with name "AGND" already exists

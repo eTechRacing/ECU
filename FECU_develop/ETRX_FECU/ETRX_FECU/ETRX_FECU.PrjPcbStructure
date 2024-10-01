@@ -1,0 +1,3 @@
+Record=TopLevelDocument|FileName=ETRX_FECU.SchDoc|SheetNumber=1
+Record=SheetSymbol|SourceDocument=ETRX_FECU.SchDoc|Designator=[1] Shield|SchDesignator=[1] Shield|FileName=[1] Shield.SchDoc|SheetNumber=2|SymbolType=Normal|RawFileName=[1] Shield.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=ETRX_FECU.SchDoc|Designator=[2] Sensors|SchDesignator=[2] Sensors|FileName=[2] Sensors.SchDoc|SheetNumber=3|SymbolType=Normal|RawFileName=[2] Sensors.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 

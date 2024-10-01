@@ -1,0 +1,60 @@
+Added Component: Designator=U*(ETR_SHIELD_III)
+Added Pin To Net: NetName=+3.3 Pin=U*-3V3_1
+Added Pin To Net: NetName=+3.3 Pin=U*-3V3_2
+Added Pin To Net: NetName=+3.3 Pin=U*-3V3_3
+Added Pin To Net: NetName=+3.3 Pin=U*-3V3_4
+Added Pin To Net: NetName=+3.3 Pin=U*-3V3_5
+Added Pin To Net: NetName=+3.3 Pin=U*-3V3_6
+Added Pin To Net: NetName=+3.3 Pin=U*-3V3_7
+Added Pin To Net: NetName=+3.3 Pin=U*-3V3_8
+Added Pin To Net: NetName=+5 Pin=U*-5V_1
+Added Pin To Net: NetName=+5 Pin=U*-5V_2
+Added Pin To Net: NetName=+5 Pin=U*-5V_3
+Added Pin To Net: NetName=+5 Pin=U*-5V_4
+Added Pin To Net: NetName=+5 Pin=U*-5V_5
+Added Pin To Net: NetName=+5 Pin=U*-5V_6
+Added Pin To Net: NetName=+5 Pin=U*-5V_7
+Added Pin To Net: NetName=GND Pin=U*-GND_1
+Added Pin To Net: NetName=GND Pin=U*-GND_2
+Added Pin To Net: NetName=GND Pin=U*-GND_3
+Added Pin To Net: NetName=GND Pin=U*-GND_4
+Added Pin To Net: NetName=GND Pin=U*-GND_5
+Added Pin To Net: NetName=GND Pin=U*-GND_6
+Added Pin To Net: NetName=GND Pin=U*-GND_7
+Added Pin To Net: NetName=GND Pin=U*-GND_8
+Added Pin To Net: NetName=GND Pin=U*-GND_9
+Added Pin To Net: NetName=GND Pin=U*-GND_10
+Added Pin To Net: NetName=GND Pin=U*-GND_11
+Added Pin To Net: NetName=LV tr Pin=U*-LVtr_1
+Added Pin To Net: NetName=LV tr Pin=U*-LVtr_2
+Added Pin To Net: NetName=LV tr Pin=U*-LVtr_3
+Added Pin To Net: NetName=LV tr Pin=U*-LVtr_4
+Added Pin To Net: NetName=PA0 Pin=U*-PA0
+Added Pin To Net: NetName=PA1 Pin=U*-PA1
+Added Pin To Net: NetName=PA2 Pin=U*-PA2
+Added Pin To Net: NetName=PA5 Pin=U*-PA5
+Added Pin To Net: NetName=PA6 Pin=U*-PA6
+Added Pin To Net: NetName=PA7 Pin=U*-PA7
+Added Pin To Net: NetName=PA8 Pin=U*-PA8
+Added Pin To Net: NetName=PB1 Pin=U*-PB1
+Added Pin To Net: NetName=PB2 Pin=U*-PB2
+Added Pin To Net: NetName=ISC1_SCL Pin=U*-PB6
+Added Pin To Net: NetName=I2C1_SDA Pin=U*-PB7
+Added Pin To Net: NetName=I2C2_SCL Pin=U*-PB10
+Added Pin To Net: NetName=I2C2_SDA Pin=U*-PB11
+Added Pin To Net: NetName=PC1 Pin=U*-PC1
+Added Pin To Net: NetName=PC2 Pin=U*-PC2
+Added Pin To Net: NetName=PC3 Pin=U*-PC3
+Added Pin To Net: NetName=PC6 Pin=U*-PC6
+Added Pin To Net: NetName=PC7 Pin=U*-PC7
+Added Pin To Net: NetName=PC8 Pin=U*-PC8
+Added Pin To Net: NetName=PC9 Pin=U*-PC9
+Added Pin To Net: NetName=PD8 Pin=U*-PD8
+Added Pin To Net: NetName=PD9 Pin=U*-PD9
+Added Pin To Net: NetName=PD10 Pin=U*-PD10
+Added Pin To Net: NetName=PD15 Pin=U*-PD15
+Added Pin To Net: NetName=PE7 Pin=U*-PE7
+Added Pin To Net: NetName=PE8 Pin=U*-PE8
+Added Pin To Net: NetName=PE9 Pin=U*-PE9
+Added Pin To Net: NetName=PE10 Pin=U*-PE10
+Added Member To Class: ClassName=[1] Shield Member=Component U* ETR_SHIELD_III

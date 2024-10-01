@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=I2C2_SCL Pin=U1-PB10
+Removed Pin From Net: NetName=I2C2_SDA Pin=U1-PB11
+Added Pin To Net: NetName=USART3_CK Pin=J3-12
+Added Net: Name=USART3_CK
+Added Pin To Net: NetName=USART3_RX Pin=J3-11
+Added Net: Name=USART3_RX
+Added Pin To Net: NetName=USART3_TX Pin=J3-10
+Added Net: Name=USART3_TX

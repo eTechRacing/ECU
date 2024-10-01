@@ -1,0 +1,24 @@
+Added Component: Designator=TP1(TESTPOINT_WIDE)
+Added Component: Designator=TP2(TestPoint)
+Add component (AddParameter): Name = ".Creator"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".PCBcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".SCHcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Category"; Value = "TestPoint"; VariantName = "[No Variations]"
+Added Component: Designator=TP3(TestPoint)
+Add component (AddParameter): Name = ".Creator"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".PCBcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".SCHcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Category"; Value = "TestPoint"; VariantName = "[No Variations]"
+Added Component: Designator=TP4(TestPoint)
+Add component (AddParameter): Name = ".Creator"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".PCBcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".SCHcheck"; Value = "GP"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Category"; Value = "TestPoint"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=TP1-1
+Added Pin To Net: NetName=NetJ5_2 Pin=TP2-1
+Added Pin To Net: NetName=NetJ13_1 Pin=TP3-1
+Added Pin To Net: NetName=RS1_test Pin=TP4-1
+Added Member To Class: ClassName=ECU_Dummy Member=Component TP1 Test Point
+Added Member To Class: ClassName=ECU_Dummy Member=Component TP2 TestPoint
+Added Member To Class: ClassName=ECU_Dummy Member=Component TP3 TestPoint
+Added Member To Class: ClassName=ECU_Dummy Member=Component TP4 TestPoint

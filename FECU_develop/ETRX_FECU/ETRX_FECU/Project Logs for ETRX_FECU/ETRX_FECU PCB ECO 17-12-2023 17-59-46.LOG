@@ -1,0 +1,12 @@
+Added Component: Designator=R215(R0805FTK)
+Added Component: Designator=R217(R0805FTK)
+Added Component: Designator=R219(R0805FTK)
+Added Pin To Net: NetName=S8 Pin=R215-1
+Added Pin To Net: NetName=PE8 Pin=R215-2
+Added Pin To Net: NetName=S9 Pin=R217-1
+Added Pin To Net: NetName=PE9 Pin=R217-2
+Added Pin To Net: NetName=S10 Pin=R219-1
+Added Pin To Net: NetName=PE10 Pin=R219-2
+Added Member To Class: ClassName=[2] Sensors Member=Component R215 12k5
+Added Member To Class: ClassName=[2] Sensors Member=Component R217 12k5
+Added Member To Class: ClassName=[2] Sensors Member=Component R219 12k5

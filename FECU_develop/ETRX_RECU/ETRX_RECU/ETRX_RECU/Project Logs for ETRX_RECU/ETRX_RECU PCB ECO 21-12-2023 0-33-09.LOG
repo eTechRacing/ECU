@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=OUTPUT_REFRI Pin=J4-8
+Removed Pin From Net: NetName=OUTPUT_PUMPS Pin=J4-9
+Added Pin To Net: NetName=OUTPUT_PUMPS Pin=J4-8
+Added Pin To Net: NetName=OUTPUT_REFRI Pin=J4-9
+Add Net: Net with name "AGND" already exists

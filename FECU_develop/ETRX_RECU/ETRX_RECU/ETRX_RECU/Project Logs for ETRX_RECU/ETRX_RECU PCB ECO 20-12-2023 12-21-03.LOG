@@ -1,0 +1,6 @@
+Removed Member From Class: ClassName=[3]Power Member=C?
+Change Component Designator: OldDesignator=C303 NewDesignator=C304
+Change Component Designator: OldDesignator=C304 NewDesignator=C305
+Change Component Designator: OldDesignator=C? NewDesignator=C303
+Add Net: Net with name "AGND" already exists
+Added Member To Class: ClassName=[3]Power Member=Component C305 885012207103
