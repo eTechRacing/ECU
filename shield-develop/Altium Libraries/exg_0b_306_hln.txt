@@ -1,0 +1,10 @@
+﻿"Symbol";"Value";"Unit";
+"TraceParts.PartNumber";"90-04082022-053631";"";
+"REFERENCE";"EXG.0B.306.HLN";"";
+"TraceParts.PartTitle";"Elbow receptacle for printed circuit with two nuts (solder or screw fixing, back panel mounting) (IP 50)";"";
+"TraceParts.InstanceId";"90-04082022-053631DLEGT13G17UUCRESUXQ881DAD";"";
+"SUPPLIER";"LEMO";"";
+"DESIGN";"Elbow receptacle for printed circuit with two nuts (solder or screw fixing, back panel mounting) (IP 50)";"";
+"TRACEPARTS";"TRACEPARTS";"";
+"TraceParts.PartLanguage";"en";"";
+"TraceParts.PartVersion";"1.0.0";"";

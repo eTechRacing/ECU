@@ -1,0 +1,4 @@
+Record=TopLevelDocument|FileName=ETRX_Shield.SchDoc|SheetNumber=1
+Record=SheetSymbol|SourceDocument=ETRX_Shield.SchDoc|Designator=[1] Supply|SchDesignator=[1] Supply|FileName=[1] Supply.SchDoc|SheetNumber=2|SymbolType=Normal|RawFileName=[1] Supply.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=ETRX_Shield.SchDoc|Designator=[2] MCU|SchDesignator=[2] MCU|FileName=[2] MCU.SchDoc|SheetNumber=3|SymbolType=Normal|RawFileName=[2] MCU.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=ETRX_Shield.SchDoc|Designator=[3] CAN|SchDesignator=[3] CAN|FileName=[3] CAN.SchDoc|SheetNumber=4|SymbolType=Normal|RawFileName=[3] CAN.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
