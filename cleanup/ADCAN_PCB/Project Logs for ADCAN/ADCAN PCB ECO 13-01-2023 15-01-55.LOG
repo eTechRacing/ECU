@@ -1,0 +1,63 @@
+Added Component: Designator=S501(Accel_SCC2230-D08)
+Add component (AddParameter): Name = "Case/Package"; Value = "SMD/SMT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Category"; Value = "Inertial Measurement Units (IMUs)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "https://www.murata.com/~/media/webrenewal/products/sensor/gyro/scc2000/scc2230-d08%20datasheet%2082177600b0.ashx?la=en&src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "https://www.murata.com/~/media/webrenewal/products/sensor/gyro/scc2000/scc2230-d08%20datasheet%2082177600b0.ashx?la=en&src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Murata"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://www.murata.com/en-global/products/productdetail?partno=SCC2230-D08"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer 1"; Value = "Murata"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number 1"; Value = "SCC2230-D08-05"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Operating Temperature"; Value = "125°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Operating Temperature"; Value = "-40°C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mount"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Output Type"; Value = "SPI"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Packaging"; Value = "Tape and Reel"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pricing 1"; Value = "1=92,29000, 5=87,67600, 10=80,75400, 25=71,52480 (USD)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Sensor Type"; Value = "Accelerometer,Gyroscope,3 Axis"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock 1"; Value = "296"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier 1"; Value = "Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number 1"; Value = "490-12142-1-ND"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=S501-1
+Added Pin To Net: NetName=RST Pin=S501-3
+Added Pin To Net: NetName=SCK Pin=S501-4
+Added Pin To Net: NetName=MISO Pin=S501-5
+Added Pin To Net: NetName=NetC503_1 Pin=S501-6
+Added Pin To Net: NetName=NetL501_1 Pin=S501-7
+Added Pin To Net: NetName=GND Pin=S501-8
+Added Pin To Net: NetName=+3.3 Pin=S501-9
+Added Pin To Net: NetName=NetC501_1 Pin=S501-10
+Added Pin To Net: NetName=GND Pin=S501-12
+Added Pin To Net: NetName=GND Pin=S501-13
+Added Pin To Net: NetName=+3.3 Pin=S501-14
+Added Pin To Net: NetName=NetC502_1 Pin=S501-15
+Added Pin To Net: NetName=GND Pin=S501-16
+Added Pin To Net: NetName=GND Pin=S501-17
+Added Pin To Net: NetName=CSB Pin=S501-18
+Added Pin To Net: NetName=MOSI Pin=S501-19
+Added Pin To Net: NetName=GND Pin=S501-24
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=RGB(255, 110, 255)
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=RGB(255, 110, 255)
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=RGB(110, 255, 110)
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=RGB(110, 255, 110)
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=RGB(68, 60, 62)
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=RGB(255, 110, 110)
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Change Net Color : Old Net Color=RGB(158, 161, 117) New Net Color=Yellow
+Added Member To Class: ClassName=Sheet 5 Member=Component S501 SCC2230-D08

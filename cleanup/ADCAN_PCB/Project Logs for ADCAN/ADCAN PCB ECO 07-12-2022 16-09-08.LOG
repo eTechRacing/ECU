@@ -1,0 +1,21 @@
+Removed Pin From Net: NetName=+5 Pin=J1-2
+Removed Pin From Net: NetName=AUX3_s Pin=J1-5
+Removed Pin From Net: NetName=AUX2_s Pin=J1-6
+Removed Pin From Net: NetName=AUX1_s Pin=J1-7
+Removed Pin From Net: NetName=APPS1_s Pin=J1-10
+Removed Pin From Net: NetName=APPS2_s Pin=J1-11
+Removed Pin From Net: NetName=Brake_s Pin=J1-12
+Removed Pin From Net: NetName=Steering_s Pin=J1-13
+Removed Pin From Net: NetName=SuspeFL_s Pin=J1-14
+Removed Pin From Net: NetName=SuspeFR_s Pin=J1-15
+Added Pin To Net: NetName=APPS1_s Pin=J1-2
+Added Pin To Net: NetName=APPS2_s Pin=J1-3
+Added Pin To Net: NetName=Brake_s Pin=J1-4
+Added Pin To Net: NetName=Steering_s Pin=J1-5
+Added Pin To Net: NetName=SuspeFL_s Pin=J1-6
+Added Pin To Net: NetName=SuspeFR_s Pin=J1-7
+Added Pin To Net: NetName=+5 Pin=J1-10
+Added Pin To Net: NetName=AUX3_s Pin=J1-13
+Added Pin To Net: NetName=AUX2_s Pin=J1-14
+Added Pin To Net: NetName=AUX1_s Pin=J1-15
+Added Member To Class: ClassName=ADCAN Member=Component J1 1053141116

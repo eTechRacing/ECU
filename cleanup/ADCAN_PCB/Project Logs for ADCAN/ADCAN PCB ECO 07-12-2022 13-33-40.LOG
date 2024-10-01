@@ -1,0 +1,90 @@
+Removed Pin From Net: NetName=CAN2_H Pin=J1-1
+Removed Pin From Net: NetName=APPS1_s Pin=J1-2
+Removed Pin From Net: NetName=APPS2_s Pin=J1-3
+Removed Pin From Net: NetName=Brake_s Pin=J1-4
+Removed Pin From Net: NetName=Steering_s Pin=J1-5
+Removed Pin From Net: NetName=SuspeFL_s Pin=J1-6
+Removed Pin From Net: NetName=SuspeFR_s Pin=J1-7
+Removed Pin From Net: NetName=LV+in Pin=J1-8
+Removed Pin From Net: NetName=GND Pin=J1-9
+Removed Pin From Net: NetName=+5 Pin=J1-10
+Removed Pin From Net: NetName=AUX3_s Pin=J1-13
+Removed Pin From Net: NetName=AUX2_s Pin=J1-14
+Removed Pin From Net: NetName=AUX1_s Pin=J1-15
+Removed Pin From Net: NetName=CAN2_L Pin=J1-16
+Removed Pin From Net: NetName=NetJ2_3 Pin=U601-1
+Removed Pin From Net: NetName=NetJ2_4 Pin=U601-2
+Removed Pin From Net: NetName=NetJ2_8 Pin=U601-3
+Removed Pin From Net: NetName=NetJ2_7 Pin=U601-4
+Removed Pin From Net: NetName=NetJ2_6 Pin=U601-5
+Removed Pin From Net: NetName=NetJ2_5 Pin=U601-6
+Removed Pin From Net: NetName=NetJ2_1 Pin=U601-7
+Removed Pin From Net: NetName=NetJ2_2 Pin=U601-8
+Removed Member From Class: ClassName=main Member=J1
+Change Component Footprint: Designator=J2 Old Footprint=J_NanoFit_2x4_V New Footprint=J_NanoFit_2X4
+Change Component Comment : Designator=J2 Old Comment=105310-1108 New Comment=105314-1108
+Change Component Designator: OldDesignator=C307 NewDesignator=C307(NP)
+Change Component Designator: OldDesignator=GND NewDesignator=TP102
+Change Component Designator: OldDesignator=LV+ NewDesignator=TP106
+Change component parameters: Designator = "J2" ("J2"); Footprint = "J_NanoFit_2x4_V"; UniqueID = "\AMJDXQAP" ("\AMJDXQAP")
+Change component parameters (AddParameter): Name = ".Creator"; Value = "DO"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = ".PCBcheck"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = ".SCHcheck"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Application"; Value = "Wire to board"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Category"; Value = "Connector"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Category type"; Value = "PCB header"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1Description"; Value = "Datasheet"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink1URL"; Value = "https://www.molex.com/molex/products/part-detail/pcb_headers/1053141104"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2Description"; Value = "Where buy it"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink2URL"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink3Description"; Value = "http://www.farnell.com/datasheets/2551096.pdf?src-supplier=Newark"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink3URL"; Value = "http://www.farnell.com/datasheets/2551096.pdf?src-supplier=Newark"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink4Description"; Value = "https://www.molex.com/pdm_docs/sd/1053141104_sd.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ComponentLink4URL"; Value = "https://www.molex.com/pdm_docs/sd/1053141104_sd.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Connections"; Value = "2x4"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Connector Type"; Value = "Header,Male Pin"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Contact Material"; Value = "Brass"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Contact Plating"; Value = "Tin"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Contact Shape"; Value = "Square"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Fastening Type"; Value = "Latch"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Flammability"; Value = "94V-0"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Insulation Color"; Value = "Black"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Insulation Material"; Value = "Polymer"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "Molex"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer part number"; Value = "105314-1108"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Max Operating Temperature"; Value = "105°C"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Maximum current"; Value = "7.5 A"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Maximum voltage"; Value = "750 V AC"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Min Operating Temperature"; Value = "-40°C"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Mount"; Value = "Through hole"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Positions"; Value = "8"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Rows"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Orientation"; Value = "Right Angle"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Packaging"; Value = "Tray"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Pricing 1"; Value = "1=1,98000, 10=1,68600, 156=1,39308, 1092=1,09983, 4992=0,97518, 10140=0,95318 (USD)"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Product name"; Value = "Nano-Fit"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "RoHS"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "RoHS Compliant"; Value = "Yes"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Stock 1"; Value = "11021"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier 1"; Value = "Digi-Key"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier Part Number 1"; Value = "WM16909-ND"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Temperature rating"; Value = "-40° to +105°C"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Termination"; Value = "Solder"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetJ2_2 Pin=U601-1
+Added Pin To Net: NetName=NetJ2_1 Pin=U601-2
+Added Pin To Net: NetName=NetJ2_5 Pin=U601-3
+Added Pin To Net: NetName=NetJ2_6 Pin=U601-4
+Added Pin To Net: NetName=NetJ2_7 Pin=U601-5
+Added Pin To Net: NetName=NetJ2_8 Pin=U601-6
+Added Pin To Net: NetName=NetJ2_4 Pin=U601-7
+Added Pin To Net: NetName=NetJ2_3 Pin=U601-8
+Change Class Name : Old Net Name=main New Net Name=ADCAN
+Added Member To Class: ClassName=Sheet 1 Member=Component TP103 TestPoint
+Added Room: Name=ADCAN
+Added Room: Name=Sheet 1
+Added Room: Name=Sheet 2
+Added Room: Name=Sheet 3
+Added Room: Name=Sheet 4
+Added Room: Name=Sheet 5
+Added Room: Name=Sheet 6

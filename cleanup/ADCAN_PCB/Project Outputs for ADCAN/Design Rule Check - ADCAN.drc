@@ -1,0 +1,69 @@
+Protel Design System Design Rule Check
+PCB File : C:\Users\dwegg\Desktop\Electronics Repo\ADCAN\ADCAN_PCB\ADCAN.PcbDoc
+Date     : 13/01/2023
+Time     : 15:11:31
+
+Processing Rule : Clearance Constraint (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Modified Polygon (Allow modified: No), (Allow shelved: No)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=0.2mm) (Max=5mm) (Preferred=0.5mm) (All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.5mm) (Conductor Width=0.5mm) (Air Gap=0.35mm) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)
+   Violation between Hole Size Constraint: (3.2mm > 2.54mm) Pad MH1-1(46.25mm,3.75mm) on Multi-Layer Actual Hole Size = 3.2mm
+   Violation between Hole Size Constraint: (3.2mm > 2.54mm) Pad MH2-1(46.25mm,91.25mm) on Multi-Layer Actual Hole Size = 3.2mm
+   Violation between Hole Size Constraint: (3.2mm > 2.54mm) Pad MH3-1(3.75mm,91.25mm) on Multi-Layer Actual Hole Size = 3.2mm
+   Violation between Hole Size Constraint: (3.2mm > 2.54mm) Pad MH4-1(3.75mm,3.75mm) on Multi-Layer Actual Hole Size = 3.2mm
+Rule Violations :4
+
+Processing Rule : Hole To Hole Clearance (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Silk to Silk (Clearance=0.254mm) (All),(All)
+   Violation between Silk To Silk Clearance Constraint: (0.23mm < 0.254mm) Between Text "C506" (23.501mm,77.93mm) on Top Overlay And Track (21.375mm,78.9mm)(24.475mm,78.9mm) on Top Overlay Silk Text to Silk Clearance [0.23mm]
+Rule Violations :1
+
+Processing Rule : Net Antennae (Tolerance=0mm) (All)
+   Violation between Net Antennae: Via (48.5mm,93.25mm) from Top Layer to Bottom Layer 
+Rule Violations :1
+
+Processing Rule : Room Sheet 2 (Bounding Region = (33.75mm, 33.75mm, 84mm, 120mm) (InComponentClass('Sheet 2'))
+Rule Violations :0
+
+Processing Rule : Room Sheet 3 (Bounding Region = (33.75mm, 34mm, 84.25mm, 120mm) (InComponentClass('Sheet 3'))
+Rule Violations :0
+
+Processing Rule : Room Sheet 5 (Bounding Region = (34mm, 34mm, 83.5mm, 119.5mm) (InComponentClass('Sheet 5'))
+Rule Violations :0
+
+Processing Rule : Room Sheet 4 (Bounding Region = (33.5mm, 34mm, 83.75mm, 119.5mm) (InComponentClass('Sheet 4'))
+Rule Violations :0
+
+Processing Rule : Room Sheet 1 (Bounding Region = (33.75mm, 34.25mm, 84mm, 120mm) (InComponentClass('Sheet 1'))
+Rule Violations :0
+
+Processing Rule : Room Sheet 6 (Bounding Region = (33.5mm, 34.25mm, 83.25mm, 119.5mm) (InComponentClass('Sheet 6'))
+Rule Violations :0
+
+Processing Rule : Room ADCAN (Bounding Region = (33.75mm, 26.25mm, 84mm, 123.25mm) (InComponentClass('ADCAN'))
+Rule Violations :0
+
+Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
+Rule Violations :0
+
+
+Violations Detected : 6
+Waived Violations : 0
+Time Elapsed        : 00:00:02

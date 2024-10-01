@@ -1,0 +1,12 @@
+Removed Pin From Net: NetName=APPS1_s Pin=J1-2
+Removed Pin From Net: NetName=APPS2_s Pin=J1-3
+Removed Pin From Net: NetName=Brake_s Pin=J1-4
+Removed Pin From Net: NetName=Steering_s Pin=J1-5
+Removed Pin From Net: NetName=SuspeFL_s Pin=J1-6
+Removed Pin From Net: NetName=SuspeFR_s Pin=J1-7
+Added Pin To Net: NetName=SuspeFR_s Pin=J1-2
+Added Pin To Net: NetName=SuspeFL_s Pin=J1-3
+Added Pin To Net: NetName=Steering_s Pin=J1-4
+Added Pin To Net: NetName=Brake_s Pin=J1-5
+Added Pin To Net: NetName=APPS2_s Pin=J1-6
+Added Pin To Net: NetName=APPS1_s Pin=J1-7

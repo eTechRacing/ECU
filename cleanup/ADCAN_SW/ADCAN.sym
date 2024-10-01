@@ -1,0 +1,243 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @INTERRUPT_AREA
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     @INTERRUPT_AREA
+017-018 cobid
+019     lengthCAN
+01A     contCAN
+01B     _alive
+01C     not_first_message
+01D-020 data
+021-024 data_bis
+025     CAN_flag
+026-029 APPS1_sum
+02A-02D APPS2_sum
+02E-031 BrakeS_sum
+032-035 Steering_sum
+036-039 SpringFR_sum
+03A-03D SpringFL_sum
+03E-03F APPS1
+040-041 APPS2
+042-043 BrakeSensor
+044-045 SteeringSensor
+046-047 SUSPFR
+048-049 SUSPFL
+04A     mean_filter_flag
+04B     read_ADC_flag
+04C-04D SUMA
+04E-04F send_alive._cobid
+04E-04F can_getd.data
+04E     can_set_mode.mode
+04E-04F send_data._cobid
+04E     can_init.@SCRATCH1
+04E     MAIN.@SCRATCH1
+04F     can_set_mode.@SCRATCH1
+050     can_getd.i
+050     send_data._len
+051-052 can_getd.ptr
+051-052 send_data._data_1
+053-054 send_data._data_2
+055-056 send_data._data_3
+057-058 send_data._data_4
+059     @delay_ms1.P1
+059-05C can_putd.id
+05D-05E can_putd.data
+05F     can_putd.len
+060     can_putd.priority
+061     can_putd.ext
+062     can_putd.rtr
+063     can_putd.i
+064-065 can_putd.txd0
+066     can_putd.port
+067-068 can_set_id.addr
+067     can_putd.@SCRATCH1
+068     can_putd.@SCRATCH2
+069-06C can_set_id.id
+069     can_putd.@SCRATCH3
+06D     can_set_id.ext
+06E-06F can_set_id.ptr
+070     can_set_id.@SCRATCH1
+071     can_set_id.@SCRATCH2
+072     can_set_id.@SCRATCH3
+073     can_set_id.@SCRATCH4
+074     canrx0_int.@SCRATCH1
+075     canrx0_int.@SCRATCH2
+076     canrx0_int.@SCRATCH3
+F00     RXF0SIDH
+F01     RXF0SIDL
+F02     RXF0EIDH
+F03     RXF0EIDL
+F04     RXF1SIDH
+F05     RXF1SIDL
+F06     RXF1EIDH
+F07     RXF1EIDL
+F08     RXF2SIDH
+F09     RXF2SIDL
+F0A     RXF2EIDH
+F0B     RXF2EIDL
+F0C     RXF3SIDH
+F0D     RXF3SIDL
+F0E     RXF3EIDH
+F0F     RXF3EIDL
+F10     RXF4SIDH
+F11     RXF4SIDL
+F12     RXF4EIDH
+F13     RXF4EIDL
+F14     RXF5SIDH
+F15     RXF5SIDL
+F16     RXF5EIDH
+F17     RXF5EIDL
+F18     RXM0SIDH
+F19     RXM0SIDL
+F1A     RXM0EIDH
+F1B     RXM0EIDL
+F1C     RXM1SIDH
+F1D     RXM1SIDL
+F1E     RXM1EIDH
+F1F     RXM1EIDL
+F20     TXB2CON
+F21     TXB2SIDH
+F22     TXB2SIDL
+F23     TXB2EIDH
+F24     TXB2EIDL
+F25     TXB2DLC
+F26     TXB2D0
+F2D     TXB2D7
+F30     TXB1CON
+F31     TXB1SIDH
+F32     TXB1SIDL
+F33     TXB1EIDH
+F34     TXB1EIDL
+F35     TXB1DLC
+F36     TXB1D0
+F3D     TXB1D7
+F40     TXB0CON
+F41     TXB0SIDH
+F42     TXB0SIDL
+F43     TXB0EIDH
+F44     TXB0EIDL
+F45     TXB0DLC
+F46     TXB0D0
+F4D     TXB0D7
+F50     RXB1CON
+F51     RXB1SIDH
+F52     RXB1SIDL
+F53     RXB1EIDH
+F54     RXB1EIDL
+F55     RXB1DLC
+F60     TXBaCON
+F60     RXB0CON
+F61     RXB0SIDH
+F62     RXB0SIDL
+F62     TXRXBaSIDL
+F63     RXB0EIDH
+F64     TXRXBaEIDL
+F64     RXB0EIDL
+F65     RXBaDLC
+F65     TXBaDLC
+F65     RXB0DLC
+F66     RXB0D0
+F66     TXRXBaD0
+F6D     TXRXBaD7
+F6D     RXB0D7
+F6E     CANSTAT
+F6F     CANCON
+F70     BRGCON1
+F71     BRGCON2
+F72     BRGCON3
+F73     CIOCON
+F74     COMSTAT
+F75     RXERRCNT
+F76     TXERRCNT
+FA4.0   CAN_INT_RXB0IF
+FA4.1   CAN_INT_RXB1IF
+FA4.2   CAN_INT_TXB0IF
+FA4.3   CAN_INT_TXB1IF
+FA4.4   CAN_INT_TXB2IF
+FA4.5   CAN_INT_ERRIF
+FA4.6   CAN_INT_WAKIF
+FA4.7   CAN_INT_IRXIF
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+0000AA  canrx0_int
+0000F4  TIMER2_isr
+000102  can_set_mode
+000124  can_set_baud
+000154  can_set_id
+000284  can_init
+000350  Initial_Config
+0003AA  @delay_ms1
+0003D0  can_putd
+00049A  send_alive
+0004D4  send_data
+000520  @cinit1
+000520  MAIN
+0005AE  @cinit2
+
+Project Directory:
+    C:\Users\Anna\Documents\UNI\Etech\Git\Electronics\ADCAN\ADCAN_SW\
+
+Project Files:
+    ADCAN.c                                                 [13-maig-22 21:51  CRC=5C8A27B1]
+    ADCAN.h                                                 [22-abr.-22 15:54  CRC=17B43772]
+    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F2685.h [12-nov.-13 15:35  CRC=2FC90A7F]
+    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\can-18xxx8.c [10-gen.-13 12:22  CRC=12402CA3]
+    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\can-18xxx8.h [10-gen.-13 12:19  CRC=624EB0FF]
+    ADCAN_vars.c                                            [13-maig-22 22:18  CRC=EE01D3FD]
+    ADCAN_funs.c                                            [11-maig-22 16:56  CRC=C8B1E6C2]
+
+Source signature=97FBE8C5
+
+Units:
+    ADCAN (main)
+
+Compiler Settings:
+    Processor:      PIC18F2685
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   ADCAN.xsym
+    Errors:      ADCAN.err
+    Ext Symbols: ADCAN.esym
+    INHX32:      ADCAN.hex
+    Symbols:     ADCAN.sym
+    List:        ADCAN.lst
+    Debug/COFF:  ADCAN.cof
+    Project:     ADCAN.ccspjt
+    Call Tree:   ADCAN.tre
+    Statistics:  ADCAN.STA

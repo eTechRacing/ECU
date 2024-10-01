@@ -1,0 +1,46 @@
+Removed Pin From Net: NetName=GND Pin=J1-1
+Removed Pin From Net: NetName=+5 Pin=J1-2
+Removed Pin From Net: NetName=AUX3_s Pin=J1-5
+Removed Pin From Net: NetName=AUX2_s Pin=J1-6
+Removed Pin From Net: NetName=AUX1_s Pin=J1-7
+Removed Pin From Net: NetName=CAN2_L Pin=J1-8
+Removed Pin From Net: NetName=LV+in Pin=J1-9
+Removed Pin From Net: NetName=APPS1_s Pin=J1-10
+Removed Pin From Net: NetName=APPS2_s Pin=J1-11
+Removed Pin From Net: NetName=Brake_s Pin=J1-12
+Removed Pin From Net: NetName=Steering_s Pin=J1-13
+Removed Pin From Net: NetName=SuspeFL_s Pin=J1-14
+Removed Pin From Net: NetName=SuspeFR_s Pin=J1-15
+Removed Pin From Net: NetName=CAN2_H Pin=J1-16
+Removed Member From Class: ClassName=ADCAN Member=J1
+Added Component: Designator=J?(J_NanoFit_2x8)
+Add component (AddParameter): Name = ".Creator"; Value = "DO"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".PCBcheck"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = ".SCHcheck"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Category"; Value = "Headers and Wire Housings"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "https://www.molex.com/pdm_docs/ps/PS-105300-100-001.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "https://www.molex.com/pdm_docs/ps/PS-105300-100-001.pdf?src-supplier=Digi-Key"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2Description"; Value = "Where buy it"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink2URL"; Value = "https://www.molex.com/molex/products/part-detail/pcb_headers/1053141116"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Molex"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "105314-1116"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pricing 1"; Value = "1=3,37000, 10=3,24000, 25=2,88000, 50=2,81000, 100=2,73000, 250=2,44000 (USD)"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "RoHS"; Value = "Yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Stock 1"; Value = "366"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier 1"; Value = "Newark"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number 1"; Value = "33AC7692"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=J?-1
+Added Pin To Net: NetName=APPS1_s Pin=J?-2
+Added Pin To Net: NetName=APPS2_s Pin=J?-3
+Added Pin To Net: NetName=Brake_s Pin=J?-4
+Added Pin To Net: NetName=Steering_s Pin=J?-5
+Added Pin To Net: NetName=SuspeFL_s Pin=J?-6
+Added Pin To Net: NetName=SuspeFR_s Pin=J?-7
+Added Pin To Net: NetName=CAN2_L Pin=J?-8
+Added Pin To Net: NetName=LV+in Pin=J?-9
+Added Pin To Net: NetName=+5 Pin=J?-10
+Added Pin To Net: NetName=AUX3_s Pin=J?-13
+Added Pin To Net: NetName=AUX2_s Pin=J?-14
+Added Pin To Net: NetName=AUX1_s Pin=J?-15
+Added Pin To Net: NetName=CAN2_H Pin=J?-16
+Added Member To Class: ClassName=ADCAN Member=Component J? 1053141116

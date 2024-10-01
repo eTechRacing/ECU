@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=CAN2_H Pin=J*-9
+Removed Pin From Net: NetName=LV+in Pin=J*-16
+Change Component Designator: OldDesignator=J* NewDesignator=J1
+Added Pin To Net: NetName=LV+in Pin=J1-9
+Added Pin To Net: NetName=CAN2_H Pin=J1-16

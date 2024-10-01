@@ -1,0 +1,32 @@
+ÀÄADCAN
+   ÃÄMAIN  0/556  Ram=1
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄInitial_Config  0/90  Ram=0
+   ³  ³  ÃÄcan_init  0/204  Ram=1
+   ³  ³  ³  ÃÄcan_set_mode  0/34  Ram=2
+   ³  ³  ³  ÃÄcan_set_baud  0/48  Ram=0
+   ³  ³  ³  ÃÄcan_set_id  0/304  Ram=13
+   ³  ³  ³  ÃÄcan_set_id  0/304  Ram=13
+   ³  ³  ³  ÃÄcan_set_id  0/304  Ram=13
+   ³  ³  ³  ÃÄcan_set_id  0/304  Ram=13
+   ³  ³  ³  ÃÄcan_set_id  0/304  Ram=13
+   ³  ³  ³  ÃÄcan_set_id  0/304  Ram=13
+   ³  ³  ³  ÃÄcan_set_id  0/304  Ram=13
+   ³  ³  ³  ÃÄcan_set_id  0/304  Ram=13
+   ³  ³  ³  ÀÄcan_set_mode  0/34  Ram=2
+   ³  ³  ÃÄcan_set_mode  0/34  Ram=2
+   ³  ³  ÀÄcan_set_mode  0/34  Ram=2
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄsend_alive  0/58  Ram=2
+   ³  ³  ÃÄcan_putd  0/202  Ram=17
+   ³  ³  ³  ÀÄcan_set_id  0/304  Ram=13
+   ³  ³  ÀÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄsend_data  0/76  Ram=11
+   ³  ³  ÃÄcan_putd  0/202  Ram=17
+   ³  ³  ³  ÀÄ*
+   ³  ³  ÀÄ@delay_ms1  0/38  Ram=1
+   ³  ÀÄsend_data  0/76  Ram=11
+   ³     ÀÄ*
+   ÃÄcanrx0_int  0/74  Ram=3
+   ÀÄTIMER2_isr  0/14  Ram=0

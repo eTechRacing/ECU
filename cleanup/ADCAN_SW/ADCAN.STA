@@ -1,0 +1,63 @@
+
+ROM used:   1864/98304 (2%)
+            1864/98304 (2%) including unused fragments
+
+            1.0 Average locations per line
+            8.4 Average locations per statement
+
+RAM used:   79/3328 (2%) at main() level
+            119/3328 (4%) worst case
+
+Stack used: 4 worst case (3 in main + 1 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  158    51  23  ADCAN.c
+   52     0   0  ADCAN.h
+  753     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F2685.h
+  465   137  61  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\can-18xxx8.c
+  377     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Drivers\can-18xxx8.h
+   43     0   0  ADCAN_vars.c
+   88    35  16  ADCAN_funs.c
+----- -----
+ 1936   223 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0    204   5    1  1216  5.3  can_init
+0     48   1    0   255  2.3  can_set_baud
+0     34   1    2    76  3.1  can_set_mode
+0    304   8   13  1128  6.5  can_set_id
+0    202   5   17  1074  8.6  can_putd
+0     38   1    1             @delay_ms1
+0     74   2    3   225  5.2  canrx0_int
+0     14   0    0    52  1.9  TIMER2_isr
+0     90   2    0   458  2.9  Initial_Config
+0     58   2    2   187  3.2  send_alive
+0     76   2   11   331  3.7  send_data
+0    556  15    1  1547  5.9  MAIN
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               11
+    Statements              223
+    Comments                792
+    Volume (V)              9816
+    Difficulty (D)          49.0
+    Effort to implement (E) 480986
+    Time to implement (T)   7 hours, 25 minutes
+    Est Delivered Bugs (B)  2
+    Cyclomatic Complexity   12
+    Maintainability (MI)    114
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-00006     0  4  
+00008-000A8   162  0  
+000AA-0FFFE  1698  63668  
+10000-17FFE     0  32768  
+
+
+

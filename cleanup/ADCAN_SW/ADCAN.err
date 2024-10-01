@@ -1,0 +1,10 @@
+>>> Warning 202 "C:\Users\Anna\Documents\UNI\Etech\Git\Electronics\ADCAN\ADCAN_SW\ADCAN_vars.c" Line 19(7,16): Variable never used:   APPS1_sum
+>>> Warning 202 "C:\Users\Anna\Documents\UNI\Etech\Git\Electronics\ADCAN\ADCAN_SW\ADCAN_vars.c" Line 20(7,16): Variable never used:   APPS2_sum
+>>> Warning 202 "C:\Users\Anna\Documents\UNI\Etech\Git\Electronics\ADCAN\ADCAN_SW\ADCAN_vars.c" Line 21(7,17): Variable never used:   BrakeS_sum
+>>> Warning 202 "C:\Users\Anna\Documents\UNI\Etech\Git\Electronics\ADCAN\ADCAN_SW\ADCAN_vars.c" Line 22(7,19): Variable never used:   Steering_sum
+>>> Warning 202 "C:\Users\Anna\Documents\UNI\Etech\Git\Electronics\ADCAN\ADCAN_SW\ADCAN_vars.c" Line 23(7,19): Variable never used:   SpringFR_sum
+>>> Warning 202 "C:\Users\Anna\Documents\UNI\Etech\Git\Electronics\ADCAN\ADCAN_SW\ADCAN_vars.c" Line 24(7,19): Variable never used:   SpringFL_sum
+>>> Warning 202 "C:\Users\Anna\Documents\UNI\Etech\Git\Electronics\ADCAN\ADCAN_SW\ADCAN_vars.c" Line 42(14,18): Variable never used:   SUMA
+      Memory usage:   ROM=2%      RAM=2% - 4%
+      0 Errors,  7 Warnings.
+Build Successful.
