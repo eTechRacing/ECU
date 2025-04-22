@@ -5,8 +5,8 @@
 ../Core/Src/main.c:454:13:MX_TIM8_Init	40	static
 ../Core/Src/main.c:499:13:MX_DMA_Init	16	static
 ../Core/Src/main.c:517:13:MX_GPIO_Init	48	static
-../Core/Src/main.c:560:6:StartCAN	88	static
-../Core/Src/main.c:621:6:StartADC	16	static
-../Core/Src/main.c:648:6:StartShutdown	16	static
-../Core/Src/main.c:670:6:HAL_TIM_PeriodElapsedCallback	16	static
-../Core/Src/main.c:687:6:Error_Handler	4	static,ignoring_inline_asm
+../Core/Src/main.c:560:6:StartCAN	56	static
+../Core/Src/main.c:620:6:StartADC	16	static
+../Core/Src/main.c:650:6:StartShutdown	16	static
+../Core/Src/main.c:672:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/main.c:689:6:Error_Handler	4	static,ignoring_inline_asm

@@ -6,7 +6,7 @@
 ../Core/Src/main.c:499:13:MX_DMA_Init	1
 ../Core/Src/main.c:517:13:MX_GPIO_Init	1
 ../Core/Src/main.c:560:6:StartCAN	3
-../Core/Src/main.c:621:6:StartADC	1
-../Core/Src/main.c:648:6:StartShutdown	1
-../Core/Src/main.c:670:6:HAL_TIM_PeriodElapsedCallback	2
-../Core/Src/main.c:687:6:Error_Handler	1
+../Core/Src/main.c:620:6:StartADC	1
+../Core/Src/main.c:650:6:StartShutdown	1
+../Core/Src/main.c:672:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:689:6:Error_Handler	1
