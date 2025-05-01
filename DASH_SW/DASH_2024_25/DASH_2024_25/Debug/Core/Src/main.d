@@ -43,7 +43,12 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- ../Core/Inc/CAN_X_2025.h ../Core/Inc/main.h ../Core/Inc/CAN.h
+ ../Core/Inc/FONTS/fonts.h ../Core/Inc/LCD/bmp.h \
+ ../Core/Inc/LCD/ili9488.h ../Core/Inc/LCD/lcd_io_spi.h \
+ ../Core/Inc/LCD/lcd.h ../Core/Inc/LCD/stm32_adafruit_lcd.h \
+ ../Core/Inc/DASH/etr_screens.h ../Core/Inc/DASH/etr_carstate.h \
+ ../Core/Inc/DASH/buttons.h ../Core/Inc/CAN/CAN_X_2025.h \
+ ../Core/Inc/CAN/CAN.h
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -89,6 +94,14 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
-../Core/Inc/CAN_X_2025.h:
-../Core/Inc/main.h:
-../Core/Inc/CAN.h:
+../Core/Inc/FONTS/fonts.h:
+../Core/Inc/LCD/bmp.h:
+../Core/Inc/LCD/ili9488.h:
+../Core/Inc/LCD/lcd_io_spi.h:
+../Core/Inc/LCD/lcd.h:
+../Core/Inc/LCD/stm32_adafruit_lcd.h:
+../Core/Inc/DASH/etr_screens.h:
+../Core/Inc/DASH/etr_carstate.h:
+../Core/Inc/DASH/buttons.h:
+../Core/Inc/CAN/CAN_X_2025.h:
+../Core/Inc/CAN/CAN.h:

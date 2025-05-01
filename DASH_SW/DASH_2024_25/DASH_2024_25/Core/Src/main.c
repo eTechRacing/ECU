@@ -22,8 +22,18 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "CAN_X_2025.h"
-#include "CAN.h"
+#include <stm32l4xx_hal_gpio.h>
+#include "FONTS/fonts.h"
+#include "LCD/bmp.h"
+#include "LCD/ili9488.h"
+#include "LCD/lcd_io_spi.h"
+#include "LCD/lcd.h"
+#include "LCD/stm32_adafruit_lcd.h"
+#include "DASH/etr_screens.h"
+#include "DASH/etr_carstate.h"
+#include "DASH/buttons.h"
+#include "CAN/CAN_X_2025.h"
+#include "CAN/CAN.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,28 +54,20 @@
 /* Private variables ---------------------------------------------------------*/
 CAN_HandleTypeDef hcan1;
 
-TIM_HandleTypeDef htim1;
-TIM_HandleTypeDef htim8;
-
 osThreadId CANHandle;
 osThreadId ButtonsHandle;
 osThreadId DisplayHandle;
 osSemaphoreId BinSemControlHandle;
 /* USER CODE BEGIN PV */
 // Adc
-uint16_t adc_buffer[12];
 // Can
-uint8_t TxData[8];
 uint8_t RxData[8];
-uint32_t TxMailbox;
-CAN_TxHeaderTypeDef TxHeader;
 CAN_RxHeaderTypeDef RxHeader;
 
 
-// Cooling
-float Temp_L = 0;
-float Temp_R = 0;
-uint8_t flag;
+// Flags
+
+uint8_t flag = 0;
 uint8_t flag1;
 /* USER CODE END PV */
 
@@ -73,8 +75,6 @@ uint8_t flag1;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_CAN1_Init(void);
-static void MX_TIM8_Init(void);
-static void MX_TIM1_Init(void);
 void StartCAN(void const * argument);
 void StartButtons(void const * argument);
 void StartDisplay(void const * argument);
@@ -118,8 +118,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_CAN1_Init();
-  MX_TIM8_Init();
-  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   //-------------StartCAN---------------------------
   HAL_CAN_Start(&hcan1);
@@ -127,7 +125,9 @@ int main(void)
 
   Init_CAN_Filter(&hcan1);
   HAL_Delay(100);
+  GlobalVariableReset();
 
+  init_rules();
   /* USER CODE END 2 */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -258,7 +258,7 @@ static void MX_CAN1_Init(void)
   hcan1.Init.TimeTriggeredMode = DISABLE;
   hcan1.Init.AutoBusOff = DISABLE;
   hcan1.Init.AutoWakeUp = DISABLE;
-  hcan1.Init.AutoRetransmission = DISABLE;
+  hcan1.Init.AutoRetransmission = ENABLE;
   hcan1.Init.ReceiveFifoLocked = DISABLE;
   hcan1.Init.TransmitFifoPriority = DISABLE;
   if (HAL_CAN_Init(&hcan1) != HAL_OK)
@@ -272,127 +272,6 @@ static void MX_CAN1_Init(void)
 }
 
 /**
-  * @brief TIM1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_TIM1_Init(void)
-{
-
-  /* USER CODE BEGIN TIM1_Init 0 */
-
-  /* USER CODE END TIM1_Init 0 */
-
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-  TIM_OC_InitTypeDef sConfigOC = {0};
-  TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = {0};
-
-  /* USER CODE BEGIN TIM1_Init 1 */
-
-  /* USER CODE END TIM1_Init 1 */
-  htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 0;
-  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 4000;
-  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim1.Init.RepetitionCounter = 0;
-  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_PWM_Init(&htim1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
-  sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_DISABLE;
-  sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
-  sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
-  sBreakDeadTimeConfig.DeadTime = 0;
-  sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
-  sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_HIGH;
-  sBreakDeadTimeConfig.BreakFilter = 0;
-  sBreakDeadTimeConfig.Break2State = TIM_BREAK2_DISABLE;
-  sBreakDeadTimeConfig.Break2Polarity = TIM_BREAK2POLARITY_HIGH;
-  sBreakDeadTimeConfig.Break2Filter = 0;
-  sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE;
-  if (HAL_TIMEx_ConfigBreakDeadTime(&htim1, &sBreakDeadTimeConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM1_Init 2 */
-
-  /* USER CODE END TIM1_Init 2 */
-  HAL_TIM_MspPostInit(&htim1);
-
-}
-
-/**
-  * @brief TIM8 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_TIM8_Init(void)
-{
-
-  /* USER CODE BEGIN TIM8_Init 0 */
-
-  /* USER CODE END TIM8_Init 0 */
-
-  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-
-  /* USER CODE BEGIN TIM8_Init 1 */
-
-  /* USER CODE END TIM8_Init 1 */
-  htim8.Instance = TIM8;
-  htim8.Init.Prescaler = 20;
-  htim8.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim8.Init.Period = 65535;
-  htim8.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim8.Init.RepetitionCounter = 0;
-  htim8.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim8) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim8, &sClockSourceConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
-  sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_UPDATE;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim8, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM8_Init 2 */
-
-  /* USER CODE END TIM8_Init 2 */
-
-}
-
-/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -400,68 +279,103 @@ static void MX_TIM8_Init(void)
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+  /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, BL_Pin|PUMPR_Pin|PUMPL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(IMD_LED_GPIO_Port, IMD_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, TS_LED_Pin|BUZZER_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : TSMS_TSMP_Pin RightTS_Pin LeftTS_Pin HVD_Pin
-                           HVBox_Pin */
-  GPIO_InitStruct.Pin = TSMS_TSMP_Pin|RightTS_Pin|LeftTS_Pin|HVD_Pin
-                          |HVBox_Pin;
+  /*Configure GPIO pin : BUTTON_UP_Pin */
+  GPIO_InitStruct.Pin = BUTTON_UP_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(BUTTON_UP_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : BUTTON_DOWN_Pin BUTTON_LEFT_Pin BUTTON_RIGHT_Pin BUTTON_OK_Pin */
+  GPIO_InitStruct.Pin = BUTTON_DOWN_Pin|BUTTON_LEFT_Pin|BUTTON_RIGHT_Pin|BUTTON_OK_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SPI_SCK_Pin SPI_MISO_Pin SPI_MOSI_Pin */
+  GPIO_InitStruct.Pin = SPI_SCK_Pin|SPI_MISO_Pin|SPI_MOSI_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BL_Pin PUMPR_Pin PUMPL_Pin */
-  GPIO_InitStruct.Pin = BL_Pin|PUMPR_Pin|PUMPL_Pin;
+  /*Configure GPIO pin : SPI_CS_Pin */
+  GPIO_InitStruct.Pin = SPI_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(SPI_CS_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SPI_DC_Pin SPI_RST_Pin */
+  GPIO_InitStruct.Pin = SPI_DC_Pin|SPI_RST_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : IMD_LED_Pin */
+  GPIO_InitStruct.Pin = IMD_LED_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(IMD_LED_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : TS_LED_Pin BUZZER_Pin */
+  GPIO_InitStruct.Pin = TS_LED_Pin|BUZZER_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LED_Pin */
-  GPIO_InitStruct.Pin = LED_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
-
-/* USER CODE BEGIN MX_GPIO_Init_2 */
-/* USER CODE END MX_GPIO_Init_2 */
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+  /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan1)
   {
-	if (HAL_CAN_GetRxMessage(hcan1, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK){
+	HAL_CAN_GetRxMessage(hcan1, CAN_RX_FIFO0, &RxHeader, RxData);
 
-		if (RxHeader.StdId == 4) { //missatge rebut per CAN2
-				message_canrx_PROC_ETAS_Inverter_R_Data(RxData);
-		//		osSemaphoreRelease(BinSemControlHandle);
+			if(RxHeader.StdId == CTRL_BMS_Cell_Extremes_id){
+				message_canrx_CTRL_BMS_Cell_Extremes(RxData);
 			}
-		if(RxHeader.StdId == 3) { //missatge rebut per CAN2
-				message_canrx_PROC_ETAS_Inverter_L_Data(RxData);
-		//		osSemaphoreRelease(BinSemControlHandle);
+			else if (RxHeader.StdId == STAT_ETAS_Diagnostics_id){
+				message_canrx_STAT_ETAS_Diagnostics(RxData);
 			}
-		if(RxHeader.StdId == 49) { //missatge rebut per CAN2
-				message_canrx_CTRL_DASH_Driver_Inputs(RxData);
-		//		osSemaphoreRelease(BinSemControlHandle);
+			else if (RxHeader.StdId == STAT_ETAS_Sync_id){
+				message_canrx_STAT_ETAS_Sync(RxData);
 			}
-		if(RxHeader.StdId == 2) { //missatge rebut per CAN2
+			else if (RxHeader.StdId == CTRL_ETAS_System_id){
 				message_canrx_CTRL_ETAS_System(RxData);
-		//		osSemaphoreRelease(BinSemControlHandle);
+				Screen.ActualState = Car_State;
 			}
-	}
+			else if (RxHeader.StdId == PROC_ETAS_TS_Data_id){
+				message_canrx_PROC_ETAS_TS_Data(RxData);
+			}
+			else if (RxHeader.StdId == PROC_ETAS_VDC_LapTiming_id){
+				message_canrx_PROC_ETAS_VDC_LapTiming(RxData);
+			}
+			else if (RxHeader.StdId == PROC_ETAS_VDC_Tq_id){
+				message_canrx_PROC_ETAS_VDC_Tq(RxData);
+			}
+			else if (RxHeader.StdId == PROC_ETAS_VDC_Values_id){
+				message_canrx_PROC_ETAS_VDC_Values(RxData);
+			}
+			else if (RxHeader.StdId == PROC_ETAS_VDC_Params_id){
+				message_canrx_PROC_ETAS_VDC_Params(RxData);
+			} else {}
   }
 /* USER CODE END 4 */
 
@@ -478,24 +392,22 @@ void StartCAN(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-//	  switch (CAN_FSM_STATE) {
-//	  case RAW_RECU_Data:
-//		  message_cantx_RAW_RECU_Data(TxHeader, hcan1, TxMailbox, TxData);
-//		  CAN_FSM_STATE = STAT_RECU_Keep_Alive;
-//		  vTaskDelay(5);
-//	  break;
-//	  case STAT_RECU_Keep_Alive:
-//		  message_cantx_STAT_RECU_Keep_Alive(TxHeader, hcan1, TxMailbox, TxData);
-//		  CAN_FSM_STATE = RAW_RECU_Data;
-//		  vTaskDelay(20);
-//	  break;2
-//	  }
-	  Rear_Alive ++;
-	  message_cantx_STAT_RECU_Keep_Alive(TxHeader, hcan1, TxMailbox, TxData);
-	  vTaskDelay(50);
-	  Rear_Alive ++;
-	  message_cantx_RAW_RECU_Data(TxHeader, hcan1, TxMailbox, TxData);
-	  message_cantx_STAT_RECU_Keep_Alive(TxHeader, hcan1, TxMailbox, TxData);
+	  message_cantx_STAT_DASH_Keep_Alive(hcan1);
+	  Dash_Alive++;
+
+	  if (PrechargeRequest == 1) {
+		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
+		  PrechargeRequest = 0;
+	  }
+	  else if (RacingMode_Send == 1) {
+		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
+		  RacingMode_Send = 0;
+	  }
+	  else if (EnableDrive_Order == 1) {
+		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
+		  EnableDrive_Order = 0;
+	  }
+
 	  vTaskDelay(50);
   }
   /* USER CODE END 5 */
@@ -514,7 +426,16 @@ void StartButtons(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+
+	  currentButtonState_Up = HAL_GPIO_ReadPin(BUTTON_UP_GPIO_Port, BUTTON_UP_Pin);
+	  currentButtonState_Down = HAL_GPIO_ReadPin(BUTTON_DOWN_GPIO_Port, BUTTON_DOWN_Pin);
+	  currentButtonState_Right = HAL_GPIO_ReadPin(BUTTON_RIGHT_GPIO_Port, BUTTON_RIGHT_Pin);
+	  currentButtonState_Left = HAL_GPIO_ReadPin(BUTTON_LEFT_GPIO_Port, BUTTON_LEFT_Pin);
+	  currentButtonState_OK = HAL_GPIO_ReadPin(BUTTON_OK_GPIO_Port, BUTTON_OK_Pin);
+
+	  refreshButton();
+
+    osDelay(10);
   }
   /* USER CODE END StartButtons */
 }
@@ -532,7 +453,10 @@ void StartDisplay(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	  refreshScreen();
+	  drawScreen();
+
+    osDelay(5);
   }
   /* USER CODE END StartDisplay */
 }
@@ -550,7 +474,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM4) {
+  if (htim->Instance == TIM4)
+  {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */

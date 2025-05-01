@@ -49,8 +49,6 @@ extern "C" {
 
 /* USER CODE END EM */
 
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
-
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -59,24 +57,34 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define TSMS_TSMP_Pin GPIO_PIN_2
-#define TSMS_TSMP_GPIO_Port GPIOE
-#define RightTS_Pin GPIO_PIN_3
-#define RightTS_GPIO_Port GPIOE
-#define LeftTS_Pin GPIO_PIN_4
-#define LeftTS_GPIO_Port GPIOE
-#define HVD_Pin GPIO_PIN_5
-#define HVD_GPIO_Port GPIOE
-#define HVBox_Pin GPIO_PIN_6
-#define HVBox_GPIO_Port GPIOE
-#define BL_Pin GPIO_PIN_7
-#define BL_GPIO_Port GPIOE
-#define PUMPR_Pin GPIO_PIN_9
-#define PUMPR_GPIO_Port GPIOE
-#define PUMPL_Pin GPIO_PIN_11
-#define PUMPL_GPIO_Port GPIOE
-#define LED_Pin GPIO_PIN_6
-#define LED_GPIO_Port GPIOC
+#define BUTTON_UP_Pin GPIO_PIN_2
+#define BUTTON_UP_GPIO_Port GPIOB
+#define BUTTON_DOWN_Pin GPIO_PIN_7
+#define BUTTON_DOWN_GPIO_Port GPIOE
+#define BUTTON_LEFT_Pin GPIO_PIN_8
+#define BUTTON_LEFT_GPIO_Port GPIOE
+#define BUTTON_RIGHT_Pin GPIO_PIN_10
+#define BUTTON_RIGHT_GPIO_Port GPIOE
+#define BUTTON_OK_Pin GPIO_PIN_12
+#define BUTTON_OK_GPIO_Port GPIOE
+#define SPI_SCK_Pin GPIO_PIN_10
+#define SPI_SCK_GPIO_Port GPIOC
+#define SPI_MISO_Pin GPIO_PIN_11
+#define SPI_MISO_GPIO_Port GPIOC
+#define SPI_MOSI_Pin GPIO_PIN_12
+#define SPI_MOSI_GPIO_Port GPIOC
+#define SPI_CS_Pin GPIO_PIN_0
+#define SPI_CS_GPIO_Port GPIOD
+#define SPI_DC_Pin GPIO_PIN_6
+#define SPI_DC_GPIO_Port GPIOB
+#define SPI_RST_Pin GPIO_PIN_7
+#define SPI_RST_GPIO_Port GPIOB
+#define IMD_LED_Pin GPIO_PIN_9
+#define IMD_LED_GPIO_Port GPIOB
+#define TS_LED_Pin GPIO_PIN_0
+#define TS_LED_GPIO_Port GPIOE
+#define BUZZER_Pin GPIO_PIN_1
+#define BUZZER_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
 

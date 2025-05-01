@@ -1,0 +1,4 @@
+../Core/Src/DASH/etr_carstate.c:33:6:GlobalVariableReset	4	static
+../Core/Src/DASH/etr_carstate.c:42:6:init_rules	8	static
+../Core/Src/DASH/etr_carstate.c:55:6:refreshScreen	4	static
+../Core/Src/DASH/etr_carstate.c:248:6:drawScreen	8	static

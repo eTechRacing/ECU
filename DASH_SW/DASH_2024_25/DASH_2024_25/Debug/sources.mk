@@ -22,6 +22,10 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Core/Src/CAN \
+Core/Src/DASH \
+Core/Src/FONTS \
+Core/Src/LCD \
 Core/Src \
 Core/Startup \
 Drivers/STM32L4xx_HAL_Driver/Src \
