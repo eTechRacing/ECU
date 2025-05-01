@@ -81,8 +81,8 @@ void Error_Handler(void);
 #define SPI_RST_GPIO_Port GPIOB
 #define IMD_LED_Pin GPIO_PIN_9
 #define IMD_LED_GPIO_Port GPIOB
-#define TS_LED_Pin GPIO_PIN_0
-#define TS_LED_GPIO_Port GPIOE
+#define BMS_LED_Pin GPIO_PIN_0
+#define BMS_LED_GPIO_Port GPIOE
 #define BUZZER_Pin GPIO_PIN_1
 #define BUZZER_GPIO_Port GPIOE
 

@@ -41,13 +41,13 @@ void GlobalVariableReset(void){
 
 void init_rules(void){
 	HAL_GPIO_WritePin(IMD_LED_GPIO_Port, IMD_LED_Pin, 1);
-	HAL_GPIO_WritePin(TS_LED_GPIO_Port, TS_LED_Pin, 1);
+	HAL_GPIO_WritePin(BMS_LED_GPIO_Port, BMS_LED_Pin, 1);
 	HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, 1);
 
 	HAL_Delay(2500);
 
 	HAL_GPIO_WritePin(IMD_LED_GPIO_Port, IMD_LED_Pin, 0);
-	HAL_GPIO_WritePin(TS_LED_GPIO_Port, TS_LED_Pin, 0);
+	HAL_GPIO_WritePin(BMS_LED_GPIO_Port, BMS_LED_Pin, 0);
 	HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, 0);
 }
 
