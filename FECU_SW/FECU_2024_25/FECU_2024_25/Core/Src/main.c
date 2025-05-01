@@ -56,10 +56,10 @@ osThreadId ShutdownHandle;
 // Adc
 uint16_t adc_buffer[12];
 // Can
-uint8_t TxData[8];
+
 uint8_t RxData[8];
-uint32_t TxMailbox;
-CAN_TxHeaderTypeDef TxHeader;
+
+
 CAN_RxHeaderTypeDef RxHeader;
 
 typedef enum {
@@ -433,7 +433,7 @@ static void MX_CAN1_Init(void)
   hcan1.Init.TimeTriggeredMode = DISABLE;
   hcan1.Init.AutoBusOff = DISABLE;
   hcan1.Init.AutoWakeUp = DISABLE;
-  hcan1.Init.AutoRetransmission = DISABLE;
+  hcan1.Init.AutoRetransmission = ENABLE;
   hcan1.Init.ReceiveFifoLocked = DISABLE;
   hcan1.Init.TransmitFifoPriority = DISABLE;
   if (HAL_CAN_Init(&hcan1) != HAL_OK)
@@ -564,20 +564,19 @@ void StartCAN(void const * argument)
   for(;;)
   {
 	  flag ++;
-
 	  if (CANcount == 9) {
 		  Front_Alive ++;
-		  message_cantx_RAW_FECU_Data2(TxHeader, hcan1, TxMailbox, TxData);
-		  message_cantx_RAW_FECU_Data1(TxHeader, hcan1, TxMailbox, TxData);
+		  message_cantx_RAW_FECU_Data2(hcan1);
+		  message_cantx_RAW_FECU_Data1(hcan1);
+		  message_cantx_STAT_FECU_Keep_Alive(hcan1);
 		  CANcount = 0;
 	  } else if (CANcount == 4) {
 		  Front_Alive ++;
-		  message_cantx_STAT_FECU_Keep_Alive(TxHeader, hcan1, TxMailbox, TxData);
-		  message_cantx_RAW_FECU_Data1(TxHeader, hcan1, TxMailbox, TxData);
+		  message_cantx_STAT_FECU_Keep_Alive(hcan1);
+		  message_cantx_RAW_FECU_Data1(hcan1);
 		  CANcount ++;
 	  } else {
-		  Front_Alive ++;
-		  message_cantx_RAW_FECU_Data1(TxHeader, hcan1, TxMailbox, TxData);
+		  message_cantx_RAW_FECU_Data1(hcan1);
 		  CANcount ++;
 	  }
 	  vTaskDelay(10);
@@ -633,6 +632,9 @@ void StartADC(void const * argument)
 	  BrakePedal_Bits = adc_buffer[1];
 	  APPS1_Bits = adc_buffer[3];
 	  APPS2_Bits = adc_buffer[2];
+	  FECU_LV  = adc_buffer[4];
+	  FECU_5V  = adc_buffer[5];
+	  FECU_3V3  = adc_buffer[6];
 	vTaskDelay(10);
   }
   /* USER CODE END StartADC */
