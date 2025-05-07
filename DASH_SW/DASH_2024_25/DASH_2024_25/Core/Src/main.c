@@ -125,9 +125,10 @@ int main(void)
 
   Init_CAN_Filter(&hcan1);
   HAL_Delay(100);
-  GlobalVariableReset();
-
+  resetAllSignals();
   init_rules();
+
+
   /* USER CODE END 2 */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -301,8 +302,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(BUTTON_UP_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BUTTON_DOWN_Pin BUTTON_LEFT_Pin BUTTON_RIGHT_Pin BUTTON_OK_Pin */
-  GPIO_InitStruct.Pin = BUTTON_DOWN_Pin|BUTTON_LEFT_Pin|BUTTON_RIGHT_Pin|BUTTON_OK_Pin;
+  /*Configure GPIO pins : BUTTON_DOWN_Pin BUTTON_RIGHT_Pin BUTTON_LEFT_Pin BUTTON_OK_Pin */
+  GPIO_InitStruct.Pin = BUTTON_DOWN_Pin|BUTTON_RIGHT_Pin|BUTTON_LEFT_Pin|BUTTON_OK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
@@ -375,7 +376,16 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan1)
 			}
 			else if (RxHeader.StdId == PROC_ETAS_VDC_Params_id){
 				message_canrx_PROC_ETAS_VDC_Params(RxData);
-			} else {}
+			}
+			else if (RxHeader.StdId == STAT_BMS_Keep_Alive_id) {
+				message_canrx_STAT_BMS_Keep_Alive(RxData);
+			}
+			else if (RxHeader.StdId == CTRL_BMS_Accu_Data_id){
+				message_canrx_CTRL_BMS_Accu_Data(RxData);
+
+			}
+
+			refreshGPIOs();
   }
 /* USER CODE END 4 */
 
@@ -395,17 +405,21 @@ void StartCAN(void const * argument)
 	  message_cantx_STAT_DASH_Keep_Alive(hcan1);
 	  Dash_Alive++;
 
-	  if (PrechargeRequest == 1) {
+	  if (PrechargeRequest == 1 && Screen.ActualState  == DASH_3_PRECHARGE) {
 		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 		  PrechargeRequest = 0;
+		  HAL_Delay(100);
+		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 	  }
-	  else if (RacingMode_Send == 1) {
+	  else if (RacingMode_Send == 1 && Screen.ActualState  == DASH_12_RACING_MENU) {
 		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 		  RacingMode_Send = 0;
 	  }
-	  else if (EnableDrive_Order == 1) {
+	  else if (EnableDrive_Order == 1 && Screen.ActualState  == DASH_12_RACING_MENU) {
 		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 		  EnableDrive_Order = 0;
+		  HAL_Delay(100);
+		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 	  }
 
 	  vTaskDelay(50);
@@ -434,6 +448,7 @@ void StartButtons(void const * argument)
 	  currentButtonState_OK = HAL_GPIO_ReadPin(BUTTON_OK_GPIO_Port, BUTTON_OK_Pin);
 
 	  refreshButton();
+	  refreshScreen();
 
     osDelay(10);
   }
@@ -453,8 +468,7 @@ void StartDisplay(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-	  refreshScreen();
-	  drawScreen();
+//	  drawScreen();
 
     osDelay(5);
   }

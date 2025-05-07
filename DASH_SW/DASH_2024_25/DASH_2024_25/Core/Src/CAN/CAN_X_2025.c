@@ -6,6 +6,7 @@ uint32_t TxMailbox = 0;
 uint8_t TxData[8] = {0};
 
 //Variables----------------------------------------------------------------------------------------------
+int8_t FLAG;
 
 int8_t New_Signal_193;
 uint8_t el_AUTO_STATUS;

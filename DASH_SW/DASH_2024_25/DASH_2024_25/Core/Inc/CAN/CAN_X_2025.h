@@ -9,6 +9,7 @@ extern uint32_t TxMailbox;
 extern uint8_t TxData[8];
 
 //Variables----------------------------------------------------------------------------------------------
+extern int8_t FLAG;
 
 extern int8_t New_Signal_193;
 extern uint8_t el_AUTO_STATUS;

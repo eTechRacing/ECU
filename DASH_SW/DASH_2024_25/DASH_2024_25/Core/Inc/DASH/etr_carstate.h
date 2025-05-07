@@ -44,10 +44,11 @@
 	extern DASH_State Screen;
 
 	extern const int NUM_SCREENS_PER_STATE[];
+	void resetAllSignals(void);
 	void refreshScreen(void);
 	void drawScreen(void);
-	void GlobalVariableReset(void);
 	void init_rules(void);
+	void refreshGPIOs (void);
 	extern uint8_t RacingMode_Send;
 
 #endif /* INC_DASH_ETR_CARSTATE_H_ */

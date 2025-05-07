@@ -49,7 +49,7 @@ void refreshButton(void){
 		pendingButtonEvent = EVENT_BUTTON_RIGHT;
 	}
 
-	if ((currentButtonState_OK != lastButtonState_OK) && (lastButtonState_Right != 1)) {
+	if ((currentButtonState_OK != lastButtonState_OK) && (lastButtonState_OK != 1)) {
 		pendingButtonEvent = EVENT_BUTTON_OK;
 	}
 
