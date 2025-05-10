@@ -12,13 +12,13 @@
 
 	typedef enum {
 		DASH_0_ETR,
-		DASH_3_PRECHARGE,
-		DASH_6_PRECHARGE_STATUS,
-		DASH_9_PRECHARGE_FINISHED,
-		DASH_12_RACING_MENU,
-		DASH_14_INVERTERS,
-		DASH_15_RACING_MODE,
-		DASH_21_ERROR
+		DASH_1_PRECHARGE,
+		DASH_2_PRECHARGE_STATUS,
+		DASH_3_PRECHARGE_FINISHED,
+		DASH_4_RACING_MENU,
+		DASH_5_INVERTERS,
+		DASH_6_RACING_MODE,
+		DASH_7_ERROR
 	}	DASH_CarState;
 
 	typedef enum {
@@ -35,13 +35,28 @@
 		SCREEN_11,
 	}	DASH_Screen;
 
+	typedef enum {
+		E1,	// FAN L ON
+		E2, // FAN L OFF
+		E3, // FAN L FULL
+		E4, // FAN R ON
+		E5, // FAN R OFF
+		E6, // FAN R FULL
+		E7, // PUMP R ON
+		E8, // PUMP R OFF
+		E9, // PUMP L ON
+		E10 // PUMP L OFF
+	}	DASH_Cooling;
+
 	typedef struct {
 		DASH_CarState ActualState;
 		DASH_CarState PreviousState;
 		DASH_Screen ActualScreen;
+		DASH_Cooling CoolingState;
 	}	DASH_State;
 
 	extern DASH_State Screen;
+	extern uint8_t CoolingRequest;
 
 	extern const int NUM_SCREENS_PER_STATE[];
 	void resetAllSignals(void);

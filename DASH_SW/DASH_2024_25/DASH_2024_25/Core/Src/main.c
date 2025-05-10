@@ -59,16 +59,14 @@ osThreadId ButtonsHandle;
 osThreadId DisplayHandle;
 osSemaphoreId BinSemControlHandle;
 /* USER CODE BEGIN PV */
-// Adc
-// Can
+
+		/* CAN */
 uint8_t RxData[8];
 CAN_RxHeaderTypeDef RxHeader;
 
-
-// Flags
-
+		/* FLAGS*/
 uint8_t flag = 0;
-uint8_t flag1;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -119,11 +117,13 @@ int main(void)
   MX_GPIO_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
-  //-------------StartCAN---------------------------
+
+  		/*START CAN*/
   HAL_CAN_Start(&hcan1);
   HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
-
   Init_CAN_Filter(&hcan1);
+
+  	  /*RULES INIT*/
   HAL_Delay(100);
   resetAllSignals();
   init_rules();
@@ -384,7 +384,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan1)
 				message_canrx_CTRL_BMS_Accu_Data(RxData);
 
 			}
-
 			refreshGPIOs();
   }
 /* USER CODE END 4 */
@@ -405,17 +404,17 @@ void StartCAN(void const * argument)
 	  message_cantx_STAT_DASH_Keep_Alive(hcan1);
 	  Dash_Alive++;
 
-	  if (PrechargeRequest == 1 && Screen.ActualState  == DASH_3_PRECHARGE) {
+	  if (PrechargeRequest == 1 && Screen.ActualState  == DASH_1_PRECHARGE) {
 		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 		  PrechargeRequest = 0;
 		  HAL_Delay(100);
 		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 	  }
-	  else if (RacingMode_Send == 1 && Screen.ActualState  == DASH_12_RACING_MENU) {
+	  else if (RacingMode_Send == 1 && Screen.ActualState  == DASH_4_RACING_MENU) {
 		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 		  RacingMode_Send = 0;
 	  }
-	  else if (EnableDrive_Order == 1 && Screen.ActualState  == DASH_12_RACING_MENU) {
+	  else if (EnableDrive_Order == 1 && Screen.ActualState  == DASH_4_RACING_MENU) {
 		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 		  EnableDrive_Order = 0;
 		  HAL_Delay(100);
@@ -469,7 +468,6 @@ void StartDisplay(void const * argument)
   for(;;)
   {
 //	  drawScreen();
-
     osDelay(5);
   }
   /* USER CODE END StartDisplay */

@@ -14,6 +14,7 @@
 #include <stdio.h>
 
 uint8_t RacingMode_Send;
+uint8_t CoolingRequest;
 
 
 const int NUM_SCREENS_PER_STATE[] = {
@@ -27,7 +28,7 @@ const int NUM_SCREENS_PER_STATE[] = {
     1   // DASH_21_ERROR
 };
 
-DASH_State Screen = {DASH_0_ETR, SCREEN_1, SCREEN_1};
+DASH_State Screen = {DASH_0_ETR, SCREEN_1, SCREEN_1, E1};
 
 void resetAllSignals(void) {
     New_Signal_193 = 0;
@@ -152,6 +153,11 @@ void resetAllSignals(void) {
     Driver = 1;
     RacingMode = 1;
     EnableDrive_Order = 0;
+
+
+    // CAR STATE VARIABLES
+    RacingMode_Send = 0;
+    CoolingRequest = 0;
 }
 
 
@@ -179,10 +185,10 @@ void refreshGPIOs (void){
 		FLAG++;
 	}
 
-	if (Screen.ActualState == DASH_14_INVERTERS){
+	if (Screen.ActualState == DASH_5_INVERTERS){
 		HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, 1);
 	}
-	if (Screen.ActualState != DASH_14_INVERTERS){
+	if (Screen.ActualState != DASH_5_INVERTERS){
 		HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, 0);
 	}
 }
@@ -194,10 +200,6 @@ void refreshScreen(void) {
     if (Screen.PreviousState != Screen.ActualState){
 
     	Screen.ActualScreen = SCREEN_1;
-//    	if (Screen.ActualState == DASH_12_RACING_MENU){
-//    		Driver = 1;
-//    		RacingMode = 1;
-//    	}
     	Screen.PreviousState = Screen.ActualState;
     }
 
@@ -205,35 +207,58 @@ void refreshScreen(void) {
 
         case DASH_0_ETR:
 
+        		/*BUTTON DOWN*/
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
-            	if(Screen.ActualScreen == SCREEN_3){
+
+            	if (CoolingRequest == 1){
+            		if (Screen.CoolingState <= E1){
+
+            		}
+            	} else if (Screen.ActualScreen == SCREEN_3){
             		Screen.ActualScreen = SCREEN_1;
             	} else {
             		Screen.ActualScreen ++;
             	}
             }
+            	/*BUTTON UP*/
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
-            	if(Screen.ActualScreen == SCREEN_1){
+
+            	if (CoolingRequest == 1){
+
+            	} else if (Screen.ActualScreen == SCREEN_1){
             		Screen.ActualScreen = SCREEN_3;
             	} else {
             		Screen.ActualScreen --;
 
             	}
             }
-
+            	/*BUTTON RIGHT*/
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
+            	if (CoolingRequest == 1){
 
+            	}
             }
+            	/*BUTTON LEFT*/
             if (pendingButtonEvent == EVENT_BUTTON_LEFT) {
+            	if (CoolingRequest == 1){
 
+            	}
             }
+            	/*BUTTON OK*/
             if (pendingButtonEvent == EVENT_BUTTON_OK) {
-            	FLAG ++;
+            	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 0){
+            		CoolingRequest = 1;
+            	}
+
+            	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 1){
+            		CoolingRequest = 0;
+            	}
+
             }
 
             break;
 
-        case DASH_3_PRECHARGE:
+        case DASH_1_PRECHARGE:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
             	if(Screen.ActualScreen == SCREEN_3){
@@ -261,7 +286,7 @@ void refreshScreen(void) {
             }
             break;
 
-        case DASH_6_PRECHARGE_STATUS:
+        case DASH_2_PRECHARGE_STATUS:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
 
@@ -280,7 +305,7 @@ void refreshScreen(void) {
             }
             break;
 
-        case DASH_9_PRECHARGE_FINISHED:
+        case DASH_3_PRECHARGE_FINISHED:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
 
@@ -299,7 +324,7 @@ void refreshScreen(void) {
             }
             break;
 
-        case DASH_12_RACING_MENU:
+        case DASH_4_RACING_MENU:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
             	if (Screen.ActualScreen >= SCREEN_5){
@@ -366,21 +391,21 @@ void refreshScreen(void) {
 
             break;
 
-        case DASH_14_INVERTERS:
+        case DASH_5_INVERTERS:
 
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
 
             }
             break;
 
-        case DASH_15_RACING_MODE:
+        case DASH_6_RACING_MODE:
 
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
 
             }
             break;
 
-        case DASH_21_ERROR:
+        case DASH_7_ERROR:
 
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
             }
@@ -411,7 +436,7 @@ void drawScreen(void) {
             }
             break;
 
-        case DASH_3_PRECHARGE:
+        case DASH_1_PRECHARGE:
             switch (Screen.ActualScreen) {
                 case SCREEN_1:
                     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
@@ -426,7 +451,7 @@ void drawScreen(void) {
             }
             break;
 
-        case DASH_6_PRECHARGE_STATUS:
+        case DASH_2_PRECHARGE_STATUS:
             		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
             		BSP_LCD_SetFont(&Font24);
             		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
@@ -435,7 +460,7 @@ void drawScreen(void) {
             		BSP_LCD_DisplayStringAt(0, 100, "PRECHARGING...", CENTER_MODE);
             break;
 
-        case DASH_9_PRECHARGE_FINISHED:
+        case DASH_3_PRECHARGE_FINISHED:
             		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
             		BSP_LCD_SetFont(&Font24);
             		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
@@ -444,7 +469,7 @@ void drawScreen(void) {
             		BSP_LCD_DisplayStringAt(0, 100, "PRECHARGE FINISHED", CENTER_MODE);
             break;
 
-        case DASH_12_RACING_MENU:
+        case DASH_4_RACING_MENU:
             switch (Screen.ActualScreen) {
                 case SCREEN_1:
                     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
@@ -459,7 +484,7 @@ void drawScreen(void) {
             }
             break;
 
-        case DASH_14_INVERTERS:
+        case DASH_5_INVERTERS:
             		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
             		BSP_LCD_SetFont(&Font24);
             		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
@@ -468,7 +493,7 @@ void drawScreen(void) {
             		BSP_LCD_DisplayStringAt(0, 100, "INVERTERS GETTING READY", CENTER_MODE);
             break;
 
-        case DASH_15_RACING_MODE:
+        case DASH_6_RACING_MODE:
             switch (Screen.ActualScreen) {
                 case SCREEN_1:
                     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
@@ -483,7 +508,7 @@ void drawScreen(void) {
             }
             break;
 
-        case DASH_21_ERROR:
+        case DASH_7_ERROR:
             		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
             		BSP_LCD_SetFont(&Font24);
             		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
