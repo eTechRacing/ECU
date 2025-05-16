@@ -19,8 +19,8 @@ uint8_t currentButtonState_Down;
 uint8_t currentButtonState_Left;
 uint8_t currentButtonState_Right;
 uint8_t currentButtonState_OK;
-uint8_t currentRotaryState_Left;
-uint8_t currentRotaryState_Right;
+uint8_t currentRotaryState_1;
+uint8_t currentRotaryState_2;
 
 
 uint8_t lastButtonState_Up;
@@ -28,8 +28,8 @@ uint8_t lastButtonState_Down;
 uint8_t lastButtonState_Left;
 uint8_t lastButtonState_Right;
 uint8_t lastButtonState_OK;
-uint8_t lastRotaryState_Left;
-uint8_t lastRotaryState_Right;
+uint8_t lastRotaryState_1;
+uint8_t lastRotaryState_2;
 
 uint8_t pendingButtonEvent;
 
@@ -58,20 +58,40 @@ void refreshButton(void){
 		pendingButtonEvent = EVENT_BUTTON_OK;
 	}
 
-	if (currentRotaryState_Left != lastRotaryState_Left) {
-		pendingButtonEvent = EVENT_ROTARY_LEFT;
+	if (currentRotaryState_1 != lastRotaryState_1) {
+		pendingButtonEvent = EVENT_ROTARY_1;
 	}
 
-	if (currentRotaryState_Right != lastRotaryState_Right) {
-		pendingButtonEvent = EVENT_ROTARY_RIGHT;
+	if (currentRotaryState_2 != lastRotaryState_2) {
+		pendingButtonEvent = EVENT_ROTARY_2;
 	}
 	lastButtonState_Up = currentButtonState_Up;
 	lastButtonState_Down = currentButtonState_Down;
 	lastButtonState_Left = currentButtonState_Left;
 	lastButtonState_Right = currentButtonState_Right;
 	lastButtonState_OK = currentButtonState_OK;
-	lastRotaryState_Left = currentRotaryState_Left;
-	lastRotaryState_Right = currentRotaryState_Right;
+	lastRotaryState_1 = currentRotaryState_1;
+	lastRotaryState_2 = currentRotaryState_2;
 }
 
+uint8_t readRotarySwitch1(void) {
+    uint8_t bit3 = HAL_GPIO_ReadPin(SW1_1_GPIO_Port, SW1_1_Pin); // MSB
+    uint8_t bit2 = HAL_GPIO_ReadPin(SW1_2_GPIO_Port, SW1_2_Pin);
+    uint8_t bit1 = HAL_GPIO_ReadPin(SW1_3_GPIO_Port, SW1_3_Pin);
+    uint8_t bit0 = HAL_GPIO_ReadPin(SW1_4_GPIO_Port, SW1_4_Pin); // LSB
 
+    uint8_t value = (bit3 << 3) | (bit2 << 2) | (bit1 << 1) | bit0;
+
+    return value;
+}
+
+uint8_t readRotarySwitch2(void) {
+    uint8_t bit3 = HAL_GPIO_ReadPin(SW2_1_GPIO_Port, SW2_1_Pin); // MSB
+    uint8_t bit2 = HAL_GPIO_ReadPin(SW2_2_GPIO_Port, SW2_2_Pin);
+    uint8_t bit1 = HAL_GPIO_ReadPin(SW2_3_GPIO_Port, SW2_3_Pin);
+    uint8_t bit0 = HAL_GPIO_ReadPin(SW2_4_GPIO_Port, SW2_4_Pin); // LSB
+
+    uint8_t value = (bit3 << 3) | (bit2 << 2) | (bit1 << 1) | bit0;
+
+    return value;
+}

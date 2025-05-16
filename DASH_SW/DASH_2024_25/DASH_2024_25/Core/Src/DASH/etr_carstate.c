@@ -236,7 +236,7 @@ void refreshScreen(void) {
             	/*BUTTON UP*/
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
 
-            	if (Screen.ActualScreen = SCREEN_5 && CoolingRequest == 1){
+            	if ((Screen.ActualScreen = SCREEN_5) && (CoolingRequest == 1)){
             		if (selectedBox == 4) {
             			selectedBox = 2;
 
@@ -312,7 +312,7 @@ void refreshScreen(void) {
 
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
 
-            	if (Screen.ActualScreen = SCREEN_5 && CoolingRequest == 1){
+            	if ((Screen.ActualScreen = SCREEN_5) && (CoolingRequest == 1)){
             		if (selectedBox == 4) {
             			selectedBox = 2;
 
@@ -500,8 +500,11 @@ void refreshScreen(void) {
 
         case DASH_6_RACING_MODE:
 
-            if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
-
+            if (pendingButtonEvent == EVENT_ROTARY_1) {
+            	TC_Level = currentRotaryState_1;
+            }
+            if (pendingButtonEvent == EVENT_ROTARY_2) {
+            	TV_Level = currentRotaryState_2;
             }
             break;
 

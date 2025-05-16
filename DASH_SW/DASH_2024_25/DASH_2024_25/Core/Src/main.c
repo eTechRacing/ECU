@@ -286,9 +286,9 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(IMD_LED_GPIO_Port, IMD_LED_Pin, GPIO_PIN_RESET);
@@ -308,23 +308,35 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SPI_SCK_Pin SPI_MISO_Pin SPI_MOSI_Pin */
-  GPIO_InitStruct.Pin = SPI_SCK_Pin|SPI_MISO_Pin|SPI_MOSI_Pin;
+  /*Configure GPIO pin : SW1_1_Pin */
+  GPIO_InitStruct.Pin = SW1_1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(SW1_1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SW1_2_Pin SW1_3_Pin SPI_DC_Pin SPI_RST_Pin */
+  GPIO_InitStruct.Pin = SW1_2_Pin|SW1_3_Pin|SPI_DC_Pin|SPI_RST_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SW1_4_Pin SPI_CS_Pin */
+  GPIO_InitStruct.Pin = SW1_4_Pin|SPI_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SW2_3_Pin SPI_SCK_Pin SPI_MISO_Pin SPI_MOSI_Pin */
+  GPIO_InitStruct.Pin = SW2_3_Pin|SPI_SCK_Pin|SPI_MISO_Pin|SPI_MOSI_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : SPI_CS_Pin */
-  GPIO_InitStruct.Pin = SPI_CS_Pin;
+  /*Configure GPIO pins : SW2_4_Pin SW2_1_Pin SW2_2_Pin */
+  GPIO_InitStruct.Pin = SW2_4_Pin|SW2_1_Pin|SW2_2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(SPI_CS_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : SPI_DC_Pin SPI_RST_Pin */
-  GPIO_InitStruct.Pin = SPI_DC_Pin|SPI_RST_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : IMD_LED_Pin */
   GPIO_InitStruct.Pin = IMD_LED_Pin;
@@ -420,7 +432,7 @@ void StartCAN(void const * argument)
 		  HAL_Delay(100);
 		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 	  }
-	  else if (pendingButtonEvent == EVENT_ROTARY_LEFT || pendingButtonEvent == EVENT_ROTARY_RIGHT){
+	  else if (pendingButtonEvent == EVENT_ROTARY_1 || pendingButtonEvent == EVENT_ROTARY_2){
 		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 	  }
 
@@ -448,8 +460,8 @@ void StartButtons(void const * argument)
 	  currentButtonState_Right = HAL_GPIO_ReadPin(BUTTON_RIGHT_GPIO_Port, BUTTON_RIGHT_Pin);
 	  currentButtonState_Left = HAL_GPIO_ReadPin(BUTTON_LEFT_GPIO_Port, BUTTON_LEFT_Pin);
 	  currentButtonState_OK = HAL_GPIO_ReadPin(BUTTON_OK_GPIO_Port, BUTTON_OK_Pin);
-	  currentRotary_Left = 0;	// Poner la funcion de HAL
-	  currentRotary_Right = 0; // Poner la funcion de HAL
+	  currentRotaryState_1 = readRotarySwitch1();
+	  currentRotaryState_2 = readRotarySwitch2();
 
 	  refreshButton();
 	  refreshScreen();
