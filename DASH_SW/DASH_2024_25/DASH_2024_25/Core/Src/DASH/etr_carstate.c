@@ -16,8 +16,6 @@
 uint8_t RacingMode_Send;
 uint8_t CoolingRequest;
 uint8_t selectedBox;
-uint8_t currentRotary_Left;
-uint8_t currentRotary_Right;
 
 
 const int NUM_SCREENS_PER_STATE[] = {
@@ -161,6 +159,7 @@ void resetAllSignals(void) {
     // CAR STATE VARIABLES
     RacingMode_Send = 0;
     CoolingRequest = 0;
+    selectedBox = 0;
 }
 
 

@@ -44,8 +44,6 @@
 	extern DASH_State Screen;
 	extern uint8_t CoolingRequest;
 	extern uint8_t selectedBox;
-	extern uint8_t currentRotary_Left;
-	extern uint8_t currentRotary_Right;
 
 	extern const int NUM_SCREENS_PER_STATE[];
 	void resetAllSignals(void);
