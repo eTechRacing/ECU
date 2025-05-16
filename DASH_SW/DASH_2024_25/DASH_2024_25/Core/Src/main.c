@@ -420,6 +420,9 @@ void StartCAN(void const * argument)
 		  HAL_Delay(100);
 		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 	  }
+	  else if (pendingButtonEvent == EVENT_ROTARY_LEFT || pendingButtonEvent == EVENT_ROTARY_RIGHT){
+		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
+	  }
 
 	  vTaskDelay(50);
   }
@@ -445,6 +448,8 @@ void StartButtons(void const * argument)
 	  currentButtonState_Right = HAL_GPIO_ReadPin(BUTTON_RIGHT_GPIO_Port, BUTTON_RIGHT_Pin);
 	  currentButtonState_Left = HAL_GPIO_ReadPin(BUTTON_LEFT_GPIO_Port, BUTTON_LEFT_Pin);
 	  currentButtonState_OK = HAL_GPIO_ReadPin(BUTTON_OK_GPIO_Port, BUTTON_OK_Pin);
+	  currentRotary_Left = 0;	// Poner la funcion de HAL
+	  currentRotary_Right = 0; // Poner la funcion de HAL
 
 	  refreshButton();
 	  refreshScreen();

@@ -11,66 +11,114 @@
 #include "LCD/lcd.h"
 #include "LCD/stm32_adafruit_lcd.h"
 #include "LCD/bmp.h"
+#include "DASH/etr_carstate.h"
 
+// Declaramos la función que dibuja la pantalla
+void drawScreen(void) {
+    switch (Screen.ActualState) {
+        case DASH_0_ETR:
+            switch (Screen.ActualScreen) {
+                case SCREEN_1:
+                    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+                    BSP_LCD_SetFont(&Font24);
+                    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+                    BSP_LCD_Clear(LCD_COLOR_WHITE);
 
-uint8_t i = 0;
-/*
- * 		@brief
- * 		@param
- * 		@retval
- */
+                    BSP_LCD_DisplayStringAt(0, 100, "CAR STATE 0", CENTER_MODE);
+                	break;
+                default:
+                	break;
+            }
+            break;
 
-void ETR_Screen_Init(void){
-	BSP_LCD_Clear(LCD_COLOR(31,237,20));
-	//Todo: insertar logo nuevo del equipo
-	BSP_LCD_Clear(LCD_COLOR(31,237,20));
+        case DASH_1_PRECHARGE:
+            switch (Screen.ActualScreen) {
+                case SCREEN_1:
+                    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+                    BSP_LCD_SetFont(&Font24);
+                    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+                    BSP_LCD_Clear(LCD_COLOR_WHITE);
+
+                    BSP_LCD_DisplayStringAt(0, 100, "PRESS OK BUTTON TO PRECHARGE", CENTER_MODE);
+                    break;
+                default:
+                	break;
+            }
+            break;
+
+        case DASH_2_PRECHARGE_STATUS:
+            		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+            		BSP_LCD_SetFont(&Font24);
+            		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+            		BSP_LCD_Clear(LCD_COLOR_WHITE);
+
+            		BSP_LCD_DisplayStringAt(0, 100, "PRECHARGING...", CENTER_MODE);
+            break;
+
+        case DASH_3_PRECHARGE_FINISHED:
+            		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+            		BSP_LCD_SetFont(&Font24);
+            		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+            		BSP_LCD_Clear(LCD_COLOR_WHITE);
+
+            		BSP_LCD_DisplayStringAt(0, 100, "PRECHARGE FINISHED", CENTER_MODE);
+            break;
+
+        case DASH_4_RACING_MENU:
+            switch (Screen.ActualScreen) {
+                case SCREEN_1:
+                    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+                    BSP_LCD_SetFont(&Font24);
+                    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+                    BSP_LCD_Clear(LCD_COLOR_WHITE);
+
+                    BSP_LCD_DisplayStringAt(0, 100, "RACING MENU. PRESS OK", CENTER_MODE);
+                    break;
+                default:
+                	break;
+            }
+            break;
+
+        case DASH_5_INVERTERS:
+            		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+            		BSP_LCD_SetFont(&Font24);
+            		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+            		BSP_LCD_Clear(LCD_COLOR_WHITE);
+
+            		BSP_LCD_DisplayStringAt(0, 100, "INVERTERS GETTING READY", CENTER_MODE);
+            break;
+
+        case DASH_6_RACING_MODE:
+            switch (Screen.ActualScreen) {
+                case SCREEN_1:
+                    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+                    BSP_LCD_SetFont(&Font24);
+                    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+                    BSP_LCD_Clear(LCD_COLOR_WHITE);
+
+                    BSP_LCD_DisplayStringAt(0, 100, "VROOM VROOM", CENTER_MODE);
+                    break;
+                default:
+                	break;
+            }
+            break;
+
+        case DASH_7_ERROR:
+            		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+            		BSP_LCD_SetFont(&Font24);
+            		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+            		BSP_LCD_Clear(LCD_COLOR_WHITE);
+
+            		BSP_LCD_DisplayStringAt(0, 100, "OOPSIE... SOMETHING WENT WRONG", CENTER_MODE);
+            break;
+
+        default:
+            		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
+            		BSP_LCD_SetFont(&Font24);
+            		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+            		BSP_LCD_Clear(LCD_COLOR_WHITE);
+
+            		BSP_LCD_DisplayStringAt(0, 100, "CAR STATE ???", CENTER_MODE);
+            break;
+    }
 }
-
-
-
-void ETR_Screen_Shutdown(void){
-
-}
-
-void ETR_Screen_InitPrecharge(void){
-
-}
-
-void ETR_Screen_PrechargeDone(void){
-
-}
-
-/*void ETR_Screen_PrechargeDone(void){
-
-}
-
-void ETR_Screen_Errors(void){
-
-}
-
-
-BSP_LCD_SetFont(&Font50);
-     sprintf(msg0, "%u", numero);
-	  BSP_LCD_DisplayStringAt(0, 120, (uint8_t*)msg0, CENTER_MODE);
-	  numero ++;
-
-	  HAL_Delay(500);
-
-
-
-  BSP_LCD_SetFont(&Font24);
-
-  uint16_t y = 0;
-  uint16_t x = 0;
-  uint16_t msgy[20];
-  uint16_t msgx[20];
-  BSP_LCD_Clear(LCD_COLOR_BLACK);
-  y = BSP_LCD_GetYSize();
-  x = BSP_LCD_GetXSize();
-
-  sprintf(msgy,"Y = %u", y);
-  sprintf(msgx,"X = %u", x);
-
-  BSP_LCD_DisplayStringAt(0, 120, (uint16_t*)msgy, CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, 180, (uint16_t*)msgx, CENTER_MODE);
-	  */

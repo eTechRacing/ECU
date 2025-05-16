@@ -19,12 +19,17 @@ uint8_t currentButtonState_Down;
 uint8_t currentButtonState_Left;
 uint8_t currentButtonState_Right;
 uint8_t currentButtonState_OK;
+uint8_t currentRotaryState_Left;
+uint8_t currentRotaryState_Right;
+
 
 uint8_t lastButtonState_Up;
 uint8_t lastButtonState_Down;
 uint8_t lastButtonState_Left;
 uint8_t lastButtonState_Right;
 uint8_t lastButtonState_OK;
+uint8_t lastRotaryState_Left;
+uint8_t lastRotaryState_Right;
 
 uint8_t pendingButtonEvent;
 
@@ -53,11 +58,20 @@ void refreshButton(void){
 		pendingButtonEvent = EVENT_BUTTON_OK;
 	}
 
+	if (currentRotaryState_Left != lastRotaryState_Left) {
+		pendingButtonEvent = EVENT_ROTARY_LEFT;
+	}
+
+	if (currentRotaryState_Right != lastRotaryState_Right) {
+		pendingButtonEvent = EVENT_ROTARY_RIGHT;
+	}
 	lastButtonState_Up = currentButtonState_Up;
 	lastButtonState_Down = currentButtonState_Down;
 	lastButtonState_Left = currentButtonState_Left;
 	lastButtonState_Right = currentButtonState_Right;
 	lastButtonState_OK = currentButtonState_OK;
+	lastRotaryState_Left = currentRotaryState_Left;
+	lastRotaryState_Right = currentRotaryState_Right;
 }
 
 

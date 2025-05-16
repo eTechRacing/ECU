@@ -32,6 +32,8 @@ extern uint8_t pendingButtonEvent;
 #define EVENT_BUTTON_LEFT 	3
 #define EVENT_BUTTON_RIGHT 	4
 #define EVENT_BUTTON_OK   	5
+#define EVENT_ROTARY_LEFT	6
+#define EVENT_ROTARY_RIGHT	7
 
 // definicion de funciones --------------------------------------------------------------------------------------
 

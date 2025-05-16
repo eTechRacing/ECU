@@ -15,11 +15,14 @@
 
 uint8_t RacingMode_Send;
 uint8_t CoolingRequest;
+uint8_t selectedBox;
+uint8_t currentRotary_Left;
+uint8_t currentRotary_Right;
 
 
 const int NUM_SCREENS_PER_STATE[] = {
-    3,  // DASH_0_ETR
-    3,  // DASH_3_PRECHARGE
+    5,  // DASH_0_ETR
+    5,  // DASH_3_PRECHARGE
     1,  // DASH_6_PRECHARGE_STATUS
     1,  // DASH_9_PRECHARGE_FINISHED
     11, // DASH_12_RACING_MENU
@@ -28,7 +31,7 @@ const int NUM_SCREENS_PER_STATE[] = {
     1   // DASH_21_ERROR
 };
 
-DASH_State Screen = {DASH_0_ETR, SCREEN_1, SCREEN_1, E1};
+DASH_State Screen = {DASH_0_ETR, SCREEN_1, SCREEN_1};
 
 void resetAllSignals(void) {
     New_Signal_193 = 0;
@@ -210,50 +213,81 @@ void refreshScreen(void) {
         		/*BUTTON DOWN*/
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
 
-            	if (CoolingRequest == 1){
-            		if (Screen.CoolingState <= E1){
+            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
+
+            		if (selectedBox == 0 || selectedBox == 1) {
+            			selectedBox += 2;
+
+            		} else if (selectedBox == 2 || selectedBox == 3) {
+            			selectedBox = 4;
+
+            		} else if (selectedBox == 4) {
+            			selectedBox = 0;
+
+            		} else if (Screen.ActualScreen == SCREEN_5){
+            			Screen.ActualScreen = SCREEN_1;
+
+            		} else {
+            			Screen.ActualScreen ++;
 
             		}
-            	} else if (Screen.ActualScreen == SCREEN_3){
-            		Screen.ActualScreen = SCREEN_1;
-            	} else {
-            		Screen.ActualScreen ++;
             	}
             }
             	/*BUTTON UP*/
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
 
-            	if (CoolingRequest == 1){
+            	if (Screen.ActualScreen = SCREEN_5 && CoolingRequest == 1){
+            		if (selectedBox == 4) {
+            			selectedBox = 2;
 
-            	} else if (Screen.ActualScreen == SCREEN_1){
-            		Screen.ActualScreen = SCREEN_3;
-            	} else {
-            		Screen.ActualScreen --;
+            		} else if (selectedBox == 2 || selectedBox == 3) {
+            			selectedBox -= 2;
 
+            		} else if (selectedBox == 0 || selectedBox == 1) {
+            			selectedBox = 4;
+
+            		} else if (Screen.ActualScreen == SCREEN_1){
+            			Screen.ActualScreen = SCREEN_5;
+
+            		} else {
+            			Screen.ActualScreen --;
+
+            		}
             	}
             }
+
             	/*BUTTON RIGHT*/
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
-            	if (CoolingRequest == 1){
-
+            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
+            	    selectedBox = (selectedBox + 1) % 5;  // Mueve a la derecha
             	}
             }
+
             	/*BUTTON LEFT*/
             if (pendingButtonEvent == EVENT_BUTTON_LEFT) {
-            	if (CoolingRequest == 1){
-
+            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
+            		if (selectedBox == 0) {
+            		    selectedBox = 4;
+            		} else {
+            		    selectedBox = selectedBox - 1;
+            		}
             	}
             }
+
             	/*BUTTON OK*/
             if (pendingButtonEvent == EVENT_BUTTON_OK) {
-            	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 0){
+            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 0){
             		CoolingRequest = 1;
+            		selectedBox = 0;
+            	} else {
+            		switch (selectedBox) {
+                    	case 0: Fans_R = (Fans_R + 1) % 3; break;
+                    	case 1: Fans_L = (Fans_L + 1) % 3; break;
+                    	case 2: Pump_R = (Pump_R + 1) % 2; break;
+                    	case 3: Pump_L = (Pump_L + 1) % 2; break;
+                    	case 4: CoolingRequest = 0; break;  			// Salir del modo edición
+            		}
             	}
-
-            	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 1){
-            		CoolingRequest = 0;
-            	}
-
             }
 
             break;
@@ -261,30 +295,80 @@ void refreshScreen(void) {
         case DASH_1_PRECHARGE:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
-            	if(Screen.ActualScreen == SCREEN_3){
-            		Screen.ActualScreen = SCREEN_1;
-            	} else {
-            		Screen.ActualScreen ++;
+            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
+            		if (selectedBox == 0 || selectedBox == 1) {
+            			selectedBox += 2;
+            		} else if (selectedBox == 2 || selectedBox == 3) {
+            	        selectedBox = 4;
+            		} else if (selectedBox == 4) {
+            	        selectedBox = 0;
+            	    } else if(Screen.ActualScreen == SCREEN_5){
+            	    	Screen.ActualScreen = SCREEN_1;
+            	    } else {
+            	    	Screen.ActualScreen ++;
+            	    }
             	}
             }
+
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
-            	if(Screen.ActualScreen == SCREEN_1){
-            		Screen.ActualScreen = SCREEN_3;
-            	} else {
-            		Screen.ActualScreen --;
 
+            	if (Screen.ActualScreen = SCREEN_5 && CoolingRequest == 1){
+            		if (selectedBox == 4) {
+            			selectedBox = 2;
+
+            		} else if (selectedBox == 2 || selectedBox == 3) {
+            			selectedBox -= 2;
+
+            		} else if (selectedBox == 0 || selectedBox == 1) {
+            			selectedBox = 4;
+
+            		} else if (Screen.ActualScreen == SCREEN_1){
+            			Screen.ActualScreen = SCREEN_5;
+
+            		} else {
+            			Screen.ActualScreen --;
+
+            		}
             	}
             }
+
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
-
+            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
+            	    selectedBox = (selectedBox + 1) % 5;  // Mueve a la derecha
+            	}
             }
+
             if (pendingButtonEvent == EVENT_BUTTON_LEFT) {
-
+            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
+            		if (selectedBox == 0) {
+            		    selectedBox = 4;
+            		} else {
+            		    selectedBox = selectedBox - 1;
+            		}
+            	}
             }
+
             if (pendingButtonEvent == EVENT_BUTTON_OK) {
-            	PrechargeRequest = 1;
+            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 0){
+            		CoolingRequest = 1;
+            		selectedBox = 0;
+            	} else if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1) {
+            		switch (selectedBox) {
+                    	case 0: Fans_R = (Fans_R + 1) % 3; break;
+                    	case 1: Fans_L = (Fans_L + 1) % 3; break;
+                    	case 2: Pump_R = (Pump_R + 1) % 2; break;
+                    	case 3: Pump_L = (Pump_L + 1) % 2; break;
+                    	case 4: CoolingRequest = 0; break;  			// Salir del modo edición
+            		}
+            	} else {
+            		PrechargeRequest = 1;
+            	}
             }
             break;
+
+            /*
+             * 	CAR STATE 2 - INVERTERS GETTING READY
+             * */
 
         case DASH_2_PRECHARGE_STATUS:
 
@@ -305,6 +389,10 @@ void refreshScreen(void) {
             }
             break;
 
+            /*
+             * 	CAR STATE 3 - INVERTERS GETTING READY
+             * */
+
         case DASH_3_PRECHARGE_FINISHED:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
@@ -324,55 +412,61 @@ void refreshScreen(void) {
             }
             break;
 
+            /*
+             * 	CAR STATE 4 - INVERTERS GETTING READY
+             * */
+
         case DASH_4_RACING_MENU:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
-            	if (Screen.ActualScreen >= SCREEN_5){
-            		Screen.ActualScreen = SCREEN_1;
-            		RacingMode = 1;
-            	} else {
-            		Screen.ActualScreen ++;
-            		RacingMode ++;
+            	if (Screen.ActualScreen >= SCREEN_1 && Screen.ActualScreen <= SCREEN_5){
+            		if (Screen.ActualScreen == SCREEN_5){
+            			Screen.ActualScreen = SCREEN_1;
+            		    RacingMode = 1;
+            		 } else {
+            		    Screen.ActualScreen ++;
+            		    RacingMode ++;
+            		 }
+            	} else if (Screen.ActualScreen >= SCREEN_6 && Screen.ActualScreen <= SCREEN_10){
+            		if (Screen.ActualScreen == SCREEN_10){
+            		    Screen.ActualScreen = SCREEN_6;
+            		    Driver = 1;
+            		 } else {
+            		    Screen.ActualScreen ++;
+            		    Driver ++;
+            		 }
             	}
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
-            	if (Screen.ActualScreen == SCREEN_1){
-            		Screen.ActualScreen = SCREEN_5;
-            		RacingMode = 5;
-            	} else {
-            		Screen.ActualScreen --;
-            		RacingMode --;
+            	if (Screen.ActualScreen >= SCREEN_1 && Screen.ActualScreen <= SCREEN_5){
+            		if (Screen.ActualScreen == SCREEN_1){
+            			Screen.ActualScreen = SCREEN_5;
+            		    RacingMode = 5;
+            		 } else {
+            		    Screen.ActualScreen --;
+            		    RacingMode --;
+            		 }
+            	} else if (Screen.ActualScreen >= SCREEN_6 && Screen.ActualScreen <= SCREEN_10){
+            		if (Screen.ActualScreen == SCREEN_6){
+            		    Screen.ActualScreen = SCREEN_10;
+            		    Driver = 5;
+            		 } else {
+            		    Screen.ActualScreen --;
+            		    Driver --;
+            		 }
             	}
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
             	if (Screen.ActualScreen >= SCREEN_1 && Screen.ActualScreen <= SCREEN_5){
-            		Screen.ActualScreen = SCREEN_6;
-            		Driver = 1;
-            	}
-
-            	if (Screen.ActualScreen == SCREEN_10){
-            		Screen.ActualScreen = SCREEN_6;
-            		Driver = 1;
-            	} else {
-            		Screen.ActualScreen ++;
-            		Driver ++;
+            		Screen.ActualScreen = Driver + 5;
             	}
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_LEFT) {
-            	if (Screen.ActualScreen >= SCREEN_1 && Screen.ActualScreen <= SCREEN_5){
-            		Screen.ActualScreen = SCREEN_10;
-            		Driver = 5;
-            	}
-
-            	if (Screen.ActualScreen == SCREEN_6){
-            		Screen.ActualScreen = SCREEN_10;
-            		Driver = 5;
-            	} else {
-            		Screen.ActualScreen --;
-            		Driver --;
+                 if (Screen.ActualScreen >= SCREEN_6 && Screen.ActualScreen <= SCREEN_10){
+            		Screen.ActualScreen = RacingMode - 1;
             	}
             }
 
@@ -385,11 +479,13 @@ void refreshScreen(void) {
             		Screen.ActualScreen = SCREEN_11;
             		RacingMode_Send = 1;
             	}
-
-
             }
 
             break;
+
+            /*
+             * 	CAR STATE 5 - INVERTERS GETTING READY
+             * */
 
         case DASH_5_INVERTERS:
 
@@ -398,12 +494,20 @@ void refreshScreen(void) {
             }
             break;
 
+            /*
+             * 	CAR STATE 6 - RACING MODE
+             * */
+
         case DASH_6_RACING_MODE:
 
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
 
             }
             break;
+
+            /*
+             * 	CAR STATE 7 - ERRORES
+             * */
 
         case DASH_7_ERROR:
 
@@ -412,118 +516,7 @@ void refreshScreen(void) {
             break;
 
     }
+
     pendingButtonEvent = EVENT_NONE;
 
-
-}
-
-
-// Declaramos la función que dibuja la pantalla
-void drawScreen(void) {
-    switch (Screen.ActualState) {
-        case DASH_0_ETR:
-            switch (Screen.ActualScreen) {
-                case SCREEN_1:
-                    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-                    BSP_LCD_SetFont(&Font24);
-                    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-                    BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-                    BSP_LCD_DisplayStringAt(0, 100, "CAR STATE 0", CENTER_MODE);
-                	break;
-                default:
-                	break;
-            }
-            break;
-
-        case DASH_1_PRECHARGE:
-            switch (Screen.ActualScreen) {
-                case SCREEN_1:
-                    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-                    BSP_LCD_SetFont(&Font24);
-                    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-                    BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-                    BSP_LCD_DisplayStringAt(0, 100, "PRESS OK BUTTON TO PRECHARGE", CENTER_MODE);
-                    break;
-                default:
-                	break;
-            }
-            break;
-
-        case DASH_2_PRECHARGE_STATUS:
-            		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-            		BSP_LCD_SetFont(&Font24);
-            		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-            		BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-            		BSP_LCD_DisplayStringAt(0, 100, "PRECHARGING...", CENTER_MODE);
-            break;
-
-        case DASH_3_PRECHARGE_FINISHED:
-            		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-            		BSP_LCD_SetFont(&Font24);
-            		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-            		BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-            		BSP_LCD_DisplayStringAt(0, 100, "PRECHARGE FINISHED", CENTER_MODE);
-            break;
-
-        case DASH_4_RACING_MENU:
-            switch (Screen.ActualScreen) {
-                case SCREEN_1:
-                    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-                    BSP_LCD_SetFont(&Font24);
-                    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-                    BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-                    BSP_LCD_DisplayStringAt(0, 100, "RACING MENU. PRESS OK", CENTER_MODE);
-                    break;
-                default:
-                	break;
-            }
-            break;
-
-        case DASH_5_INVERTERS:
-            		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-            		BSP_LCD_SetFont(&Font24);
-            		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-            		BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-            		BSP_LCD_DisplayStringAt(0, 100, "INVERTERS GETTING READY", CENTER_MODE);
-            break;
-
-        case DASH_6_RACING_MODE:
-            switch (Screen.ActualScreen) {
-                case SCREEN_1:
-                    BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-                    BSP_LCD_SetFont(&Font24);
-                    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-                    BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-                    BSP_LCD_DisplayStringAt(0, 100, "VROOM VROOM", CENTER_MODE);
-                    break;
-                default:
-                	break;
-            }
-            break;
-
-        case DASH_7_ERROR:
-            		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-            		BSP_LCD_SetFont(&Font24);
-            		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-            		BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-            		BSP_LCD_DisplayStringAt(0, 100, "OOPSIE... SOMETHING WENT WRONG", CENTER_MODE);
-            break;
-
-        default:
-            		BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
-            		BSP_LCD_SetFont(&Font24);
-            		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-            		BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-            		BSP_LCD_DisplayStringAt(0, 100, "CAR STATE ???", CENTER_MODE);
-            break;
-    }
 }

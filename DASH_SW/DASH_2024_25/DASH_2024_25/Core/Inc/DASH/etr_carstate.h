@@ -35,28 +35,17 @@
 		SCREEN_11,
 	}	DASH_Screen;
 
-	typedef enum {
-		E1,	// FAN L ON
-		E2, // FAN L OFF
-		E3, // FAN L FULL
-		E4, // FAN R ON
-		E5, // FAN R OFF
-		E6, // FAN R FULL
-		E7, // PUMP R ON
-		E8, // PUMP R OFF
-		E9, // PUMP L ON
-		E10 // PUMP L OFF
-	}	DASH_Cooling;
-
 	typedef struct {
 		DASH_CarState ActualState;
 		DASH_CarState PreviousState;
 		DASH_Screen ActualScreen;
-		DASH_Cooling CoolingState;
 	}	DASH_State;
 
 	extern DASH_State Screen;
 	extern uint8_t CoolingRequest;
+	extern uint8_t selectedBox;
+	extern uint8_t currentRotary_Left;
+	extern uint8_t currentRotary_Right;
 
 	extern const int NUM_SCREENS_PER_STATE[];
 	void resetAllSignals(void);

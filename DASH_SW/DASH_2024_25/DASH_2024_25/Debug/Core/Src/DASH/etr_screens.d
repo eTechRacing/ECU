@@ -29,7 +29,7 @@ Core/Src/DASH/etr_screens.o: ../Core/Src/DASH/etr_screens.c \
  ../Core/Inc/DASH/etr_screens.h ../Core/Inc/LCD/ili9488.h \
  ../Core/Inc/LCD/lcd_io_spi.h ../Core/Inc/LCD/lcd.h \
  ../Core/Inc/LCD/stm32_adafruit_lcd.h ../Core/Inc/FONTS/fonts.h \
- ../Core/Inc/LCD/bmp.h
+ ../Core/Inc/LCD/bmp.h ../Core/Inc/DASH/etr_carstate.h
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h:
@@ -64,3 +64,4 @@ Core/Src/DASH/etr_screens.o: ../Core/Src/DASH/etr_screens.c \
 ../Core/Inc/LCD/stm32_adafruit_lcd.h:
 ../Core/Inc/FONTS/fonts.h:
 ../Core/Inc/LCD/bmp.h:
+../Core/Inc/DASH/etr_carstate.h:

@@ -3,8 +3,8 @@
 ../Core/Src/main.c:243:13:MX_CAN1_Init	2
 ../Core/Src/main.c:280:13:MX_GPIO_Init	1
 ../Core/Src/main.c:348:6:HAL_CAN_RxFifo0MsgPendingCallback	12
-../Core/Src/main.c:398:6:StartCAN	7
-../Core/Src/main.c:436:6:StartButtons	1
-../Core/Src/main.c:464:6:StartDisplay	1
-../Core/Src/main.c:484:6:HAL_TIM_PeriodElapsedCallback	2
-../Core/Src/main.c:502:6:Error_Handler	1
+../Core/Src/main.c:398:6:StartCAN	9
+../Core/Src/main.c:439:6:StartButtons	1
+../Core/Src/main.c:469:6:StartDisplay	1
+../Core/Src/main.c:489:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:507:6:Error_Handler	1
