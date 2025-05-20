@@ -17,8 +17,6 @@ void drawScreen(void) {
                 case SCREEN_1:
                 	carState_0_SC0 ();
                 	break;
-                default:
-                	break;
             }
             break;
 
@@ -27,17 +25,23 @@ void drawScreen(void) {
                 case SCREEN_1:
                     carState_3_SC0 ();
                     break;
-                default:
-                	break;
             }
             break;
 
         case DASH_2_PRECHARGE_STATUS:
-        		carState_6();
+            switch (Screen.ActualScreen) {
+            	case SCREEN_1:
+            		carState_6();
+            		break;
+            }
             break;
 
         case DASH_3_PRECHARGE_FINISHED:
+            switch (Screen.ActualScreen) {
+            	case SCREEN_1:
             		carState_9 ();
+            		break;
+            }
             break;
 
         case DASH_4_RACING_MENU:
@@ -45,31 +49,33 @@ void drawScreen(void) {
                 case SCREEN_1:
                     //HERE
                     break;
-                default:
-                	break;
             }
             break;
 
         case DASH_5_INVERTERS:
+            switch (Screen.ActualScreen) {
+                case SCREEN_1:
             		carState_14();
+            		break;
+            }
             break;
 
         case DASH_6_RACING_MODE:
             switch (Screen.ActualScreen) {
                 case SCREEN_1:
                 	carState_15(0);
-                    break;
-                default:
                 	break;
             }
             break;
 
         case DASH_7_ERROR:
+            switch (Screen.ActualScreen) {
+                case SCREEN_1:
             		carState_21 ();
+            		break;
+            }
             break;
 
-        default:
-            		//HERE???
-            break;
+
     }
 }
