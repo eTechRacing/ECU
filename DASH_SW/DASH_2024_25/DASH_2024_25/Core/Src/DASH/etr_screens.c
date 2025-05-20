@@ -24,7 +24,7 @@ void drawScreen(void) {
                     BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
                     BSP_LCD_Clear(LCD_COLOR_WHITE);
 
-                    BSP_LCD_DisplayStringAt(0, 100, "CAR STATE 0", CENTER_MODE);
+                    BSP_LCD_DisplayStringAt(0, 100, "hIGHEST_CCADOFHNJbai", CENTER_MODE);
                 	break;
                 default:
                 	break;

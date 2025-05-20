@@ -29,7 +29,7 @@ const int NUM_SCREENS_PER_STATE[] = {
     1   // DASH_21_ERROR
 };
 
-DASH_State Screen = {DASH_0_ETR, SCREEN_1, SCREEN_1};
+DASH_State Screen = {DASH_0_ETR, DASH_0_ETR, SCREEN_1, SCREEN_1};
 
 void resetAllSignals(void) {
     New_Signal_193 = 0;
@@ -155,7 +155,6 @@ void resetAllSignals(void) {
     RacingMode = 1;
     EnableDrive_Order = 0;
 
-
     // CAR STATE VARIABLES
     RacingMode_Send = 0;
     CoolingRequest = 0;
@@ -200,7 +199,6 @@ void refreshScreen(void) {
 
     		// RESETEA LA PANTALLA SI SE CAMBIA EL ESTADO
     if (Screen.PreviousState != Screen.ActualState){
-
     	Screen.ActualScreen = SCREEN_1;
     	Screen.PreviousState = Screen.ActualState;
     }
@@ -499,6 +497,7 @@ void refreshScreen(void) {
 
         case DASH_6_RACING_MODE:
 
+        	// ACC, WORKSHOP,
             if (pendingButtonEvent == EVENT_ROTARY_1) {
             	TC_Level = currentRotaryState_1;
             }

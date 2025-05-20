@@ -39,18 +39,19 @@
 		DASH_CarState ActualState;
 		DASH_CarState PreviousState;
 		DASH_Screen ActualScreen;
+		DASH_Screen PreviousScreen;
 	}	DASH_State;
 
 	extern DASH_State Screen;
 	extern uint8_t CoolingRequest;
 	extern uint8_t selectedBox;
+	extern uint8_t RacingMode_Send;
+
 
 	extern const int NUM_SCREENS_PER_STATE[];
 	void resetAllSignals(void);
 	void refreshScreen(void);
-	void drawScreen(void);
 	void init_rules(void);
 	void refreshGPIOs (void);
-	extern uint8_t RacingMode_Send;
 
 #endif /* INC_DASH_ETR_CARSTATE_H_ */
