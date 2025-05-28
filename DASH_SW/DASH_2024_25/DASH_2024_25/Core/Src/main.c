@@ -117,7 +117,8 @@ int main(void)
   MX_GPIO_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
-
+  /*SCREEN INIT*/
+  ILI9488_Init();
   		/*START CAN*/
   HAL_CAN_Start(&hcan1);
   HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
@@ -467,7 +468,7 @@ void StartDisplay(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-//	  drawScreen();
+	drawScreen();
     osDelay(5);
   }
   /* USER CODE END StartDisplay */
