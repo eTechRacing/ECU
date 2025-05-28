@@ -47,7 +47,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
  ../Core/Inc/DASH/etr_screens.h ../Core/Inc/DASH/etr_carstate.h \
  ../Core/Inc/DASH/buttons.h ../Core/Inc/CAN/CAN_X_2025.h \
- ../Core/Inc/CAN/CAN.h
+ ../Core/Inc/CAN/CAN.h ../Core/Inc/ILI9488/lib/mainDash_lib.h \
+ ../Core/Inc/ILI9488/bitmaps/bitmaps.h
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -100,3 +101,5 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/DASH/buttons.h:
 ../Core/Inc/CAN/CAN_X_2025.h:
 ../Core/Inc/CAN/CAN.h:
+../Core/Inc/ILI9488/lib/mainDash_lib.h:
+../Core/Inc/ILI9488/bitmaps/bitmaps.h:

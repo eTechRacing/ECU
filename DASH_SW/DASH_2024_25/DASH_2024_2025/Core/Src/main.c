@@ -28,6 +28,7 @@
 #include "DASH/buttons.h"
 #include "CAN/CAN_X_2025.h"
 #include "CAN/CAN.h"
+#include "ILI9488/lib/mainDash_lib.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -118,7 +119,7 @@ int main(void)
   MX_CAN1_Init();
   MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
-  /*SCREEN INIT*/
+  	  	/*SCREEN INIT*/
   ILI9488_Init();
   		/*START CAN*/
   HAL_CAN_Start(&hcan1);

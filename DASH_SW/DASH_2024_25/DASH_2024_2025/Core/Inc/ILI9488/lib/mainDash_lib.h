@@ -47,10 +47,12 @@ void ILI9488_DrawPixel(uint16_t x, uint16_t y, uint16_t color);
 void ILI9488_FillScreen(uint16_t color);
 void ILI9488_FillScreen_DMA(uint16_t color);
 void ILI9488_Square(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);
+void ILI9488_FillCircle(uint16_t x0, uint16_t y0, uint16_t radius, uint16_t color);
 void ILI9488_DrawBitmapRGB565(uint16_t x0, uint16_t y0, uint16_t width, uint16_t height, const uint16_t *bitmap);
 void ILI9488_DrawChar(uint16_t x, uint16_t y, char c, FontDef font, uint16_t color);
 void ILI9488_DrawString(uint16_t x, uint16_t y, const char *str, FontDef font, uint16_t color);
-
+void ILI9488_DrawCharBold(uint16_t x, uint16_t y, char c, FontDef font, uint16_t color);
+void ILI9488_DrawStringBold(uint16_t x, uint16_t y, const char *str, FontDef font, uint16_t color);
 
 
 

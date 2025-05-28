@@ -9,8 +9,8 @@
  *	 NOTE: the ILI9488 works with RGB666, all the data must be RGB565 bc all the functions have a converter
  * License: See Below
  *************************************************************/
-
 #include <stdint.h>
+
 #include "ILI9488/lib/mainDash_lib.h"
 
 
@@ -205,28 +205,48 @@ void ILI9488_DrawChar(uint16_t x, uint16_t y, char c, FontDef font, uint16_t col
 	    for (uint8_t row = 0; row < font.height; row++) {
 	        uint64_t line = 0;
 
-	        if (font.height == 8) {
-	        	line = bitmap[row];
-				line = line >> (8 - font.width);
-	        } else if (font.height == 16) {
-	        	line = (bitmap[row * font.bytes] << 8) | bitmap[row * font.bytes + 1];
-				line = line >> (16 - font.width);
-	        } else if (font.height == 24) {
-	            line = (bitmap[row * font.bytes] << 16) | (bitmap[row * font.bytes + 1] << 8) | bitmap[row * font.bytes + 2];
-			    line = line >> (24 - font.width);
-	        } else if (font.height == 36) {
-	        	line = (bitmap[row * font.bytes] << 24) | (bitmap[row * font.bytes + 1 ] << 16) | (bitmap[row * font.bytes + 2] << 8) | (bitmap[row * font.bytes + 3]);
-	        	line = line >> (32 - font.width);
+	        for (uint8_t b = 0; b < font.bytes; b++) {
+	            line <<= 8;
+	            line |= bitmap[row * font.bytes + b];
 	        }
-	        line &= (1 << font.width) - 1;
+
+	        line = line >> ((font.bytes * 8) - font.width); // Alinear a la derecha
+	        line &= (1 << font.width) - 1; // Limpiar bits sobrantes
 
 	        for (uint8_t col = 0; col < font.width; col++) {
-	        	if (line & (1 << (font.width - 1 - col))) {
+	            if (line & (1 << (font.width - 1 - col))) {
 	                ILI9488_DrawPixel(x + col, y + row, color);
 	            }
 	        }
 	    }
 
+}
+
+void ILI9488_DrawCharBold(uint16_t x, uint16_t y, char c, FontDef font, uint16_t color) {
+    uint32_t offset = (c - 32) * font.height * font.bytes;
+    const uint8_t *bitmap = &font.table[offset];
+
+    for (uint8_t row = 0; row < font.height; row++) {
+        uint64_t line = 0;
+
+        // Leer todos los bytes de la fila
+        for (uint8_t b = 0; b < font.bytes; b++) {
+            line <<= 8;
+            line |= bitmap[row * font.bytes + b];
+        }
+
+        line = line >> ((font.bytes * 8) - font.width);
+        line &= (1 << font.width) - 1;
+
+        for (uint8_t col = 0; col < font.width; col++) {
+            if (line & (1 << (font.width - 1 - col))) {
+                ILI9488_DrawPixel(x + col, y + row, color);
+                if (col < font.width - 1 && !(line & (1 << (font.width - 2 - col)))) {
+                    ILI9488_DrawPixel(x + col + 1, y + row, color); // Efecto bold: pixel adicional a la derecha
+                }
+            }
+        }
+    }
 }
 //Draw a string
 void ILI9488_DrawString(uint16_t x, uint16_t y, const char *str, FontDef font, uint16_t color){
@@ -249,6 +269,39 @@ void ILI9488_DrawString(uint16_t x, uint16_t y, const char *str, FontDef font, u
 		x += font.width;
 		str++;
 	    }
+}
+
+void ILI9488_DrawStringBold(uint16_t x, uint16_t y, const char *str, FontDef font, uint16_t color) {
+    uint16_t x_start = x;
+    while (*str) {
+        if (*str == '\n') {
+            y += font.height;
+            x = x_start;
+            str++;
+            continue;
+        }
+        if ((x + font.width + 1) > ILI9488_WIDTH) {
+            y += font.height;
+            x = x_start;
+        }
+        if ((y + font.height) > ILI9488_HEIGHT) {
+            break;
+        }
+
+        ILI9488_DrawCharBold(x, y, *str, font, color);
+        x += font.width + 1; // Compensamos el píxel extra del bold
+        str++;
+    }
+}
+
+void ILI9488_FillCircle(uint16_t x0, uint16_t y0, uint16_t radius, uint16_t color) {
+    for (int y = -radius; y <= radius; y++) {
+        for (int x = -radius; x <= radius; x++) {
+            if (x * x + y * y <= radius * radius) {
+                ILI9488_DrawPixel(x0 + x, y0 + y, color);
+            }
+        }
+    }
 }
 
 /* LICENSE: MIT
