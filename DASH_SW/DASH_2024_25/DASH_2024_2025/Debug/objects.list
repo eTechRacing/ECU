@@ -2,7 +2,6 @@
 "./Core/Src/CAN/CAN_X_2025.o"
 "./Core/Src/DASH/buttons.o"
 "./Core/Src/DASH/etr_carstate.o"
-"./Core/Src/DASH/etr_screens.o"
 "./Core/Src/ILI9488/UI/screen.o"
 "./Core/Src/ILI9488/bitmaps/back.o"
 "./Core/Src/ILI9488/bitmaps/flecha.o"

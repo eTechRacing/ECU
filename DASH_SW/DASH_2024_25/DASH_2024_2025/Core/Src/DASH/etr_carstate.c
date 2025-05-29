@@ -4,22 +4,23 @@
  *  Created on: Feb 25, 2025
  *      Author: cunio
  */
-#include <stdio.h>
 #include <stdint.h>
+#include <stdio.h>
+
 #include "DASH/etr_carstate.h"
 #include "DASH/buttons.h"
+#include "ILI9488/UI/screen.h"
 #include "DASH/etr_carstate.h"
 #include "CAN/CAN_X_2025.h"
 
 
 uint8_t RacingMode_Send;
 uint8_t CoolingRequest;
-uint8_t selectedBox;
 
 
 const int NUM_SCREENS_PER_STATE[] = {
-    5,  // DASH_0_ETR
-    5,  // DASH_3_PRECHARGE
+    3,  // DASH_0_ETR
+    3,  // DASH_3_PRECHARGE
     1,  // DASH_6_PRECHARGE_STATUS
     1,  // DASH_9_PRECHARGE_FINISHED
     11, // DASH_12_RACING_MENU
@@ -27,8 +28,15 @@ const int NUM_SCREENS_PER_STATE[] = {
     5,  // DASH_15_RACING_MODE
     1   // DASH_21_ERROR
 };
+//-------------------------------------------------------------
+DASH_State Screen = {
+		.ActualState = DASH_2_PRECHARGE_STATUS,
+		.PreviousState = DASH_2_PRECHARGE_STATUS,
+		.ActualScreen = SCREEN_1,
+		.CoolingState = E1,
+};
+//-------------------------------------------------------------
 
-DASH_State Screen = {DASH_0_ETR, DASH_0_ETR, SCREEN_1, SCREEN_1};
 
 void resetAllSignals(void) {
     New_Signal_193 = 0;
@@ -154,10 +162,10 @@ void resetAllSignals(void) {
     RacingMode = 1;
     EnableDrive_Order = 0;
 
+
     // CAR STATE VARIABLES
     RacingMode_Send = 0;
     CoolingRequest = 0;
-    selectedBox = 0;
 }
 
 
@@ -198,6 +206,7 @@ void refreshScreen(void) {
 
     		// RESETEA LA PANTALLA SI SE CAMBIA EL ESTADO
     if (Screen.PreviousState != Screen.ActualState){
+
     	Screen.ActualScreen = SCREEN_1;
     	Screen.PreviousState = Screen.ActualState;
     }
@@ -209,81 +218,50 @@ void refreshScreen(void) {
         		/*BUTTON DOWN*/
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
 
-            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
-
-            		if (selectedBox == 0 || selectedBox == 1) {
-            			selectedBox += 2;
-
-            		} else if (selectedBox == 2 || selectedBox == 3) {
-            			selectedBox = 4;
-
-            		} else if (selectedBox == 4) {
-            			selectedBox = 0;
-
-            		} else if (Screen.ActualScreen == SCREEN_5){
-            			Screen.ActualScreen = SCREEN_1;
-
-            		} else {
-            			Screen.ActualScreen ++;
+            	if (CoolingRequest == 1){
+            		if (Screen.CoolingState <= E1){
 
             		}
+            	} else if (Screen.ActualScreen == SCREEN_3){
+            		Screen.ActualScreen = SCREEN_1;
+            	} else {
+            		Screen.ActualScreen ++;
             	}
             }
             	/*BUTTON UP*/
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
 
-            	if ((Screen.ActualScreen = SCREEN_5) && (CoolingRequest == 1)){
-            		if (selectedBox == 4) {
-            			selectedBox = 2;
+            	if (CoolingRequest == 1){
 
-            		} else if (selectedBox == 2 || selectedBox == 3) {
-            			selectedBox -= 2;
+            	} else if (Screen.ActualScreen == SCREEN_1){
+            		Screen.ActualScreen = SCREEN_3;
+            	} else {
+            		Screen.ActualScreen --;
 
-            		} else if (selectedBox == 0 || selectedBox == 1) {
-            			selectedBox = 4;
-
-            		} else if (Screen.ActualScreen == SCREEN_1){
-            			Screen.ActualScreen = SCREEN_5;
-
-            		} else {
-            			Screen.ActualScreen --;
-
-            		}
             	}
             }
-
             	/*BUTTON RIGHT*/
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
-            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
-            	    selectedBox = (selectedBox + 1) % 5;  // Mueve a la derecha
+            	if (CoolingRequest == 1){
+
             	}
             }
-
             	/*BUTTON LEFT*/
             if (pendingButtonEvent == EVENT_BUTTON_LEFT) {
-            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
-            		if (selectedBox == 0) {
-            		    selectedBox = 4;
-            		} else {
-            		    selectedBox = selectedBox - 1;
-            		}
+            	if (CoolingRequest == 1){
+
             	}
             }
-
             	/*BUTTON OK*/
             if (pendingButtonEvent == EVENT_BUTTON_OK) {
-            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 0){
+            	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 0){
             		CoolingRequest = 1;
-            		selectedBox = 0;
-            	} else {
-            		switch (selectedBox) {
-                    	case 0: Fans_R = (Fans_R + 1) % 3; break;
-                    	case 1: Fans_L = (Fans_L + 1) % 3; break;
-                    	case 2: Pump_R = (Pump_R + 1) % 2; break;
-                    	case 3: Pump_L = (Pump_L + 1) % 2; break;
-                    	case 4: CoolingRequest = 0; break;  			// Salir del modo edición
-            		}
             	}
+
+            	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 1){
+            		CoolingRequest = 0;
+            	}
+
             }
 
             break;
@@ -291,80 +269,30 @@ void refreshScreen(void) {
         case DASH_1_PRECHARGE:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
-            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
-            		if (selectedBox == 0 || selectedBox == 1) {
-            			selectedBox += 2;
-            		} else if (selectedBox == 2 || selectedBox == 3) {
-            	        selectedBox = 4;
-            		} else if (selectedBox == 4) {
-            	        selectedBox = 0;
-            	    } else if(Screen.ActualScreen == SCREEN_5){
-            	    	Screen.ActualScreen = SCREEN_1;
-            	    } else {
-            	    	Screen.ActualScreen ++;
-            	    }
-            	}
-            }
-
-            if (pendingButtonEvent == EVENT_BUTTON_UP) {
-
-            	if ((Screen.ActualScreen = SCREEN_5) && (CoolingRequest == 1)){
-            		if (selectedBox == 4) {
-            			selectedBox = 2;
-
-            		} else if (selectedBox == 2 || selectedBox == 3) {
-            			selectedBox -= 2;
-
-            		} else if (selectedBox == 0 || selectedBox == 1) {
-            			selectedBox = 4;
-
-            		} else if (Screen.ActualScreen == SCREEN_1){
-            			Screen.ActualScreen = SCREEN_5;
-
-            		} else {
-            			Screen.ActualScreen --;
-
-            		}
-            	}
-            }
-
-            if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
-            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
-            	    selectedBox = (selectedBox + 1) % 5;  // Mueve a la derecha
-            	}
-            }
-
-            if (pendingButtonEvent == EVENT_BUTTON_LEFT) {
-            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1){
-            		if (selectedBox == 0) {
-            		    selectedBox = 4;
-            		} else {
-            		    selectedBox = selectedBox - 1;
-            		}
-            	}
-            }
-
-            if (pendingButtonEvent == EVENT_BUTTON_OK) {
-            	if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 0){
-            		CoolingRequest = 1;
-            		selectedBox = 0;
-            	} else if (Screen.ActualScreen == SCREEN_5 && CoolingRequest == 1) {
-            		switch (selectedBox) {
-                    	case 0: Fans_R = (Fans_R + 1) % 3; break;
-                    	case 1: Fans_L = (Fans_L + 1) % 3; break;
-                    	case 2: Pump_R = (Pump_R + 1) % 2; break;
-                    	case 3: Pump_L = (Pump_L + 1) % 2; break;
-                    	case 4: CoolingRequest = 0; break;  			// Salir del modo edición
-            		}
+            	if(Screen.ActualScreen == SCREEN_3){
+            		Screen.ActualScreen = SCREEN_1;
             	} else {
-            		PrechargeRequest = 1;
+            		Screen.ActualScreen ++;
             	}
+            }
+            if (pendingButtonEvent == EVENT_BUTTON_UP) {
+            	if(Screen.ActualScreen == SCREEN_1){
+            		Screen.ActualScreen = SCREEN_3;
+            	} else {
+            		Screen.ActualScreen --;
+
+            	}
+            }
+            if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
+
+            }
+            if (pendingButtonEvent == EVENT_BUTTON_LEFT) {
+
+            }
+            if (pendingButtonEvent == EVENT_BUTTON_OK) {
+            	PrechargeRequest = 1;
             }
             break;
-
-            /*
-             * 	CAR STATE 2 - INVERTERS GETTING READY
-             * */
 
         case DASH_2_PRECHARGE_STATUS:
 
@@ -385,10 +313,6 @@ void refreshScreen(void) {
             }
             break;
 
-            /*
-             * 	CAR STATE 3 - INVERTERS GETTING READY
-             * */
-
         case DASH_3_PRECHARGE_FINISHED:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
@@ -408,61 +332,55 @@ void refreshScreen(void) {
             }
             break;
 
-            /*
-             * 	CAR STATE 4 - INVERTERS GETTING READY
-             * */
-
         case DASH_4_RACING_MENU:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
-            	if (Screen.ActualScreen >= SCREEN_1 && Screen.ActualScreen <= SCREEN_5){
-            		if (Screen.ActualScreen == SCREEN_5){
-            			Screen.ActualScreen = SCREEN_1;
-            		    RacingMode = 1;
-            		 } else {
-            		    Screen.ActualScreen ++;
-            		    RacingMode ++;
-            		 }
-            	} else if (Screen.ActualScreen >= SCREEN_6 && Screen.ActualScreen <= SCREEN_10){
-            		if (Screen.ActualScreen == SCREEN_10){
-            		    Screen.ActualScreen = SCREEN_6;
-            		    Driver = 1;
-            		 } else {
-            		    Screen.ActualScreen ++;
-            		    Driver ++;
-            		 }
+            	if (Screen.ActualScreen >= SCREEN_5){
+            		Screen.ActualScreen = SCREEN_1;
+            		RacingMode = 1;
+            	} else {
+            		Screen.ActualScreen ++;
+            		RacingMode ++;
             	}
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
-            	if (Screen.ActualScreen >= SCREEN_1 && Screen.ActualScreen <= SCREEN_5){
-            		if (Screen.ActualScreen == SCREEN_1){
-            			Screen.ActualScreen = SCREEN_5;
-            		    RacingMode = 5;
-            		 } else {
-            		    Screen.ActualScreen --;
-            		    RacingMode --;
-            		 }
-            	} else if (Screen.ActualScreen >= SCREEN_6 && Screen.ActualScreen <= SCREEN_10){
-            		if (Screen.ActualScreen == SCREEN_6){
-            		    Screen.ActualScreen = SCREEN_10;
-            		    Driver = 5;
-            		 } else {
-            		    Screen.ActualScreen --;
-            		    Driver --;
-            		 }
+            	if (Screen.ActualScreen == SCREEN_1){
+            		Screen.ActualScreen = SCREEN_5;
+            		RacingMode = 5;
+            	} else {
+            		Screen.ActualScreen --;
+            		RacingMode --;
             	}
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
             	if (Screen.ActualScreen >= SCREEN_1 && Screen.ActualScreen <= SCREEN_5){
-            		Screen.ActualScreen = Driver + 5;
+            		Screen.ActualScreen = SCREEN_6;
+            		Driver = 1;
+            	}
+
+            	if (Screen.ActualScreen == SCREEN_10){
+            		Screen.ActualScreen = SCREEN_6;
+            		Driver = 1;
+            	} else {
+            		Screen.ActualScreen ++;
+            		Driver ++;
             	}
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_LEFT) {
-                 if (Screen.ActualScreen >= SCREEN_6 && Screen.ActualScreen <= SCREEN_10){
-            		Screen.ActualScreen = RacingMode - 1;
+            	if (Screen.ActualScreen >= SCREEN_1 && Screen.ActualScreen <= SCREEN_5){
+            		Screen.ActualScreen = SCREEN_10;
+            		Driver = 5;
+            	}
+
+            	if (Screen.ActualScreen == SCREEN_6){
+            		Screen.ActualScreen = SCREEN_10;
+            		Driver = 5;
+            	} else {
+            		Screen.ActualScreen --;
+            		Driver --;
             	}
             }
 
@@ -475,13 +393,11 @@ void refreshScreen(void) {
             		Screen.ActualScreen = SCREEN_11;
             		RacingMode_Send = 1;
             	}
+
+
             }
 
             break;
-
-            /*
-             * 	CAR STATE 5 - INVERTERS GETTING READY
-             * */
 
         case DASH_5_INVERTERS:
 
@@ -490,24 +406,12 @@ void refreshScreen(void) {
             }
             break;
 
-            /*
-             * 	CAR STATE 6 - RACING MODE
-             * */
-
         case DASH_6_RACING_MODE:
 
-        	// ACC, WORKSHOP,
-            if (pendingButtonEvent == EVENT_ROTARY_1) {
-            	TC_Level = currentRotaryState_1;
-            }
-            if (pendingButtonEvent == EVENT_ROTARY_2) {
-            	TV_Level = currentRotaryState_2;
+            if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
+
             }
             break;
-
-            /*
-             * 	CAR STATE 7 - ERRORES
-             * */
 
         case DASH_7_ERROR:
 
@@ -516,7 +420,82 @@ void refreshScreen(void) {
             break;
 
     }
-
     pendingButtonEvent = EVENT_NONE;
+
+
+}
+int state = 0;
+char pantalla = SCREEN_1;
+
+// Declaramos la función que dibuja la pantalla
+void drawScreen(void) {
+    switch (Screen.ActualState) {
+        case DASH_0_ETR:
+            switch (Screen.ActualScreen) {
+                case SCREEN_1:
+                	if(state == 0){
+                	carState_0_SC0 ();
+                	state = 1;
+                	}
+                	break;
+                default:
+                	carState_0_SC0 ();
+                	break;
+            }
+            break;
+
+        case DASH_1_PRECHARGE:
+            switch (Screen.ActualScreen) {
+                case SCREEN_1:
+                	carState_6 ();
+                    break;
+                default:
+                	carState_6 ();
+                	break;
+            }
+            break;
+
+        case DASH_2_PRECHARGE_STATUS:
+            		//while(PrechargeRequest !=100){
+            			carState_6 ();
+            		//}
+            break;
+
+        case DASH_3_PRECHARGE_FINISHED:
+        			carState_9 ();
+            break;
+
+        case DASH_4_RACING_MENU:
+            switch (Screen.ActualScreen) {
+                case SCREEN_1:
+                    //HERE
+                    break;
+                default:
+                	break;
+            }
+            break;
+
+        case DASH_5_INVERTERS:
+        			carState_14 ();
+            break;
+
+        case DASH_6_RACING_MODE:
+            switch (Screen.ActualScreen) {
+                case SCREEN_1:
+                	carState_15 (0);
+                    break;
+                default:
+                	break;
+            }
+            break;
+
+        case DASH_7_ERROR:
+        			carState_21 ();
+            break;
+
+        default:
+            		//HERE
+            break;
+    }
 
 }

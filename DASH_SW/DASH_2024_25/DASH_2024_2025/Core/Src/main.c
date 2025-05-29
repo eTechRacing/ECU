@@ -23,7 +23,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stm32l4xx_hal_gpio.h>
-#include "DASH/etr_screens.h"
 #include "DASH/etr_carstate.h"
 #include "DASH/buttons.h"
 #include "CAN/CAN_X_2025.h"
