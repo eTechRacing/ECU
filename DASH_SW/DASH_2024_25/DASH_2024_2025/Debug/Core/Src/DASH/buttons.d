@@ -1,7 +1,6 @@
 Core/Src/DASH/buttons.o: ../Core/Src/DASH/buttons.c \
- ../Core/Inc/DASH/etr_screens.h ../Core/Inc/DASH/buttons.h \
- ../Core/Inc/CAN/CAN_X_2025.h ../Core/Inc/main.h \
- ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
+ ../Core/Inc/DASH/buttons.h ../Core/Inc/CAN/CAN_X_2025.h \
+ ../Core/Inc/main.h ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h \
@@ -31,7 +30,6 @@ Core/Src/DASH/buttons.o: ../Core/Src/DASH/buttons.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Core/Inc/DASH/etr_carstate.h
-../Core/Inc/DASH/etr_screens.h:
 ../Core/Inc/DASH/buttons.h:
 ../Core/Inc/CAN/CAN_X_2025.h:
 ../Core/Inc/main.h:

@@ -23,11 +23,11 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stm32l4xx_hal_gpio.h>
-#include "DASH/etr_screens.h"
 #include "DASH/etr_carstate.h"
 #include "DASH/buttons.h"
 #include "CAN/CAN_X_2025.h"
 #include "CAN/CAN.h"
+#include "ILI9488/lib/mainDash_lib.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -118,7 +118,8 @@ int main(void)
   MX_CAN1_Init();
   MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
-
+  	  	/*SCREEN INIT*/
+  ILI9488_Init();
   		/*START CAN*/
   HAL_CAN_Start(&hcan1);
   HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
@@ -551,7 +552,7 @@ void StartDisplay(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-//	  drawScreen();
+	drawScreen();
     osDelay(5);
   }
   /* USER CODE END StartDisplay */

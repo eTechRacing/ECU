@@ -8,5 +8,8 @@
 ../Core/Src/ILI9488/lib/mainDash_lib.c:109:6:ILI9488_FillScreen_DMA	32	static
 ../Core/Src/ILI9488/lib/mainDash_lib.c:140:6:ILI9488_Square	40	static
 ../Core/Src/ILI9488/lib/mainDash_lib.c:170:6:ILI9488_DrawBitmapRGB565	40	static
-../Core/Src/ILI9488/lib/mainDash_lib.c:201:6:ILI9488_DrawChar	152	static
-../Core/Src/ILI9488/lib/mainDash_lib.c:232:6:ILI9488_DrawString	32	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:201:6:ILI9488_DrawChar	112	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:225:6:ILI9488_DrawCharBold	128	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:252:6:ILI9488_DrawString	32	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:274:6:ILI9488_DrawStringBold	32	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:297:6:ILI9488_FillCircle	32	static

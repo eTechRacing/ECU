@@ -69,8 +69,8 @@ all: main-build
 main-build: DASH_2024_2025.elf secondary-outputs
 
 # Tool invocations
-DASH_2024_2025.elf DASH_2024_2025.map: $(OBJS) $(USER_OBJS) C:\Users\cunio\Documents\GitHub\ECU\DASH_SW\DASH_2024_25\DASH_2024_2025\STM32L496VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "DASH_2024_2025.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\cunio\Documents\GitHub\ECU\DASH_SW\DASH_2024_25\DASH_2024_2025\STM32L496VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DASH_2024_2025.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+DASH_2024_2025.elf DASH_2024_2025.map: $(OBJS) $(USER_OBJS) C:\Users\maxes\STM32CubeIDE\workspace_1.18.0\ECU\DASH_SW\DASH_2024_25\DASH_2024_2025\STM32L496VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "DASH_2024_2025.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\maxes\STM32CubeIDE\workspace_1.18.0\ECU\DASH_SW\DASH_2024_25\DASH_2024_2025\STM32L496VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DASH_2024_2025.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

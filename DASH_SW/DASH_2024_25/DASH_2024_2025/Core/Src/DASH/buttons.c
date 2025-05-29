@@ -7,7 +7,7 @@
 
 #include <stdint.h>
 
-#include "DASH/etr_screens.h"
+
 #include "DASH/buttons.h"
 #include "CAN/CAN_X_2025.h"
 #include "DASH/etr_carstate.h"

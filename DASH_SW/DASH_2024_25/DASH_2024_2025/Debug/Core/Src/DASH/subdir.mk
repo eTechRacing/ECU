@@ -6,18 +6,15 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/DASH/buttons.c \
-../Core/Src/DASH/etr_carstate.c \
-../Core/Src/DASH/etr_screens.c 
+../Core/Src/DASH/etr_carstate.c 
 
 OBJS += \
 ./Core/Src/DASH/buttons.o \
-./Core/Src/DASH/etr_carstate.o \
-./Core/Src/DASH/etr_screens.o 
+./Core/Src/DASH/etr_carstate.o 
 
 C_DEPS += \
 ./Core/Src/DASH/buttons.d \
-./Core/Src/DASH/etr_carstate.d \
-./Core/Src/DASH/etr_screens.d 
+./Core/Src/DASH/etr_carstate.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -27,7 +24,7 @@ Core/Src/DASH/%.o Core/Src/DASH/%.su Core/Src/DASH/%.cyclo: ../Core/Src/DASH/%.c
 clean: clean-Core-2f-Src-2f-DASH
 
 clean-Core-2f-Src-2f-DASH:
-	-$(RM) ./Core/Src/DASH/buttons.cyclo ./Core/Src/DASH/buttons.d ./Core/Src/DASH/buttons.o ./Core/Src/DASH/buttons.su ./Core/Src/DASH/etr_carstate.cyclo ./Core/Src/DASH/etr_carstate.d ./Core/Src/DASH/etr_carstate.o ./Core/Src/DASH/etr_carstate.su ./Core/Src/DASH/etr_screens.cyclo ./Core/Src/DASH/etr_screens.d ./Core/Src/DASH/etr_screens.o ./Core/Src/DASH/etr_screens.su
+	-$(RM) ./Core/Src/DASH/buttons.cyclo ./Core/Src/DASH/buttons.d ./Core/Src/DASH/buttons.o ./Core/Src/DASH/buttons.su ./Core/Src/DASH/etr_carstate.cyclo ./Core/Src/DASH/etr_carstate.d ./Core/Src/DASH/etr_carstate.o ./Core/Src/DASH/etr_carstate.su
 
 .PHONY: clean-Core-2f-Src-2f-DASH
 
