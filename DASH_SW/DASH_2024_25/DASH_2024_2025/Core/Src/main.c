@@ -28,6 +28,8 @@
 #include "CAN/CAN_X_2025.h"
 #include "CAN/CAN.h"
 #include "ILI9488/lib/mainDash_lib.h"
+#include "ILI9488/UI/screen.h"
+#include "ILI9488/bitmaps/bitmaps.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -352,7 +354,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(SPI_CS_GPIO_Port, SPI_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(IMD_LED_GPIO_Port, IMD_LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, SPI_DC_Pin|SPI_RST_Pin|IMD_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, BMS_LED_Pin|BUZZER_Pin, GPIO_PIN_RESET);
@@ -375,8 +377,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(SW1_1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SW1_2_Pin SW1_3_Pin SPI_DC_Pin SPI_RST_Pin */
-  GPIO_InitStruct.Pin = SW1_2_Pin|SW1_3_Pin|SPI_DC_Pin|SPI_RST_Pin;
+  /*Configure GPIO pins : SW1_2_Pin SW1_3_Pin */
+  GPIO_InitStruct.Pin = SW1_2_Pin|SW1_3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -406,12 +408,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(SPI_CS_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : IMD_LED_Pin */
-  GPIO_InitStruct.Pin = IMD_LED_Pin;
+  /*Configure GPIO pins : SPI_DC_Pin SPI_RST_Pin IMD_LED_Pin */
+  GPIO_InitStruct.Pin = SPI_DC_Pin|SPI_RST_Pin|IMD_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(IMD_LED_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : BMS_LED_Pin BUZZER_Pin */
   GPIO_InitStruct.Pin = BMS_LED_Pin|BUZZER_Pin;
