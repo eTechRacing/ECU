@@ -30,9 +30,9 @@ const int NUM_SCREENS_PER_STATE[] = {
 };
 //-------------------------------------------------------------
 DASH_State Screen = {
-		.ActualState = DASH_2_PRECHARGE_STATUS,
-		.PreviousState = DASH_2_PRECHARGE_STATUS,
-		.ActualScreen = SCREEN_1,
+		.ActualState = DASH_0_ETR,
+		.PreviousState = DASH_0_ETR,
+		.ActualScreen = SCREEN_2,
 		.CoolingState = E1,
 };
 //-------------------------------------------------------------
@@ -424,22 +424,20 @@ void refreshScreen(void) {
 
 
 }
-int state = 0;
-char pantalla = SCREEN_1;
+
 
 // Declaramos la función que dibuja la pantalla
 void drawScreen(void) {
     switch (Screen.ActualState) {
-        case DASH_0_ETR:
+    	case DASH_0_ETR:
             switch (Screen.ActualScreen) {
-                case SCREEN_1:
-                	if(state == 0){
+            	case SCREEN_1:
                 	carState_0_SC0 ();
-                	state = 1;
-                	}
+                	break;
+                case SCREEN_2:
+                		carState_0_SC2_refri();
                 	break;
                 default:
-                	carState_0_SC0 ();
                 	break;
             }
             break;
