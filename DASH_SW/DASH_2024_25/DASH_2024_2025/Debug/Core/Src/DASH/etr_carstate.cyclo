@@ -2,4 +2,4 @@
 ../Core/Src/DASH/etr_carstate.c:172:6:init_rules	1
 ../Core/Src/DASH/etr_carstate.c:182:6:refreshGPIOs	9
 ../Core/Src/DASH/etr_carstate.c:205:6:refreshScreen	35
-../Core/Src/DASH/etr_carstate.c:431:6:drawScreen	13
+../Core/Src/DASH/etr_carstate.c:430:6:drawScreen	13

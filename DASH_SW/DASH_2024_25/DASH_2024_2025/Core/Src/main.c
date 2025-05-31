@@ -132,7 +132,6 @@ int main(void)
   resetAllSignals();
   init_rules();
 
-
   /* USER CODE END 2 */
 
   /* USER CODE BEGIN RTOS_MUTEX */
