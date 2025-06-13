@@ -1,6 +1,7 @@
 #include "ILI9488/UI/screen.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "CAN/CAN_X_2025.h"
 const char* central_button = "Press Central Button to Accept";
 
 const char* status[] = {
@@ -47,9 +48,13 @@ void carState_0_SC0 (){
 	ILI9488_DrawBitmapRGB565(10,75,460,150,logo);
 }
 //REVISAR
-void carState_0_SC1_ecus (){
+void carState_0_SC1_ecus (int mode){
 	// ----- SCREEN 2 -----
-	ILI9488_FillScreen_DMA(0x0000);
+	//*************ECUS*************************//
+	int y_pos = 70;
+	uint16_t color = 0xFFFF;
+	if(mode==0){
+		ILI9488_FillScreen_DMA(0x0000);
 
 	ILI9488_DrawString(86,0,"CAR STATUS", Font32, 0xFFFF);
 	ILI9488_Square(0, 63, 479, 65, 0xF800); //1H line
@@ -59,16 +64,10 @@ void carState_0_SC1_ecus (){
 	ILI9488_DrawStringBold(52,43,"ECUS",Font16,0x0FFF);
 	ILI9488_DrawStringBold(334,43,"SHUTDOWN",Font16,0x0FFF);
 	ILI9488_DrawStringBold(192,192,"SENSORS",Font16,0x0FFF);
-	//*************ECUS*************************//
-	int y_pos = 70;//5000000000
-	int n_ecus = sizeof(ecus_list)/sizeof(ecus_list[0]);
-	int ecus_status[n_ecus];
-		ecus_status[0] = 1/*ETAS_MSG_Counter*/; //Here is ETAS state FALTAAAAAAAAAAAAAAAAAAAAAAAA
-		ecus_status[1] = 1/*Disconnection_Rear*/;
-		ecus_status[2] = 0/*Disconnection_Front*/;
-		ecus_status[3] = 1/*Disconnection_DashBoard*/;
-		ecus_status[4] = 0/*Disconnection_BMS*/;
-	uint16_t color = 0xFFFF;
+
+	}
+	if(mode==1){
+
 	for (int i=0;i<n_ecus; i++){
 			if(status[ecus_status[i]]==status[0]){
 				color = 0xF800;
@@ -79,8 +78,10 @@ void carState_0_SC1_ecus (){
 			ILI9488_FillCircle(12,y_pos+10, 10, color);
 			y_pos+=23;
 	}
+	}
 	//"LVMS+STAS", "BSPD+INER", "SC+BOTS", "BMS", "IMD", "TSMS+TSMP", "LEFT TS", "RIGHT TS", "HV BOX", "HVD", "ACCU INT"
 	/*********** SHUTDOWN *****************/
+	if (mode==2){
 	int n_sdown = sizeof(shutdown_list)/sizeof(shutdown_list[0]);
 	uint8_t sdown_status[n_sdown];
 		sdown_status[0] = 0/*Shutdown_Setas*/;
@@ -110,8 +111,10 @@ void carState_0_SC1_ecus (){
 		ILI9488_FillCircle(x_pos,y_pos+10, 10, color);
 		y_pos+=23;
 	}
+	}
 	//"APPS1+2", "ELIPSE", "SUSP", "PITOT", "BRK PDL", "BRK PRS"
 	/**************** SENSORS *******************/
+	if(mode==3){
 	int n_sens = sizeof(sensors_list)/sizeof(sensors_list[0]);
 	uint8_t sens_status[n_sens];
 		sens_status[0]=1/*Disconnection_APPS1 && Disconnection_APPS2*/;
@@ -132,6 +135,7 @@ void carState_0_SC1_ecus (){
 			ILI9488_FillCircle(342,y_pos+10, 10, color);
 
 			y_pos+=23;
+	}
 	}
 }
 
@@ -376,6 +380,7 @@ void carState_15 (int n_race){
 //----- CAR_STATE - 21
 ////////////////////////
 void carState_21 (){
+	ILI9488_FillScreen_DMA(0x0000);
 	ILI9488_DrawString(137, 100, "ERROR SOMETHING WENT RONG", Font24, 0xFFFF);
 }
 

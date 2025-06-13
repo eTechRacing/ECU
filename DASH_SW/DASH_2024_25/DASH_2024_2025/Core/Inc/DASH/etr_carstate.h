@@ -52,9 +52,11 @@
 		DASH_CarState ActualState;
 		DASH_CarState PreviousState;
 		DASH_Screen ActualScreen;
+		DASH_Screen PreviousScreen;
 		DASH_Cooling CoolingState;
 	}	DASH_State;
 
+	extern int printStatus;
 	extern DASH_State Screen;
 	extern uint8_t CoolingRequest;
 
