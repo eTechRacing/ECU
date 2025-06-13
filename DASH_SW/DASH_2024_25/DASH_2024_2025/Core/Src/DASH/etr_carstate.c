@@ -17,7 +17,7 @@
 uint8_t RacingMode_Send;
 uint8_t CoolingRequest;
 
-
+int printStatus = 0;
 const int NUM_SCREENS_PER_STATE[] = {
     3,  // DASH_0_ETR
     3,  // DASH_3_PRECHARGE
@@ -31,8 +31,9 @@ const int NUM_SCREENS_PER_STATE[] = {
 //-------------------------------------------------------------
 DASH_State Screen = {
 		.ActualState = DASH_0_ETR,
-		.PreviousState = DASH_0_ETR,
-		.ActualScreen = SCREEN_2,
+		.PreviousState = -1,
+		.ActualScreen = SCREEN_1,
+		.PreviousScreen = -1,
 		.CoolingState = E1,
 };
 //-------------------------------------------------------------
@@ -217,26 +218,28 @@ void refreshScreen(void) {
 
         		/*BUTTON DOWN*/
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
-
+            	printStatus =0;
             	if (CoolingRequest == 1){
             		if (Screen.CoolingState <= E1){
 
             		}
             	} else if (Screen.ActualScreen == SCREEN_3){
+            		Screen.PreviousScreen = Screen.ActualScreen;
             		Screen.ActualScreen = SCREEN_1;
             	} else {
             		Screen.ActualScreen ++;
+
             	}
             }
             	/*BUTTON UP*/
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
-
+            	printStatus =0;
             	if (CoolingRequest == 1){
 
             	} else if (Screen.ActualScreen == SCREEN_1){
+            		Screen.PreviousScreen = Screen.ActualScreen;
             		Screen.ActualScreen = SCREEN_3;
             	} else {
-            		Screen.ActualScreen --;
 
             	}
             }
@@ -428,14 +431,33 @@ void refreshScreen(void) {
 
 // Declaramos la función que dibuja la pantalla
 void drawScreen(void) {
-    switch (Screen.ActualState) {
-    	case DASH_0_ETR:
+	switch (Screen.ActualState) {
+		case DASH_0_ETR:
             switch (Screen.ActualScreen) {
             	case SCREEN_1:
-                	carState_0_SC0 ();
+            		if(printStatus==0){
+            			carState_0_SC0 ();
+            			printStatus+=1;
+            		}
                 	break;
                 case SCREEN_2:
-                		carState_0_SC2_refri();
+                		//carState_0_SC1_ecus();
+                	if(printStatus==0){
+                		carState_0_SC1_ecus(0);
+                		printStatus+=1;
+                	}else if(printStatus==1){
+                		carState_0_SC1_ecus(1);
+                		printStatus+=1;
+                	}else if(printStatus==2){
+                		carState_0_SC1_ecus(2);
+                		printStatus+=1;
+                	}
+                	break;
+                case SCREEN_3:
+                	if(printStatus==0){
+                    	carState_0_SC2_refri();
+                    	printStatus+=1;
+                	}
                 	break;
                 default:
                 	break;
@@ -495,5 +517,4 @@ void drawScreen(void) {
             		//HERE
             break;
     }
-
 }

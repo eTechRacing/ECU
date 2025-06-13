@@ -6,7 +6,7 @@
 
 //FUNCTION DECLARATION
 void carState_0_SC0 (void);
-void carState_0_SC1_ecus (void);
+void carState_0_SC1_ecus (int mode);
 void carState_0_SC1_sensors (void);
 void carState_0_SC1_shutdown (void);
 void carState_0_SC2_refri (void);

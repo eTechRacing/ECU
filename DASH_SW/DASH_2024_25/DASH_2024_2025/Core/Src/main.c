@@ -554,7 +554,7 @@ void StartDisplay(void const * argument)
   for(;;)
   {
 	drawScreen();
-    osDelay(5);
+    osDelay(100);
   }
   /* USER CODE END StartDisplay */
 }

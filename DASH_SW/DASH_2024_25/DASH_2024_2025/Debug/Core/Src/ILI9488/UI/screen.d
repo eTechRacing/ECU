@@ -29,7 +29,8 @@ Core/Src/ILI9488/UI/screen.o: ../Core/Src/ILI9488/UI/screen.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
- ../Core/Inc/ILI9488/lib/mainDash_lib.h
+ ../Core/Inc/ILI9488/lib/mainDash_lib.h ../Core/Inc/CAN/CAN_X_2025.h \
+ ../Core/Inc/main.h
 ../Core/Inc/ILI9488/UI/screen.h:
 ../Core/Inc/ILI9488/bitmaps/bitmaps.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
@@ -62,3 +63,5 @@ Core/Src/ILI9488/UI/screen.o: ../Core/Src/ILI9488/UI/screen.c \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Core/Inc/ILI9488/lib/mainDash_lib.h:
+../Core/Inc/CAN/CAN_X_2025.h:
+../Core/Inc/main.h:
