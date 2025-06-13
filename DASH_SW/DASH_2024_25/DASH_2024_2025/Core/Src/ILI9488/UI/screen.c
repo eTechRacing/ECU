@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "CAN/CAN_X_2025.h"
-const char* central_button = "Press Central Button to Accept";
 
 const char* status[] = {
 		"ERROR", "OK"
@@ -66,8 +65,16 @@ void carState_0_SC1_ecus (int mode){
 	ILI9488_DrawStringBold(192,192,"SENSORS",Font16,0x0FFF);
 
 	}
+
 	if(mode==1){
 
+			int n_ecus = sizeof(ecus_list)/sizeof(ecus_list[0]);
+			int ecus_status[n_ecus];
+				ecus_status[0] = 1/*ETAS_MSG_Counter*/; //Here is ETAS state FALTA
+				ecus_status[1] = Disconnection_Rear;
+				ecus_status[2] = Disconnection_Front;
+				ecus_status[3] = Disconnection_DashBoard;
+				ecus_status[4] = Disconnection_BMS;
 	for (int i=0;i<n_ecus; i++){
 			if(status[ecus_status[i]]==status[0]){
 				color = 0xF800;
