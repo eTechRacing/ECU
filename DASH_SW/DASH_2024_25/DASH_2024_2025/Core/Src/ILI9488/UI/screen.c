@@ -21,6 +21,38 @@ const char* shutdown_list[] = {
 const char* dymaic_tests[] = {
 		"SKIDPAD","AUTOX", "ENDURANCE", "ACCELERATION", "WORKSHOP"
 };
+uint8_t ecus_status[N_ECUS];
+uint8_t sdown_status[N_SHUTDOWN];
+uint8_t sensors_status[N_SENSORS];
+void initStatus(){
+
+	ecus_status[0] = 1/*ETAS_MSG_Counter*/;
+	ecus_status[1] = Disconnection_Rear;
+	ecus_status[2] = Disconnection_Front;
+	ecus_status[3] = Disconnection_DashBoard;
+	ecus_status[4] = Disconnection_BMS;
+
+	sdown_status[0] = 0/*Shutdown_Setas*/;
+	sdown_status[1] = 1/*Shutdown_BSPD_Inertia*/;
+	sdown_status[2] = 0/*Shutdown_SC_BOTS*/;
+	sdown_status[3] = 0/*Shutdown_BMS*/;
+	sdown_status[4] = 1/*Shutdown_IMD*/;
+	sdown_status[5] = 1/*Shutdown_TSMS_TSMP*/;
+	sdown_status[6] = 1/*Shutdown_LeftTS*/;
+	sdown_status[7] = 0/*Shutdown_RightTS*/;
+	sdown_status[8] = 1/*Shutdown_HVBox*/;
+	sdown_status[9] = 1/*Shutdown_HVD*/;
+	sdown_status[10] = 1/*Shutdown_PackageIntck*/;
+/*
+	sensors_status[0] = Disconnection_APPS1 && Disconnection_APPS2;
+	sensors_status[1] = Disconnection_Ellipse;
+	sensors_status[2] = Disconnection_Susp_R_R && Disconnection_Susp_R_L && Disconnection_Susp_F_R && Disconnection_Susp_F_L;
+	sensors_status[3] = Disconnection_Pitot;
+	sensors_status[4] = Disconnection_BrakePedal;
+	sensors_status[5] = Disconnection_BrakePressure1 && Disconnection_BrakePressure2;
+*/
+}
+
 
 //UTILITY FUNCTIONS
 const char* intToString (int value){
@@ -48,12 +80,12 @@ void carState_0_SC0 (){
 }
 //REVISAR
 void carState_0_SC1_ecus (int mode){
-	// ----- SCREEN 2 -----
 	//*************ECUS*************************//
 	int y_pos = 70;
 	uint16_t color = 0xFFFF;
+	initStatus();
 	if(mode==0){
-		ILI9488_FillScreen_DMA(0x0000);
+	ILI9488_FillScreen_DMA(0x0000);
 
 	ILI9488_DrawString(86,0,"CAR STATUS", Font32, 0xFFFF);
 	ILI9488_Square(0, 63, 479, 65, 0xF800); //1H line
@@ -68,14 +100,9 @@ void carState_0_SC1_ecus (int mode){
 
 	if(mode==1){
 
-			int n_ecus = sizeof(ecus_list)/sizeof(ecus_list[0]);
-			int ecus_status[n_ecus];
-				ecus_status[0] = 1/*ETAS_MSG_Counter*/; //Here is ETAS state FALTA
-				ecus_status[1] = Disconnection_Rear;
-				ecus_status[2] = Disconnection_Front;
-				ecus_status[3] = Disconnection_DashBoard;
-				ecus_status[4] = Disconnection_BMS;
-	for (int i=0;i<n_ecus; i++){
+			//int n_ecus = sizeof(ecus_list)/sizeof(ecus_list[0]);
+
+	for (int i=0;i<N_ECUS; i++){
 			if(status[ecus_status[i]]==status[0]){
 				color = 0xF800;
 			}else{
@@ -89,22 +116,10 @@ void carState_0_SC1_ecus (int mode){
 	//"LVMS+STAS", "BSPD+INER", "SC+BOTS", "BMS", "IMD", "TSMS+TSMP", "LEFT TS", "RIGHT TS", "HV BOX", "HVD", "ACCU INT"
 	/*********** SHUTDOWN *****************/
 	if (mode==2){
-	int n_sdown = sizeof(shutdown_list)/sizeof(shutdown_list[0]);
-	uint8_t sdown_status[n_sdown];
-		sdown_status[0] = 0/*Shutdown_Setas*/;
-		sdown_status[1] = 1/*Shutdown_BSPD_Inertia*/;
-		sdown_status[2] = 0/*Shutdown_SC_BOTS*/;
-		sdown_status[3] = 0/*Shutdown_BMS*/;
-		sdown_status[4] = 1/*Shutdown_IMD*/;
-		sdown_status[5] = 1/*Shutdown_TSMS_TSMP*/;
-		sdown_status[6] = 1/*Shutdown_LeftTS*/;
-		sdown_status[7] = 0/*Shutdown_RightTS*/;
-		sdown_status[8] = 1/*Shutdown_HVBox*/;
-		sdown_status[9] = 1/*Shutdown_HVD*/;
-		sdown_status[10] = 1/*Shutdown_PackageIntck*/;
+	//int n_sdown = sizeof(shutdown_list)/sizeof(shutdown_list[0]);
 	y_pos = 222;
 	int x_pos=12;
-	for (int i=0;i<n_sdown;i++){
+	for (int i=0;i<N_SHUTDOWN;i++){
 		if (i==4||i==8) {
 			x_pos += 165;
 			y_pos=222;
@@ -122,18 +137,18 @@ void carState_0_SC1_ecus (int mode){
 	//"APPS1+2", "ELIPSE", "SUSP", "PITOT", "BRK PDL", "BRK PRS"
 	/**************** SENSORS *******************/
 	if(mode==3){
-	int n_sens = sizeof(sensors_list)/sizeof(sensors_list[0]);
-	uint8_t sens_status[n_sens];
-		sens_status[0]=1/*Disconnection_APPS1 && Disconnection_APPS2*/;
-		sens_status[1]=0/*Disconnection_Ellipse*/;
-		sens_status[2]=1/*Disconnection_Susp_R_R && Disconnection_Susp_R_L && Disconnection_Susp_F_R && Disconnection_Susp_F_L */;
-		sens_status[3]=1/*Disconnection_Pitot*/;
-		sens_status[4]=1/*Disconnection_BrakePedal*/;
-		sens_status[5]=0/*Disconnection_BrakePressure1 && Disconnection_BrakePressure2*/;
+	//int n_sens = sizeof(sensors_list)/sizeof(sensors_list[0]);
+//	uint8_t sens_status[n_sens];
+//		sens_status[0]=1/*Disconnection_APPS1 && Disconnection_APPS2*/;
+//		sens_status[1]=0/*Disconnection_Ellipse*/;
+//		sens_status[2]=1/*Disconnection_Susp_R_R && Disconnection_Susp_R_L && Disconnection_Susp_F_R && Disconnection_Susp_F_L */;
+//		sens_status[3]=1/*Disconnection_Pitot*/;
+//		sens_status[4]=1/*Disconnection_BrakePedal*/;
+//		sens_status[5]=0/*Disconnection_BrakePressure1 && Disconnection_BrakePressure2*/;
 
 	y_pos = 70;
-	for (int i=0;i<n_sens; i++){
-			if(status[sens_status[i]]==status[0]){
+	for (int i=0;i<N_SENSORS; i++){
+			if(status[sensors_status[i]]==status[0]){
 				color = 0xF800;
 			}else{
 				color = 0x07E0;

@@ -35,6 +35,7 @@ DASH_State Screen = {
 		.ActualScreen = SCREEN_1,
 		.PreviousScreen = -1,
 		.CoolingState = E1,
+		.RefriSettings = 0
 };
 //-------------------------------------------------------------
 
@@ -257,6 +258,9 @@ void refreshScreen(void) {
             }
             	/*BUTTON OK*/
             if (pendingButtonEvent == EVENT_BUTTON_OK) {
+            	if(Screen.ActualScreen == SCREEN_3){
+
+            	}
             	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 0){
             		CoolingRequest = 1;
             	}
@@ -450,6 +454,9 @@ void drawScreen(void) {
                 		printStatus+=1;
                 	}else if(printStatus==2){
                 		carState_0_SC1_ecus(2);
+                		printStatus+=1;
+                	}else if(printStatus==3){
+                		carState_0_SC1_ecus(3);
                 		printStatus+=1;
                 	}
                 	break;
