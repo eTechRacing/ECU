@@ -54,7 +54,7 @@
 		DASH_Screen ActualScreen;
 		DASH_Screen PreviousScreen;
 		DASH_Cooling CoolingState;
-		int RefriSettings;
+		int RefriSetup;
 	}	DASH_State;
 
 	extern int printStatus;

@@ -8084,42 +8084,42 @@ LOAD C:/ST/STM32CubeIDE_1.18.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_line    0x0001e0da      0x94b ./Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.o
  .debug_line    0x0001ea25      0x9ae ./Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.o
 
-.debug_str      0x00000000   0x10b8fa
- .debug_str     0x00000000   0x10b8fa ./Core/Src/CAN/CAN.o
+.debug_str      0x00000000   0x10b8f7
+ .debug_str     0x00000000   0x10b8f7 ./Core/Src/CAN/CAN.o
                               0xf8209 (size before relaxing)
- .debug_str     0x0010b8fa    0xf9c51 ./Core/Src/CAN/CAN_X_2025.o
- .debug_str     0x0010b8fa    0xf859e ./Core/Src/DASH/buttons.o
- .debug_str     0x0010b8fa    0xfc851 ./Core/Src/DASH/etr_carstate.o
- .debug_str     0x0010b8fa    0xfc0b2 ./Core/Src/ILI9488/UI/screen.o
- .debug_str     0x0010b8fa    0xf7b28 ./Core/Src/ILI9488/bitmaps/font16.o
- .debug_str     0x0010b8fa    0xf7b28 ./Core/Src/ILI9488/bitmaps/font24.o
- .debug_str     0x0010b8fa    0xf7b28 ./Core/Src/ILI9488/bitmaps/font32.o
- .debug_str     0x0010b8fa    0xf7af8 ./Core/Src/ILI9488/bitmaps/logo.o
- .debug_str     0x0010b8fa    0xf7b10 ./Core/Src/ILI9488/bitmaps/precharge.o
- .debug_str     0x0010b8fa    0xf832d ./Core/Src/ILI9488/lib/mainDash_lib.o
- .debug_str     0x0010b8fa    0xff240 ./Core/Src/freertos.o
- .debug_str     0x0010b8fa   0x1037ad ./Core/Src/main.o
- .debug_str     0x0010b8fa    0xf8cc4 ./Core/Src/stm32l4xx_hal_msp.o
- .debug_str     0x0010b8fa    0xf883c ./Core/Src/stm32l4xx_hal_timebase_tim.o
- .debug_str     0x0010b8fa    0xf86d9 ./Core/Src/stm32l4xx_it.o
- .debug_str     0x0010b8fa    0xf7d1d ./Core/Src/system_stm32l4xx.o
- .debug_str     0x0010b8fa       0x9f ./Core/Startup/startup_stm32l496vetx.o
- .debug_str     0x0010b8fa    0xf8925 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
- .debug_str     0x0010b8fa    0xf83a6 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.o
- .debug_str     0x0010b8fa    0xf85f8 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
- .debug_str     0x0010b8fa    0xf7f7a ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o
- .debug_str     0x0010b8fa    0xf7e97 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o
- .debug_str     0x0010b8fa    0xf826c ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
- .debug_str     0x0010b8fa    0xf836a ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
- .debug_str     0x0010b8fa    0xf852b ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.o
- .debug_str     0x0010b8fa    0xf9050 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.o
- .debug_str     0x0010b8fa    0xf8964 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.o
- .debug_str     0x0010b8fa     0xed43 ./Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.o
- .debug_str     0x0010b8fa     0xac65 ./Middlewares/Third_Party/FreeRTOS/Source/list.o
- .debug_str     0x0010b8fa     0xc5f8 ./Middlewares/Third_Party/FreeRTOS/Source/queue.o
- .debug_str     0x0010b8fa     0xd31f ./Middlewares/Third_Party/FreeRTOS/Source/tasks.o
- .debug_str     0x0010b8fa     0xb99f ./Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.o
- .debug_str     0x0010b8fa     0xb5a7 ./Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.o
+ .debug_str     0x0010b8f7    0xf9c51 ./Core/Src/CAN/CAN_X_2025.o
+ .debug_str     0x0010b8f7    0xf859e ./Core/Src/DASH/buttons.o
+ .debug_str     0x0010b8f7    0xfc84e ./Core/Src/DASH/etr_carstate.o
+ .debug_str     0x0010b8f7    0xfc0b2 ./Core/Src/ILI9488/UI/screen.o
+ .debug_str     0x0010b8f7    0xf7b28 ./Core/Src/ILI9488/bitmaps/font16.o
+ .debug_str     0x0010b8f7    0xf7b28 ./Core/Src/ILI9488/bitmaps/font24.o
+ .debug_str     0x0010b8f7    0xf7b28 ./Core/Src/ILI9488/bitmaps/font32.o
+ .debug_str     0x0010b8f7    0xf7af8 ./Core/Src/ILI9488/bitmaps/logo.o
+ .debug_str     0x0010b8f7    0xf7b10 ./Core/Src/ILI9488/bitmaps/precharge.o
+ .debug_str     0x0010b8f7    0xf832d ./Core/Src/ILI9488/lib/mainDash_lib.o
+ .debug_str     0x0010b8f7    0xff240 ./Core/Src/freertos.o
+ .debug_str     0x0010b8f7   0x1037aa ./Core/Src/main.o
+ .debug_str     0x0010b8f7    0xf8cc4 ./Core/Src/stm32l4xx_hal_msp.o
+ .debug_str     0x0010b8f7    0xf883c ./Core/Src/stm32l4xx_hal_timebase_tim.o
+ .debug_str     0x0010b8f7    0xf86d9 ./Core/Src/stm32l4xx_it.o
+ .debug_str     0x0010b8f7    0xf7d1d ./Core/Src/system_stm32l4xx.o
+ .debug_str     0x0010b8f7       0x9f ./Core/Startup/startup_stm32l496vetx.o
+ .debug_str     0x0010b8f7    0xf8925 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o
+ .debug_str     0x0010b8f7    0xf83a6 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.o
+ .debug_str     0x0010b8f7    0xf85f8 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o
+ .debug_str     0x0010b8f7    0xf7f7a ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o
+ .debug_str     0x0010b8f7    0xf7e97 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o
+ .debug_str     0x0010b8f7    0xf826c ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o
+ .debug_str     0x0010b8f7    0xf836a ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o
+ .debug_str     0x0010b8f7    0xf852b ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.o
+ .debug_str     0x0010b8f7    0xf9050 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.o
+ .debug_str     0x0010b8f7    0xf8964 ./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.o
+ .debug_str     0x0010b8f7     0xed43 ./Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.o
+ .debug_str     0x0010b8f7     0xac65 ./Middlewares/Third_Party/FreeRTOS/Source/list.o
+ .debug_str     0x0010b8f7     0xc5f8 ./Middlewares/Third_Party/FreeRTOS/Source/queue.o
+ .debug_str     0x0010b8f7     0xd31f ./Middlewares/Third_Party/FreeRTOS/Source/tasks.o
+ .debug_str     0x0010b8f7     0xb99f ./Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.o
+ .debug_str     0x0010b8f7     0xb5a7 ./Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.o
 
 .comment        0x00000000       0x43
  .comment       0x00000000       0x43 ./Core/Src/CAN/CAN.o

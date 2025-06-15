@@ -35,7 +35,7 @@ DASH_State Screen = {
 		.ActualScreen = SCREEN_1,
 		.PreviousScreen = -1,
 		.CoolingState = E1,
-		.RefriSettings = 0
+		.RefriSetup = 0
 };
 //-------------------------------------------------------------
 
