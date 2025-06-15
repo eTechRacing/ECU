@@ -39,13 +39,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_line   0001f3d3  00000000  00000000  000911af  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0010b8fa  00000000  00000000  000b0582  2**0
+ 18 .debug_str    0010b8f7  00000000  00000000  000b0582  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  001bbe7c  2**0
+ 19 .comment      00000043  00000000  00000000  001bbe79  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00006d70  00000000  00000000  001bbec0  2**2
+ 20 .debug_frame  00006d70  00000000  00000000  001bbebc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000083  00000000  00000000  001c2c30  2**0
+ 21 .debug_line_str 00000083  00000000  00000000  001c2c2c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2064,7 +2064,7 @@ uint8_t readRotarySwitch2(void) {
  800110c:	48000800 	.word	0x48000800
 
 08001110 <resetAllSignals>:
-		.RefriSettings = 0
+		.RefriSetup = 0
 };
 //-------------------------------------------------------------
 
