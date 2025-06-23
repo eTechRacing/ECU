@@ -4,6 +4,8 @@
 #include "ILI9488/bitmaps/bitmaps.h"
 #include "ILI9488/lib/mainDash_lib.h"
 #include "CAN/CAN_X_2025.h"
+#include "DASH/etr_carstate.h"
+
 #define N_ECUS 5
 #define N_SENSORS 6
 #define N_SHUTDOWN 11
@@ -14,7 +16,7 @@ void carState_0_SC0 (void);
 void carState_0_SC1_ecus (int mode);
 void carState_0_SC1_sensors (void);
 void carState_0_SC1_shutdown (void);
-void carState_0_SC2_refri (void);
+void carState_0_SC2_refri (int status, DASH_refriSettings setup);
 
 void carState_3_SC0 (void);
 

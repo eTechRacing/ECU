@@ -1,6 +1,7 @@
 #include "ILI9488/UI/screen.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "DASH/etr_carstate.h"
 #include "CAN/CAN_X_2025.h"
 
 const char* status[] = {
@@ -164,15 +165,7 @@ void carState_0_SC1_ecus (int mode){
 
 
 //MANDOS CENTRALES
-void carState_0_SC2_refri (){
-	// ----- SCREEN 3 -----
-	ILI9488_FillScreen_DMA(0x0000);
-
-	ILI9488_DrawStringBold(106,0,"L", Font32, 0xC7FF);
-	ILI9488_Square(239,0,240,230,0xF800); //half V line
-	ILI9488_DrawStringBold(346,0,"R", Font32, 0xC7FF);
-	ILI9488_Square(0,49,480-1,50,0xF800); //top H line
-	ILI9488_Square(0,229,479,230,0xF800);
+void carState_0_SC2_refri (int status, DASH_refriSettings setup){
 	//------... STRUCTURE------//
 	/////////////////////////////
 	////////|	1	|	2	|////
@@ -183,6 +176,7 @@ void carState_0_SC2_refri (){
 	//--------------------------
 	//	3	|		x		|////
 	/////////////////////////////
+	/*
 	//Dynamix STATUS
 	int L_fanStatus=2;
 	int L_pumpStatus=1;
@@ -194,114 +188,151 @@ void carState_0_SC2_refri (){
 	int R_fan_0, R_fan_1;
 	int R_pump_0, R_pump_1;
 	int accuFan_0, accuFan_1;
-
-	switch(L_fanStatus){
+	*/
+	switch(setup.L_fanStatus){
 					case 0:
-						L_fan_0 = 32;
-						L_fan_1 = 75;
+						setup.L_fan_0 = 32;
+						setup.L_fan_1 = 75;
 						break;
 					case 1:
-						L_fan_0 = 78;
-						L_fan_1 = 134;
+						setup.L_fan_0 = 78;
+						setup.L_fan_1 = 134;
 						break;
 					case 2:
-						L_fan_0 = 140;
-						L_fan_1 = 208;
+						setup.L_fan_0 = 140;
+						setup.L_fan_1 = 208;
 						break;
 	}
-	switch(L_pumpStatus){
+	switch(setup.L_pumpStatus){
 					case 0:
-						L_pump_0 = 70;
-						L_pump_1 = 113;
+						setup.L_pump_0 = 70;
+						setup.L_pump_1 = 113;
 						break;
 
 					case 1:
-						L_pump_0 = 113;
-						L_pump_1 = 170;
+						setup.L_pump_0 = 113;
+						setup.L_pump_1 = 170;
 						break;
 
 	}
-	switch(R_fanStatus){
+	switch(setup.R_fanStatus){
 					case 0:
-						R_fan_0 = 272;
-						R_fan_1 = 315;
+						setup.R_fan_0 = 272;
+						setup.R_fan_1 = 315;
 						break;
 					case 1:
-						R_fan_0 = 318;
-						R_fan_1 = 374;
+						setup.R_fan_0 = 318;
+						setup.R_fan_1 = 374;
 						break;
 					case 2:
-						R_fan_0 = 380;
-						R_fan_1 = 448;
+						setup.R_fan_0 = 380;
+						setup.R_fan_1 = 448;
 						break;
 	}
-	switch(R_pumpStatus){
+	switch(setup.R_pumpStatus){
 					case 0:
-						R_pump_0 = 310;
-						R_pump_1 = 353;
+						setup.R_pump_0 = 310;
+						setup.R_pump_1 = 353;
 						break;
 
 					case 1:
-						R_pump_0 = 353;
-						R_pump_1 = 410;
+						setup.R_pump_0 = 353;
+						setup.R_pump_1 = 410;
 						break;
 
 	}
-	switch(accuRefri_status){
+	switch(setup.accuRefri_status){
 					case 0:
-						accuFan_0 = 152;
-						accuFan_1 = 195;
+						setup.accuFan_0 = 152;
+						setup.accuFan_1 = 195;
 						break;
 
 					case 1:
-						accuFan_0 = 198;
-						accuFan_1 = 254;
+						setup.accuFan_0 = 198;
+						setup.accuFan_1 = 254;
 						break;
 
 					case 2:
-						accuFan_0 = 260;
-						accuFan_1 = 328;
+						setup.accuFan_0 = 260;
+						setup.accuFan_1 = 328;
 						break;
 
-}
+	}
 
 
+	if (status==0){
+	ILI9488_FillScreen_DMA(0x0000);
 
+	ILI9488_DrawStringBold(106,0,"L", Font32, 0xC7FF);
+	ILI9488_Square(239,0,240,230,0xF800); //half V line
+	ILI9488_DrawStringBold(346,0,"R", Font32, 0xC7FF);
+	ILI9488_Square(0,49,480-1,50,0xF800); //top H line
+	ILI9488_Square(0,229,479,230,0xF800);
 	//square 1-1
-	ILI9488_Square(10,60,230,130,0xCCFF);
+	ILI9488_Square(10,60,230,130,0xFFFF);
 	ILI9488_DrawStringBold(95,65,"FAN",Font16,0x0000);
 	ILI9488_Square(30,100,210,120,0x0000);
-	ILI9488_Square(L_fan_0,102,L_fan_1,118,0x07e0);
+	ILI9488_Square(setup.L_fan_0,102,setup.L_fan_1,118,0x07e0);
 	ILI9488_DrawStringBold(40,97,"ON OFF FULL",Font16,0xFFFF);
 
 	//square 1-2
-	ILI9488_Square(10,150,230,220,0xCCFF);
+	ILI9488_Square(10,150,230,220,0xFFFF);
 	ILI9488_DrawStringBold(90,155,"PUMP",Font16,0x000);
 	ILI9488_Square(68,190,172,210,0x0000);
-	ILI9488_Square(L_pump_0,192,L_pump_1,208,0x07e0);
+	ILI9488_Square(setup.L_pump_0,192,setup.L_pump_1,208,0x07e0);
 	ILI9488_DrawStringBold(78,187,"ON OFF",Font16,0xFFFF);
 
 	//square 2-1
 	ILI9488_Square(250,60,470,130,0xFFFF);
 	ILI9488_DrawStringBold(335,65,"FAN",Font16,0x0000);
 	ILI9488_Square(270,100,450,120,0x0000);
-	ILI9488_Square(R_fan_0,102,R_fan_1,118,0x07e0);
+	ILI9488_Square(setup.R_fan_0,102,setup.R_fan_1,118,0x07e0);
 	ILI9488_DrawStringBold(280,97,"ON OFF FULL",Font16,0xFFFF);
 	//square 2-2
 	ILI9488_Square(250,150,470,220,0xFFFF);
 	ILI9488_DrawStringBold(330,155,"PUMP",Font16,0x000);
 	ILI9488_Square(308,190,412,210,0x0000);
-	ILI9488_Square(R_pump_0,192,R_pump_1,208,0x07e0);
+	ILI9488_Square(setup.R_pump_0,192,setup.R_pump_1,208,0x07e0);
 	ILI9488_DrawStringBold(318,187,"ON OFF",Font16,0xFFFF);
 	//square 3
 	ILI9488_Square(10,240,464,312,0xFFFF);
 	ILI9488_DrawStringBold(163,240,"ACCUMULATOR",Font16,0x0000);
 	ILI9488_DrawStringBold(219,260,"FAN",Font16,0x0000);
 	ILI9488_Square(150,287,330,307,0x0000);
-	ILI9488_Square(accuFan_0,289,accuFan_1,305,0x07e0);
+	ILI9488_Square(setup.accuFan_0,289,setup.accuFan_1,305,0x07e0);
 	ILI9488_DrawStringBold(160,285,"ON OFF FULL",Font16,0xFFFF);
-
-
+	}else if(status==1){
+		ILI9488_Square(10,60,230,130,0xCCFF);
+		ILI9488_DrawStringBold(95,65,"FAN",Font16,0x0000);
+		ILI9488_Square(30,100,210,120,0x0000);
+		ILI9488_Square(setup.L_fan_0,102,setup.L_fan_1,118,0x07e0);
+		ILI9488_DrawStringBold(40,97,"ON OFF FULL",Font16,0xFFFF);
+	}else if(status==2){
+		ILI9488_Square(10,150,230,220,0xCCFF);
+		ILI9488_DrawStringBold(90,155,"PUMP",Font16,0x000);
+		ILI9488_Square(68,190,172,210,0x0000);
+		ILI9488_Square(setup.L_pump_0,192,setup.L_pump_1,208,0x07e0);
+		ILI9488_DrawStringBold(78,187,"ON OFF",Font16,0xFFFF);
+	}else if(status==3){
+		ILI9488_Square(10,240,464,312,0xCCFF);
+		ILI9488_DrawStringBold(163,240,"ACCUMULATOR",Font16,0x0000);
+		ILI9488_DrawStringBold(219,260,"FAN",Font16,0x0000);
+		ILI9488_Square(150,287,330,307,0x0000);
+		ILI9488_Square(setup.accuFan_0,289,setup.accuFan_1,305,0x07e0);
+		ILI9488_DrawStringBold(160,285,"ON OFF FULL",Font16,0xFFFF);
+	}else if(status==4){
+		ILI9488_Square(250,60,470,130,0xCCFF);
+		ILI9488_DrawStringBold(335,65,"FAN",Font16,0x0000);
+		ILI9488_Square(270,100,450,120,0x0000);
+		ILI9488_Square(setup.R_fan_0,102,setup.R_fan_1,118,0x07e0);
+		ILI9488_DrawStringBold(280,97,"ON OFF FULL",Font16,0xFFFF);
+	}else if(status==5){
+		ILI9488_Square(250,150,470,220,0xCCFF);
+		ILI9488_DrawStringBold(330,155,"PUMP",Font16,0x000);
+		ILI9488_Square(308,190,412,210,0x0000);
+		ILI9488_Square(setup.R_pump_0,192,setup.R_pump_1,208,0x07e0);
+		ILI9488_DrawStringBold(318,187,"ON OFF",Font16,0xFFFF);
+	}
 }
 
 /////////////////////////

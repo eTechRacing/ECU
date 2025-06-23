@@ -35,7 +35,23 @@ DASH_State Screen = {
 		.ActualScreen = SCREEN_1,
 		.PreviousScreen = -1,
 		.CoolingState = E1,
-		.RefriSetup = 0
+		.RefriMode = 0,
+		.RefriSetup = 0,
+		.refriSettings.L_fanStatus = 0,
+		.refriSettings.L_pumpStatus = 0,
+		.refriSettings.R_fanStatus = 0,
+		.refriSettings.R_pumpStatus = 0,
+		.refriSettings.accuRefri_status = 0,
+		.refriSettings.L_fan_0 = 0,
+		.refriSettings.L_fan_1 = 0,
+		.refriSettings.L_pump_0 = 0,
+		.refriSettings.L_pump_1 = 0,
+		.refriSettings.R_fan_0 = 0,
+		.refriSettings.R_fan_1 = 0,
+		.refriSettings.R_pump_0 = 0,
+		.refriSettings.R_pump_1 = 0,
+		.refriSettings.accuFan_0 = 0,
+		.refriSettings.accuFan_1 = 0,
 };
 //-------------------------------------------------------------
 
@@ -220,15 +236,34 @@ void refreshScreen(void) {
         		/*BUTTON DOWN*/
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
             	printStatus =0;
+            	/*
             	if (CoolingRequest == 1){
             		if (Screen.CoolingState <= E1){
 
             		}
-            	} else if (Screen.ActualScreen == SCREEN_3){
-            		Screen.PreviousScreen = Screen.ActualScreen;
-            		Screen.ActualScreen = SCREEN_1;
-            	} else {
-            		Screen.ActualScreen ++;
+				*/
+            	//NO RefriMode Activated - Normal Screen flow
+            	if(Screen.RefriMode==0){
+            		if (Screen.ActualScreen == SCREEN_3){
+            			Screen.PreviousScreen = Screen.ActualScreen;
+            			Screen.ActualScreen = SCREEN_1;
+            		} else {
+            			Screen.ActualScreen ++;
+
+            		}
+            	}
+
+            	//RefriMode Activated - Only Change SCREEN_3 REFRI MENU
+            	if (Screen.RefriMode==1){
+            		if(Screen.RefriSetup==0){
+            			Screen.RefriSetup++;
+            		}else if (Screen.RefriSetup==1){
+            			Screen.RefriSetup++;
+            		}else if (Screen.RefriSetup==3){
+            			Screen.RefriSetup++;
+            		}else if (Screen.RefriSetup==4){
+            			Screen.RefriSetup++;
+            		}
 
             	}
             }
@@ -241,7 +276,7 @@ void refreshScreen(void) {
             		Screen.PreviousScreen = Screen.ActualScreen;
             		Screen.ActualScreen = SCREEN_3;
             	} else {
-
+            		Screen.ActualScreen--;
             	}
             }
             	/*BUTTON RIGHT*/
@@ -257,10 +292,11 @@ void refreshScreen(void) {
             	}
             }
             	/*BUTTON OK*/
-            if (pendingButtonEvent == EVENT_BUTTON_OK) {
+            if (pendingButtonEvent == EVENT_BUTTON_OK && Screen.RefriMode == 0) {
             	if(Screen.ActualScreen == SCREEN_3){
-
+            		Screen.RefriMode=1;
             	}
+            	/*
             	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 0){
             		CoolingRequest = 1;
             	}
@@ -268,7 +304,22 @@ void refreshScreen(void) {
             	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 1){
             		CoolingRequest = 0;
             	}
+            	*/
 
+            }
+            //To edit Refri Screen
+            if(pendingButtonEvent == EVENT_BUTTON_OK && Screen.RefriMode==1){
+            	if(Screen.RefriSetup==0){
+
+            	}else if(Screen.RefriSetup==1){
+
+            	}else if(Screen.RefriSetup==2){
+
+            	}else if(Screen.RefriSetup==3){
+
+            	}else if(Screen.RefriSetup==4){
+
+            	}
             }
 
             break;
@@ -462,8 +513,27 @@ void drawScreen(void) {
                 	break;
                 case SCREEN_3:
                 	if(printStatus==0){
-                    	carState_0_SC2_refri();
+                    	carState_0_SC2_refri(0,Screen.refriSettings);
+
                     	printStatus+=1;
+                	}else if (printStatus!=0){
+                		switch (Screen.RefriSetup){
+                			case 0:
+                				carState_0_SC2_refri(1,Screen.refriSettings);
+                				break;
+                			case 1:
+                				carState_0_SC2_refri(2,Screen.refriSettings);
+                				break;
+                			case 2:
+                				carState_0_SC2_refri(3,Screen.refriSettings);
+                				break;
+                			case 3:
+                				carState_0_SC2_refri(4,Screen.refriSettings);
+                				break;
+                			case 4:
+                				carState_0_SC2_refri(5,Screen.refriSettings);
+                				break;
+                		}
                 	}
                 	break;
                 default:

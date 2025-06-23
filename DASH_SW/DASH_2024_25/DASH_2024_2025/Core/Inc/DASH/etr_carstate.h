@@ -49,12 +49,27 @@
 	}	DASH_Cooling;
 
 	typedef struct {
+		int L_fanStatus;
+		int L_pumpStatus;
+		int R_fanStatus;
+		int R_pumpStatus;
+		int accuRefri_status;
+		int L_fan_0, L_fan_1;
+		int L_pump_0, L_pump_1;
+		int R_fan_0, R_fan_1;
+		int R_pump_0, R_pump_1;
+		int accuFan_0, accuFan_1;
+	} DASH_refriSettings;
+
+	typedef struct {
 		DASH_CarState ActualState;
 		DASH_CarState PreviousState;
 		DASH_Screen ActualScreen;
 		DASH_Screen PreviousScreen;
 		DASH_Cooling CoolingState;
+		int RefriMode;
 		int RefriSetup;
+		DASH_refriSettings refriSettings;
 	}	DASH_State;
 
 	extern int printStatus;
