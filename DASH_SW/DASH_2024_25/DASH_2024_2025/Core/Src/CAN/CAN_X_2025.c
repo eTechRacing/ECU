@@ -6,7 +6,6 @@ uint32_t TxMailbox = 0;
 uint8_t TxData[8] = {0};
 
 //Variables----------------------------------------------------------------------------------------------
-int8_t FLAG;
 
 int8_t New_Signal_193;
 uint8_t el_AUTO_STATUS;
@@ -123,6 +122,7 @@ int8_t SteeringSensor_Value;
 uint8_t BrakePedal_Value;
 uint8_t APPS2_Value;
 uint8_t APPS1_Value;
+uint8_t Refri_ACCU;
 uint8_t Pump_R;
 uint8_t Pump_L;
 uint8_t Button_2;
@@ -577,6 +577,7 @@ void message_cantx_CTRL_DASH_Driver_Inputs(CAN_HandleTypeDef hcan) {
    TxHeader.RTR = 0;
    TxHeader.StdId = CTRL_DASH_Driver_Inputs_id;
    TxHeader.TransmitGlobalTime = DISABLE;
+   TxData[2] = (TxData[2] & ~3) | (((Refri_ACCU >> 0) << 0) & 3);
    TxData[2] = (TxData[2] & ~16) | (((Pump_R >> 0) << 4) & 16);
    TxData[2] = (TxData[2] & ~32) | (((Pump_L >> 0) << 5) & 32);
    TxData[2] = (TxData[2] & ~4) | (((Button_2 >> 0) << 2) & 4);
@@ -919,9 +920,9 @@ void message_canrx_CHARGER_Battery_Current(uint8_t *RxData) {
 }
 
 void message_canrx_STAT_CHARGER_Battery_Temp(uint8_t *RxData) {
-   Charger_Lowest_Cell_Temperature = ((RxData[0] & 255) << 8) | (RxData[1] << 0);   // Signal: Charger_Lowest_Cell_Temperature Start Bit: 7, Length: 16 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: �C
-   Charger_Highest_Cell_Temperature = ((RxData[2] & 255) << 8) | (RxData[3] << 0);   // Signal: Charger_Highest_Cell_Temperature Start Bit: 23, Length: 16 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: �C
-   Charger_Average_Cell_Temperature = ((RxData[4] & 255) << 8) | (RxData[5] << 0);   // Signal: Charger_Average_Cell_Temperature Start Bit: 39, Length: 16 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: �C
+   Charger_Lowest_Cell_Temperature = ((RxData[0] & 255) << 8) | (RxData[1] << 0);   // Signal: Charger_Lowest_Cell_Temperature Start Bit: 7, Length: 16 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit:  C
+   Charger_Highest_Cell_Temperature = ((RxData[2] & 255) << 8) | (RxData[3] << 0);   // Signal: Charger_Highest_Cell_Temperature Start Bit: 23, Length: 16 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit:  C
+   Charger_Average_Cell_Temperature = ((RxData[4] & 255) << 8) | (RxData[5] << 0);   // Signal: Charger_Average_Cell_Temperature Start Bit: 39, Length: 16 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit:  C
 }
 
 void message_canrx_STAT_CHARGER_Battery_Voltages(uint8_t *RxData) {
@@ -947,11 +948,11 @@ void message_canrx_STAT_CHARGER_Sync(uint8_t *RxData) {
 }
 
 void message_canrx_PROC_ETAS_VDC_Params(uint8_t *RxData) {
-   VDC_Steering_Deadzone = ((RxData[3] & 62) >> 1);   // Signal: VDC_Steering_Deadzone Start Bit: 29, Length: 5 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: �
+   VDC_Steering_Deadzone = ((RxData[3] & 62) >> 1);   // Signal: VDC_Steering_Deadzone Start Bit: 29, Length: 5 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit:
    VDC_Min_Tyre_Slip = ((RxData[0] & 3) << 4) | ((RxData[1] & 240) >> 4);   // Signal: VDC_Min_Tyre_Slip Start Bit: 1, Length: 6 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 1 Unit: -
    VDC_Max_Tyre_Slip = ((RxData[0] & 252) >> 2);   // Signal: VDC_Max_Tyre_Slip Start Bit: 7, Length: 6 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 1 Unit: -
    VDC_Max_TV_DiffTq = ((RxData[4] & 15) << 1) | ((RxData[5] & 128) >> 7);   // Signal: VDC_Max_TV_DiffTq Start Bit: 35, Length: 5 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: Nm
-   VDC_Max_Steering_Angle = ((RxData[3] & 1) << 4) | ((RxData[4] & 240) >> 4);   // Signal: VDC_Max_Steering_Angle Start Bit: 24, Length: 5 Byte Order: 0, Value Type: + Factor: 1 Offset: 110 Unit: �
+   VDC_Max_Steering_Angle = ((RxData[3] & 1) << 4) | ((RxData[4] & 240) >> 4);   // Signal: VDC_Max_Steering_Angle Start Bit: 24, Length: 5 Byte Order: 0, Value Type: + Factor: 1 Offset: 110 Unit:
    VDC_AP_SatUp = ((RxData[2] & 31) << 2) | ((RxData[3] & 192) >> 6);   // Signal: VDC_AP_SatUp Start Bit: 20, Length: 7 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
    VDC_AP_SatDown = ((RxData[1] & 15) << 3) | ((RxData[2] & 224) >> 5);   // Signal: VDC_AP_SatDown Start Bit: 11, Length: 7 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
 }
@@ -963,7 +964,7 @@ void message_canrx_PROC_ETAS_VDC_LapTiming(uint8_t *RxData) {
 }
 
 void message_canrx_CTRL_BMS_Accu_Data(uint8_t *RxData) {
-   Average_CellTemp = ((RxData[4] & 127) << 3) | ((RxData[5] & 224) >> 5);   // Signal: Average_CellTemp Start Bit: 38, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: �C
+   Average_CellTemp = ((RxData[4] & 127) << 3) | ((RxData[5] & 224) >> 5);   // Signal: Average_CellTemp Start Bit: 38, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit:  C
    Accumulator_Voltage = ((RxData[0] & 7) << 13) | (RxData[1] << 5) | ((RxData[2] & 248) >> 3);   // Signal: Accumulator_Voltage Start Bit: 2, Length: 16 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: V
    Accumulator_Current = ((RxData[2] & 7) << 9) | (RxData[3] << 1) | ((RxData[4] & 128) >> 7);   // Signal: Accumulator_Current Start Bit: 18, Length: 12 Byte Order: 0, Value Type: + Factor: 0.19536 Offset: -400 Unit: A
    Shutdown_PackageIntck = ((RxData[0] & 32) >> 5);   // Signal: Shutdown_PackageIntck Start Bit: 5, Length: 1 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: Bit
@@ -974,9 +975,9 @@ void message_canrx_CTRL_BMS_Accu_Data(uint8_t *RxData) {
 
 void message_canrx_CTRL_BMS_Cell_Extremes(uint8_t *RxData) {
    Highest_CellVoltage = ((RxData[2] & 255) << 8) | (RxData[3] << 0);   // Signal: Highest_CellVoltage Start Bit: 23, Length: 16 Byte Order: 0, Value Type: + Factor: 0.0001 Offset: 0 Unit: V
-   Highest_CellTemp = ((RxData[5] & 63) << 4) | ((RxData[6] & 240) >> 4);   // Signal: Highest_CellTemp Start Bit: 45, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: �C
+   Highest_CellTemp = ((RxData[5] & 63) << 4) | ((RxData[6] & 240) >> 4);   // Signal: Highest_CellTemp Start Bit: 45, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit:  C
    Lowest_CellVoltage = ((RxData[0] & 255) << 8) | (RxData[1] << 0);   // Signal: Lowest_CellVoltage Start Bit: 7, Length: 16 Byte Order: 0, Value Type: + Factor: 0.0001 Offset: 0 Unit: V
-   Lowest_CellTemp = ((RxData[4] & 255) << 2) | ((RxData[5] & 192) >> 6);   // Signal: Lowest_CellTemp Start Bit: 39, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: �C
+   Lowest_CellTemp = ((RxData[4] & 255) << 2) | ((RxData[5] & 192) >> 6);   // Signal: Lowest_CellTemp Start Bit: 39, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit:  C
 }
 
 void message_canrx_STAT_DASH_Keep_Alive(uint8_t *RxData) {
@@ -1052,13 +1053,14 @@ void message_canrx_STAT_ETAS_Diagnostics(uint8_t *RxData) {
 void message_canrx_PROC_ETAS_VDC_Values(uint8_t *RxData) {
    Inv_Speed = ((RxData[5] & 127) >> 0);   // Signal: Inv_Speed Start Bit: 46, Length: 7 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: km/h
    el_VEL = ((RxData[3] & 7) << 9) | (RxData[4] << 1) | ((RxData[5] & 128) >> 7);   // Signal: el_VEL Start Bit: 26, Length: 12 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: m/s
-   SteeringSensor_Value = ((RxData[2] & 7) << 5) | ((RxData[3] & 248) >> 3);   // Signal: SteeringSensor_Value Start Bit: 18, Length: 8 Byte Order: 0, Value Type: - Factor: 1 Offset: 0 Unit: �
+   SteeringSensor_Value = ((RxData[2] & 7) << 5) | ((RxData[3] & 248) >> 3);   // Signal: SteeringSensor_Value Start Bit: 18, Length: 8 Byte Order: 0, Value Type: - Factor: 1 Offset: 0 Unit:
    BrakePedal_Value = ((RxData[1] & 3) << 5) | ((RxData[2] & 248) >> 3);   // Signal: BrakePedal_Value Start Bit: 9, Length: 7 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
    APPS2_Value = ((RxData[0] & 1) << 6) | ((RxData[1] & 252) >> 2);   // Signal: APPS2_Value Start Bit: 0, Length: 7 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
    APPS1_Value = ((RxData[0] & 254) >> 1);   // Signal: APPS1_Value Start Bit: 7, Length: 7 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
 }
 
 void message_canrx_CTRL_DASH_Driver_Inputs(uint8_t *RxData) {
+   Refri_ACCU = ((RxData[2] & 3) >> 0);   // Signal: Refri_ACCU Start Bit: 17, Length: 2 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit:
    Pump_R = ((RxData[2] & 16) >> 4);   // Signal: Pump_R Start Bit: 20, Length: 1 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: Bit
    Pump_L = ((RxData[2] & 32) >> 5);   // Signal: Pump_L Start Bit: 21, Length: 1 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: Bit
    Button_2 = ((RxData[2] & 4) >> 2);   // Signal: Button_2 Start Bit: 18, Length: 1 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: Bit
@@ -1105,9 +1107,9 @@ void message_canrx_STAT_ELLIPSE_Status(uint8_t *RxData) {
 }
 
 void message_canrx_PROC_ELLIPSE_IMU_Gyro(uint8_t *RxData) {
-   el_Gyro_Z = ((RxData[4] & 1) << 15) | (RxData[5] << 7) | ((RxData[6] & 254) >> 1);   // Signal: el_Gyro_Z Start Bit: 32, Length: 16 Byte Order: 1, Value Type: - Factor: 0.001 Offset: 0 Unit: �/s
-   el_Gyro_Y = ((RxData[2] & 1) << 15) | (RxData[3] << 7) | ((RxData[4] & 254) >> 1);   // Signal: el_Gyro_Y Start Bit: 16, Length: 16 Byte Order: 1, Value Type: - Factor: 0.001 Offset: 0 Unit: �/s
-   el_Gyro_X = ((RxData[0] & 1) << 15) | (RxData[1] << 7) | ((RxData[2] & 254) >> 1);   // Signal: el_Gyro_X Start Bit: 0, Length: 16 Byte Order: 1, Value Type: - Factor: 0.001 Offset: 0 Unit: �/s
+   el_Gyro_Z = ((RxData[4] & 1) << 15) | (RxData[5] << 7) | ((RxData[6] & 254) >> 1);   // Signal: el_Gyro_Z Start Bit: 32, Length: 16 Byte Order: 1, Value Type: - Factor: 0.001 Offset: 0 Unit:  /s
+   el_Gyro_Y = ((RxData[2] & 1) << 15) | (RxData[3] << 7) | ((RxData[4] & 254) >> 1);   // Signal: el_Gyro_Y Start Bit: 16, Length: 16 Byte Order: 1, Value Type: - Factor: 0.001 Offset: 0 Unit:  /s
+   el_Gyro_X = ((RxData[0] & 1) << 15) | (RxData[1] << 7) | ((RxData[2] & 254) >> 1);   // Signal: el_Gyro_X Start Bit: 0, Length: 16 Byte Order: 1, Value Type: - Factor: 0.001 Offset: 0 Unit:  /s
 }
 
 void message_canrx_CTRL_ELLIPSE_Vel_Valid(uint8_t *RxData) {
@@ -1117,16 +1119,16 @@ void message_canrx_CTRL_ELLIPSE_Vel_Valid(uint8_t *RxData) {
 }
 
 void message_canrx_PROC_ETAS_Inverter_R_Data(uint8_t *RxData) {
-   Inv_R_TempMotor = ((RxData[1] & 63) << 5) | ((RxData[2] & 248) >> 3);   // Signal: Inv_R_TempMotor Start Bit: 13, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: �C
+   Inv_R_TempMotor = ((RxData[1] & 63) << 5) | ((RxData[2] & 248) >> 3);   // Signal: Inv_R_TempMotor Start Bit: 13, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit:  C
    current_R = ((RxData[3] & 7) << 8) | (RxData[4] << 0);   // Signal: current_R Start Bit: 26, Length: 11 Byte Order: 0, Value Type: - Factor: 0.1 Offset: 0 Unit: A
-   Inv_R_TempIGBT = ((RxData[0] & 255) << 2) | ((RxData[1] & 192) >> 6);   // Signal: Inv_R_TempIGBT Start Bit: 7, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: �C
+   Inv_R_TempIGBT = ((RxData[0] & 255) << 2) | ((RxData[1] & 192) >> 6);   // Signal: Inv_R_TempIGBT Start Bit: 7, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit:  C
    RR_Vel_ms_Wheel = ((RxData[2] & 7) << 5) | ((RxData[3] & 248) >> 3);   // Signal: RR_Vel_ms_Wheel Start Bit: 18, Length: 8 Byte Order: 0, Value Type: - Factor: 0.1 Offset: 12 Unit: m/s
 }
 
 void message_canrx_PROC_ETAS_Inverter_L_Data(uint8_t *RxData) {
-   Inv_L_TempMotor = ((RxData[1] & 63) << 5) | ((RxData[2] & 248) >> 3);   // Signal: Inv_L_TempMotor Start Bit: 13, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: �C
+   Inv_L_TempMotor = ((RxData[1] & 63) << 5) | ((RxData[2] & 248) >> 3);   // Signal: Inv_L_TempMotor Start Bit: 13, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit:  C
    current_L = ((RxData[3] & 7) << 8) | (RxData[4] << 0);   // Signal: current_L Start Bit: 26, Length: 11 Byte Order: 0, Value Type: - Factor: 0.1 Offset: 0 Unit: A
-   Inv_L_TempIGBT = ((RxData[0] & 255) << 2) | ((RxData[1] & 192) >> 6);   // Signal: Inv_L_TempIGBT Start Bit: 7, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: �C
+   Inv_L_TempIGBT = ((RxData[0] & 255) << 2) | ((RxData[1] & 192) >> 6);   // Signal: Inv_L_TempIGBT Start Bit: 7, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit:  C
    RL_Vel_ms_Wheel = ((RxData[2] & 7) << 5) | ((RxData[3] & 248) >> 3);   // Signal: RL_Vel_ms_Wheel Start Bit: 18, Length: 8 Byte Order: 0, Value Type: - Factor: 0.1 Offset: 12 Unit: m/s
 }
 

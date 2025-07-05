@@ -10,13 +10,11 @@ typedef struct {
 }FontDef;
 
 extern const uint16_t logo[];
-extern const uint16_t back[];
-extern const uint16_t down[];
-extern const uint16_t up[];
-extern const uint16_t refri_L [];
-extern const uint16_t refri_R [];
-extern const uint16_t precharge_0 [];
-extern const uint16_t precharge_1 [];
+extern const uint8_t skidpad[];
+extern const uint8_t autox[];
+extern const uint8_t endurance[];
+extern const uint8_t acceleration[];
+
 
 extern const uint8_t Font8_Table[];
 extern FontDef Font8;

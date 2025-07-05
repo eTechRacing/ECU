@@ -304,6 +304,20 @@ void ILI9488_FillCircle(uint16_t x0, uint16_t y0, uint16_t radius, uint16_t colo
     }
 }
 
+void ILI9488_DrawBitmapMono(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t width, uint16_t height, uint16_t color) {
+    uint8_t bytesPerRow = (width + 7) / 8;
+
+    for (uint16_t row = 0; row < height; row++) {
+        for (uint16_t col = 0; col < width; col++) {
+            uint16_t byteIndex = row * bytesPerRow + col / 8;
+            uint8_t bitMask = 0x80 >> (col % 8);
+
+            if (bitmap[byteIndex] & bitMask) {
+                ILI9488_DrawPixel(x + col, y + row, color);
+            }
+        }
+    }
+}
 /* LICENSE: MIT
  * Code for ETECH RACING FS team internal use.
  * Can be used, modified and redistribuited inside the team
