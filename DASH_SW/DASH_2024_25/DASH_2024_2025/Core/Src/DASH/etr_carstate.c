@@ -668,11 +668,11 @@ void drawScreen(void) {
             switch (Screen.ActualScreen) {
                 case SCREEN_1:
                     carState_15(Screen.raceSetup);
-                    printStatus+=1;
+                    printStatus++;
                     break;
                 case SCREEN_2:
                 	carState_12_DRIVER (Screen.driverSetup);
-                	printStatus+=1;
+                	printStatus++;
 					break;
                 case SCREEN_3:
                 	if(printStatus==0)carState4_SC3();
@@ -684,8 +684,7 @@ void drawScreen(void) {
             break;
 
         case DASH_5_INVERTERS:
-        			if(printStatus==0)carState_14 ();
-        			printStatus++;
+        			carState_14 ();
             break;
 
         case DASH_6_RACING_MODE:
@@ -700,8 +699,7 @@ void drawScreen(void) {
             break;
 
         case DASH_7_ERROR:
-        			if(printStatus==0)carState_21 ();
-        			printStatus++;
+        			carState_21 ();
             break;
 
         default:
@@ -709,4 +707,3 @@ void drawScreen(void) {
             break;
     }
 }
-//q

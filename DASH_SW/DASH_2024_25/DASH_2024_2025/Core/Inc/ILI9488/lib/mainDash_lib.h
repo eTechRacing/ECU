@@ -53,7 +53,7 @@ void ILI9488_DrawChar(uint16_t x, uint16_t y, char c, FontDef font, uint16_t col
 void ILI9488_DrawString(uint16_t x, uint16_t y, const char *str, FontDef font, uint16_t color);
 void ILI9488_DrawCharBold(uint16_t x, uint16_t y, char c, FontDef font, uint16_t color);
 void ILI9488_DrawStringBold(uint16_t x, uint16_t y, const char *str, FontDef font, uint16_t color);
-
+void ILI9488_DrawBitmapMono(uint16_t x, uint16_t y, const uint8_t *bitmap, uint16_t width, uint16_t height, uint16_t color);
 
 
 #endif

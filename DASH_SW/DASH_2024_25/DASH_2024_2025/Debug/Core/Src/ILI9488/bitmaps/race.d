@@ -1,5 +1,4 @@
-Core/Src/ILI9488/bitmaps/precharge.o: \
- ../Core/Src/ILI9488/bitmaps/precharge.c \
+Core/Src/ILI9488/bitmaps/race.o: ../Core/Src/ILI9488/bitmaps/race.c \
  ../Core/Inc/ILI9488/bitmaps/bitmaps.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \

@@ -4,9 +4,9 @@
 ../Core/Src/main.c:283:13:MX_SPI3_Init	2
 ../Core/Src/main.c:321:13:MX_DMA_Init	1
 ../Core/Src/main.c:339:13:MX_GPIO_Init	1
-../Core/Src/main.c:429:6:HAL_CAN_RxFifo0MsgPendingCallback	12
-../Core/Src/main.c:479:6:StartCAN	9
-../Core/Src/main.c:520:6:StartButtons	1
-../Core/Src/main.c:550:6:StartDisplay	1
-../Core/Src/main.c:570:6:HAL_TIM_PeriodElapsedCallback	2
-../Core/Src/main.c:588:6:Error_Handler	1
+../Core/Src/main.c:429:6:HAL_CAN_RxFifo0MsgPendingCallback	14
+../Core/Src/main.c:485:6:StartCAN	1
+../Core/Src/main.c:527:6:StartButtons	1
+../Core/Src/main.c:558:6:StartDisplay	1
+../Core/Src/main.c:579:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:597:6:Error_Handler	1
