@@ -18,6 +18,7 @@ uint8_t RacingMode_Send;
 uint8_t CoolingRequest;
 
 int printStatus = 0;
+int refri_status = 0;
 const int NUM_SCREENS_PER_STATE[] = {
     3,  // DASH_0_ETR
     3,  // DASH_3_PRECHARGE
@@ -30,28 +31,15 @@ const int NUM_SCREENS_PER_STATE[] = {
 };
 //-------------------------------------------------------------
 DASH_State Screen = {
-		.ActualState = DASH_0_ETR,
+		.ActualState = DASH_2_PRECHARGE_STATUS,
 		.PreviousState = -1,
 		.ActualScreen = SCREEN_1,
 		.PreviousScreen = -1,
 		.CoolingState = E1,
-		.RefriMode = 0,
-		.RefriSetup = 0,
-		.refriSettings.L_fanStatus = 0,
-		.refriSettings.L_pumpStatus = 0,
-		.refriSettings.R_fanStatus = 0,
-		.refriSettings.R_pumpStatus = 0,
-		.refriSettings.accuRefri_status = 0,
-		.refriSettings.L_fan_0 = 0,
-		.refriSettings.L_fan_1 = 0,
-		.refriSettings.L_pump_0 = 0,
-		.refriSettings.L_pump_1 = 0,
-		.refriSettings.R_fan_0 = 0,
-		.refriSettings.R_fan_1 = 0,
-		.refriSettings.R_pump_0 = 0,
-		.refriSettings.R_pump_1 = 0,
-		.refriSettings.accuFan_0 = 0,
-		.refriSettings.accuFan_1 = 0,
+		.refriSetup.system = L_FAN,
+		.RefriSettings = 0,
+		.raceSetup = 0,
+		.driverSetup = 0
 };
 //-------------------------------------------------------------
 
@@ -204,13 +192,10 @@ void refreshGPIOs (void){
 	}
 	if (IMD_OK == 0 || Disconnection_BMS == 1){
 		HAL_GPIO_WritePin(IMD_LED_GPIO_Port, IMD_LED_Pin, 1);
-		FLAG++;
 	}
 	if (BMS_OK == 0 || Disconnection_BMS == 1) {
 		HAL_GPIO_WritePin(BMS_LED_GPIO_Port, BMS_LED_Pin, 1);
-		FLAG++;
 	}
-
 	if (Screen.ActualState == DASH_5_INVERTERS){
 		HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, 1);
 	}
@@ -227,6 +212,15 @@ void refreshScreen(void) {
 
     	Screen.ActualScreen = SCREEN_1;
     	Screen.PreviousState = Screen.ActualState;
+    	Screen.PreviousScreen = -1;
+		Screen.CoolingState = E1;
+		Screen.refriSetup.system = L_FAN;
+		Screen.RefriSettings = 0;
+		Screen.raceSetup = 0;
+		Screen.driverSetup = 0;
+
+		printStatus = 0;
+
     }
 
     switch(Screen.ActualState) {
@@ -236,47 +230,48 @@ void refreshScreen(void) {
         		/*BUTTON DOWN*/
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
             	printStatus =0;
-            	/*
-            	if (CoolingRequest == 1){
-            		if (Screen.CoolingState <= E1){
-
-            		}
-				*/
-            	//NO RefriMode Activated - Normal Screen flow
-            	if(Screen.RefriMode==0){
-            		if (Screen.ActualScreen == SCREEN_3){
-            			Screen.PreviousScreen = Screen.ActualScreen;
-            			Screen.ActualScreen = SCREEN_1;
-            		} else {
-            			Screen.ActualScreen ++;
-
-            		}
-            	}
-
-            	//RefriMode Activated - Only Change SCREEN_3 REFRI MENU
-            	if (Screen.RefriMode==1){
-            		if(Screen.RefriSetup==0){
-            			Screen.RefriSetup++;
-            		}else if (Screen.RefriSetup==1){
-            			Screen.RefriSetup++;
-            		}else if (Screen.RefriSetup==3){
-            			Screen.RefriSetup++;
-            		}else if (Screen.RefriSetup==4){
-            			Screen.RefriSetup++;
-            		}
-
+            	switch(Screen.RefriSettings){
+            		case(0):
+						if (Screen.ActualScreen >= SCREEN_3){
+							Screen.PreviousScreen = Screen.ActualScreen;
+							Screen.ActualScreen = SCREEN_1;
+						} else {
+							Screen.PreviousScreen = Screen.ActualScreen;
+							Screen.ActualScreen ++;
+						}
+            			break;
+            		case(1):
+						if(Screen.refriSetup.system != 4){
+							Screen.refriSetup.system++;
+						}else{
+							Screen.RefriSettings = 0;
+							Screen.PreviousScreen = Screen.ActualScreen;
+							Screen.ActualScreen=SCREEN_1;
+						}
+            			refri_status=0;
+            			break;
             	}
             }
             	/*BUTTON UP*/
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
             	printStatus =0;
-            	if (CoolingRequest == 1){
+            	switch(Screen.RefriSettings){
+            		case(0):
+						if (Screen.ActualScreen == SCREEN_1){
+							Screen.PreviousScreen = Screen.ActualScreen;
+							Screen.ActualScreen = SCREEN_3;
+						} else {
+							Screen.PreviousScreen = Screen.ActualScreen;
+							Screen.ActualScreen --;
+						}
+            			break;
+            		case(1):
+						if(Screen.refriSetup.system != 0){
+							Screen.refriSetup.system--;
+							refri_status=0;
+						}
+            			break;
 
-            	} else if (Screen.ActualScreen == SCREEN_1){
-            		Screen.PreviousScreen = Screen.ActualScreen;
-            		Screen.ActualScreen = SCREEN_3;
-            	} else {
-            		Screen.ActualScreen--;
             	}
             }
             	/*BUTTON RIGHT*/
@@ -292,52 +287,109 @@ void refreshScreen(void) {
             	}
             }
             	/*BUTTON OK*/
-            if (pendingButtonEvent == EVENT_BUTTON_OK && Screen.RefriMode == 0) {
-            	if(Screen.ActualScreen == SCREEN_3){
-            		Screen.RefriMode=1;
+            if (pendingButtonEvent == EVENT_BUTTON_OK) {
+            	if(Screen.ActualScreen == SCREEN_2){
+            		printStatus = 0;
             	}
-            	/*
-            	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 0){
-            		CoolingRequest = 1;
-            	}
+            	switch(Screen.RefriSettings){
+            		case(0):
+						if(Screen.ActualScreen == SCREEN_3){
+		            		Screen.RefriSettings = 1;
+		            	}
 
-            	if (Screen.ActualScreen == SCREEN_3 && CoolingRequest == 1){
-            		CoolingRequest = 0;
-            	}
-            	*/
+            			break;
+            		case(1):
+						if (Screen.ActualScreen == SCREEN_3){
+							switch(Screen.refriSetup.system){
+								case(L_FAN):
 
+									if(Fans_L>=2){
+										Fans_L=0;
+									}else{
+										Fans_L++;
+									}
+									refri_status++;
+									break;
+								case(L_PUMP):
+									if(Pump_L>=1){
+										Pump_L=0;
+									}else{
+										Pump_L++;
+									}
+									break;
+								case(ACCU):
+									if(Refri_ACCU>=2){
+										Refri_ACCU=0;
+									}else{
+										Refri_ACCU++;
+									}
+									break;
+								case(R_FAN):
+									if(Fans_R>=2){
+										Fans_R=0;
+									}else{
+										Fans_R++;
+									}
+									break;
+								case(R_PUMP):
+									if(Pump_R>=1){
+										Pump_R=0;
+									}else{
+										Pump_R++;
+									}
+									break;
+							}
+						}
+					break;
+            		}
             }
-            //To edit Refri Screen
-            if(pendingButtonEvent == EVENT_BUTTON_OK && Screen.RefriMode==1){
-            	if(Screen.RefriSetup==0){
 
-            	}else if(Screen.RefriSetup==1){
-
-            	}else if(Screen.RefriSetup==2){
-
-            	}else if(Screen.RefriSetup==3){
-
-            	}else if(Screen.RefriSetup==4){
-
-            	}
-            }
-
-            break;
+		break;
 
         case DASH_1_PRECHARGE:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
-            	if(Screen.ActualScreen == SCREEN_3){
-            		Screen.ActualScreen = SCREEN_1;
-            	} else {
-            		Screen.ActualScreen ++;
-            	}
+            	printStatus =0;
+				switch(Screen.RefriSettings){
+					case(0):
+						if (Screen.ActualScreen >= SCREEN_3){
+							Screen.PreviousScreen = Screen.ActualScreen;
+							Screen.ActualScreen = SCREEN_1;
+						} else {
+							Screen.PreviousScreen = Screen.ActualScreen;
+							Screen.ActualScreen ++;
+						}
+						break;
+					case(1):
+						if(Screen.refriSetup.system != 4){
+							Screen.refriSetup.system++;
+						}else{
+							Screen.RefriSettings = 0;
+							Screen.PreviousScreen = Screen.ActualScreen;
+							Screen.ActualScreen=SCREEN_1;
+						}
+						refri_status=0;
+						break;
+				}
             }
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
-            	if(Screen.ActualScreen == SCREEN_1){
-            		Screen.ActualScreen = SCREEN_3;
-            	} else {
-            		Screen.ActualScreen --;
+            	printStatus =0;
+            	switch(Screen.RefriSettings){
+            		case(0):
+						if (Screen.ActualScreen == SCREEN_1){
+							Screen.PreviousScreen = Screen.ActualScreen;
+							Screen.ActualScreen = SCREEN_3;
+						} else {
+							Screen.PreviousScreen = Screen.ActualScreen;
+							Screen.ActualScreen --;
+						}
+            			break;
+            		case(1):
+						if(Screen.refriSetup.system != 0){
+							Screen.refriSetup.system--;
+							refri_status=0;
+						}
+            			break;
 
             	}
             }
@@ -348,8 +400,65 @@ void refreshScreen(void) {
 
             }
             if (pendingButtonEvent == EVENT_BUTTON_OK) {
-            	PrechargeRequest = 1;
+            	if(Screen.ActualScreen == SCREEN_2){
+            		printStatus = 0;
+            	}
+            	switch(Screen.RefriSettings){
+            		case(0):
+						if(Screen.ActualScreen == SCREEN_3){
+		            		Screen.RefriSettings = 1;
+		            	}
+
+            			break;
+            		case(1):
+						if (Screen.ActualScreen == SCREEN_3){
+							switch(Screen.refriSetup.system){
+								case(L_FAN):
+
+									if(Fans_L>=2){
+										Fans_L=0;
+									}else{
+										Fans_L++;
+									}
+									refri_status++;
+									break;
+								case(L_PUMP):
+									if(Pump_L>=1){
+										Pump_L=0;
+									}else{
+										Pump_L++;
+									}
+									break;
+								case(ACCU):
+									if(Refri_ACCU>=2){
+										Refri_ACCU=0;
+									}else{
+										Refri_ACCU++;
+									}
+									break;
+								case(R_FAN):
+									if(Fans_R>=2){
+										Fans_R=0;
+									}else{
+										Fans_R++;
+									}
+									break;
+								case(R_PUMP):
+									if(Pump_R>=1){
+										Pump_R=0;
+									}else{
+										Pump_R++;
+									}
+									break;
+							}
+						}
+					break;
+            		}
             }
+            if(Screen.ActualScreen==SCREEN_1){
+				PrechargeRequest = !HAL_GPIO_ReadPin(BUTTON_OK_GPIO_Port, BUTTON_OK_Pin);
+
+			}
             break;
 
         case DASH_2_PRECHARGE_STATUS:
@@ -393,72 +502,56 @@ void refreshScreen(void) {
         case DASH_4_RACING_MENU:
 
             if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
-            	if (Screen.ActualScreen >= SCREEN_5){
-            		Screen.ActualScreen = SCREEN_1;
-            		RacingMode = 1;
-            	} else {
-            		Screen.ActualScreen ++;
-            		RacingMode ++;
+            	if(Screen.ActualScreen==SCREEN_1){
+            		Screen.raceSetup++;
             	}
+
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_UP) {
-            	if (Screen.ActualScreen == SCREEN_1){
-            		Screen.ActualScreen = SCREEN_5;
-            		RacingMode = 5;
-            	} else {
-            		Screen.ActualScreen --;
-            		RacingMode --;
-            	}
+            	if(Screen.ActualScreen==SCREEN_1){
+            		if(Screen.raceSetup==0){
+            			RacingMode = 1;   //FOR WORKSHOP
+            		}else{
+            			Screen.raceSetup--;
+            		}
+
+				}
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
-            	if (Screen.ActualScreen >= SCREEN_1 && Screen.ActualScreen <= SCREEN_5){
-            		Screen.ActualScreen = SCREEN_6;
-            		Driver = 1;
-            	}
-
-            	if (Screen.ActualScreen == SCREEN_10){
-            		Screen.ActualScreen = SCREEN_6;
-            		Driver = 1;
-            	} else {
-            		Screen.ActualScreen ++;
-            		Driver ++;
+            	if(Screen.ActualScreen==SCREEN_2){
+            		if(Screen.driverSetup<4){
+            			Screen.driverSetup++;
+            		}
             	}
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_LEFT) {
-            	if (Screen.ActualScreen >= SCREEN_1 && Screen.ActualScreen <= SCREEN_5){
-            		Screen.ActualScreen = SCREEN_10;
-            		Driver = 5;
-            	}
-
-            	if (Screen.ActualScreen == SCREEN_6){
-            		Screen.ActualScreen = SCREEN_10;
-            		Driver = 5;
-            	} else {
-            		Screen.ActualScreen --;
-            		Driver --;
+            	if(Screen.ActualScreen==SCREEN_2){
+            		if(Screen.driverSetup>0){
+            			Screen.driverSetup--;
+            		}
             	}
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_OK) {
-
-            	if (Screen.ActualScreen == SCREEN_11){
-            		EnableDrive_Order = 1;
+            	if(Screen.ActualScreen==SCREEN_1){
+            		Screen.PreviousScreen=Screen.ActualScreen;
+            		Screen.ActualScreen++;
+            		printStatus=0;
             	}
-            	if (Screen.ActualScreen >= SCREEN_6 && Screen.ActualScreen <= SCREEN_10){
-            		Screen.ActualScreen = SCREEN_11;
-            		RacingMode_Send = 1;
+            	if(Screen.ActualScreen==SCREEN_2){
+            		Screen.PreviousScreen=Screen.ActualScreen;
+            		Screen.ActualScreen++;
+            		printStatus=0;
             	}
-
-
             }
-
             break;
-
+            if(Screen.ActualScreen == SCREEN_3){
+            EnableDrive_Order = !HAL_GPIO_ReadPin(BUTTON_OK_GPIO_Port, BUTTON_OK_Pin);
+            }
         case DASH_5_INVERTERS:
-
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
 
             }
@@ -480,7 +573,6 @@ void refreshScreen(void) {
     }
     pendingButtonEvent = EVENT_NONE;
 
-
 }
 
 
@@ -495,8 +587,8 @@ void drawScreen(void) {
             			printStatus+=1;
             		}
                 	break;
+
                 case SCREEN_2:
-                		//carState_0_SC1_ecus();
                 	if(printStatus==0){
                 		carState_0_SC1_ecus(0);
                 		printStatus+=1;
@@ -511,29 +603,13 @@ void drawScreen(void) {
                 		printStatus+=1;
                 	}
                 	break;
+
                 case SCREEN_3:
                 	if(printStatus==0){
-                    	carState_0_SC2_refri(0,Screen.refriSettings);
-
-                    	printStatus+=1;
-                	}else if (printStatus!=0){
-                		switch (Screen.RefriSetup){
-                			case 0:
-                				carState_0_SC2_refri(1,Screen.refriSettings);
-                				break;
-                			case 1:
-                				carState_0_SC2_refri(2,Screen.refriSettings);
-                				break;
-                			case 2:
-                				carState_0_SC2_refri(3,Screen.refriSettings);
-                				break;
-                			case 3:
-                				carState_0_SC2_refri(4,Screen.refriSettings);
-                				break;
-                			case 4:
-                				carState_0_SC2_refri(5,Screen.refriSettings);
-                				break;
-                		}
+                    	carState_0_SC2_refri();
+                    	printStatus++;
+                	}else{
+                		carState_0_SC2_refri();
                 	}
                 	break;
                 default:
@@ -544,29 +620,64 @@ void drawScreen(void) {
         case DASH_1_PRECHARGE:
             switch (Screen.ActualScreen) {
                 case SCREEN_1:
-                	carState_6 ();
+                	if(printStatus==0){
+            			carState_3_SC0();
+            			printStatus+=1;
+					}
                     break;
+                case SCREEN_2:
+                	if(printStatus==0){
+						carState_0_SC1_ecus(0);
+						printStatus+=1;
+					}else if(printStatus==1){
+						carState_0_SC1_ecus(1);
+						printStatus+=1;
+					}else if(printStatus==2){
+						carState_0_SC1_ecus(2);
+						printStatus+=1;
+					}else if(printStatus==3){
+						carState_0_SC1_ecus(3);
+						printStatus+=1;
+					}
+                	break;
+                case SCREEN_3:
+                	if(printStatus==0){
+						carState_0_SC2_refri();
+						printStatus++;
+					}else{
+						carState_0_SC2_refri();
+					}
+                	break;
                 default:
-                	carState_6 ();
                 	break;
             }
             break;
 
         case DASH_2_PRECHARGE_STATUS:
-            		//while(PrechargeRequest !=100){
-            			carState_6 ();
-            		//}
+            			carState_6();
+            			printStatus++;
+
             break;
 
         case DASH_3_PRECHARGE_FINISHED:
-        			carState_9 ();
+        			if(printStatus==0) carState_9 ();
+        			printStatus++;
             break;
 
         case DASH_4_RACING_MENU:
             switch (Screen.ActualScreen) {
                 case SCREEN_1:
-                    //HERE
+                    carState_15(Screen.raceSetup);
+                    printStatus+=1;
                     break;
+                case SCREEN_2:
+                	carState_12_DRIVER (Screen.driverSetup);
+                	printStatus+=1;
+					break;
+                case SCREEN_3:
+                	if(printStatus==0)carState4_SC3();
+
+                	break;
                 default:
                 	break;
             }
@@ -580,7 +691,8 @@ void drawScreen(void) {
         case DASH_6_RACING_MODE:
             switch (Screen.ActualScreen) {
                 case SCREEN_1:
-                	carState_15 (0);
+                	if(printStatus==0)carState_15 (0);
+                	printStatus++;
                     break;
                 default:
                 	break;
@@ -597,3 +709,4 @@ void drawScreen(void) {
             break;
     }
 }
+//q
