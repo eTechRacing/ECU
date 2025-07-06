@@ -48,18 +48,41 @@
 		E10 // PUMP L OFF
 	}	DASH_Cooling;
 
+	typedef enum{
+		L_FAN,
+		L_PUMP,
+		R_FAN,
+		R_PUMP,
+		ACCU
+	} REFRI_System;
+
+	typedef enum{
+		SKIDPAD,
+		AUTOX,
+		ACCELERATION,
+		ENDURANCE
+	}RACE_Class;
+
+	typedef struct {
+		REFRI_System system;
+	} REFRI_Setup;
+
 	typedef struct {
 		DASH_CarState ActualState;
 		DASH_CarState PreviousState;
 		DASH_Screen ActualScreen;
 		DASH_Screen PreviousScreen;
 		DASH_Cooling CoolingState;
-		int RefriSetup;
+		REFRI_Setup refriSetup;
+		int RefriSettings;
+		RACE_Class raceSetup;
+		int driverSetup;
 	}	DASH_State;
 
 	extern int printStatus;
 	extern DASH_State Screen;
 	extern uint8_t CoolingRequest;
+	extern int refri_status;
 
 	extern const int NUM_SCREENS_PER_STATE[];
 	void resetAllSignals(void);

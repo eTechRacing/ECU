@@ -165,7 +165,7 @@ int main(void)
   ButtonsHandle = osThreadCreate(osThread(Buttons), NULL);
 
   /* definition and creation of Display */
-  osThreadDef(Display, StartDisplay, osPriorityBelowNormal, 0, 128);
+  osThreadDef(Display, StartDisplay, osPriorityBelowNormal, 0, 750);
   DisplayHandle = osThreadCreate(osThread(Display), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
@@ -435,6 +435,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan1)
 			}
 			else if (RxHeader.StdId == STAT_ETAS_Diagnostics_id){
 				message_canrx_STAT_ETAS_Diagnostics(RxData);
+				ETAS_Tick = HAL_GetTick();
 			}
 			else if (RxHeader.StdId == STAT_ETAS_Sync_id){
 				message_canrx_STAT_ETAS_Sync(RxData);
@@ -463,7 +464,12 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan1)
 			}
 			else if (RxHeader.StdId == CTRL_BMS_Accu_Data_id){
 				message_canrx_CTRL_BMS_Accu_Data(RxData);
-
+			}
+			else if (RxHeader.StdId == STAT_FECU_Keep_Alive_id){
+				message_canrx_STAT_FECU_Keep_Alive(RxData);
+			}
+			else if (RxHeader.StdId == STAT_RECU_Keep_Alive_id){
+				message_canrx_STAT_RECU_Keep_Alive(RxData);
 			}
 			refreshGPIOs();
   }
@@ -485,25 +491,26 @@ void StartCAN(void const * argument)
 	  message_cantx_STAT_DASH_Keep_Alive(hcan1);
 	  Dash_Alive++;
 
-	  if (PrechargeRequest == 1 && Screen.ActualState  == DASH_1_PRECHARGE) {
-		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
-		  PrechargeRequest = 0;
-		  HAL_Delay(100);
-		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
-	  }
-	  else if (RacingMode_Send == 1 && Screen.ActualState  == DASH_4_RACING_MENU) {
-		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
-		  RacingMode_Send = 0;
-	  }
-	  else if (EnableDrive_Order == 1 && Screen.ActualState  == DASH_4_RACING_MENU) {
-		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
-		  EnableDrive_Order = 0;
-		  HAL_Delay(100);
-		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
-	  }
-	  else if (pendingButtonEvent == EVENT_ROTARY_1 || pendingButtonEvent == EVENT_ROTARY_2){
-		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
-	  }
+//	  if (PrechargeRequest == 1 && Screen.ActualState  == DASH_1_PRECHARGE) {
+//		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
+//		  PrechargeRequest = 0;
+//		  HAL_Delay(100);
+//		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
+//	  }
+//	  else if (RacingMode_Send == 1 && Screen.ActualState  == DASH_4_RACING_MENU) {
+//		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
+//		  RacingMode_Send = 0;
+//	  }
+//	  else if (EnableDrive_Order == 1 && Screen.ActualState  == DASH_4_RACING_MENU) {
+//		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
+//		  EnableDrive_Order = 0;
+//		  HAL_Delay(100);
+//		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
+//	  }
+//	  else if (pendingButtonEvent == EVENT_ROTARY_1 || pendingButtonEvent == EVENT_ROTARY_2){
+//		  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
+//	  }
+	  message_cantx_CTRL_DASH_Driver_Inputs(hcan1);
 
 	  vTaskDelay(50);
   }
@@ -532,10 +539,11 @@ void StartButtons(void const * argument)
 	  currentRotaryState_1 = readRotarySwitch1();
 	  currentRotaryState_2 = readRotarySwitch2();
 
+
 	  refreshButton();
 	  refreshScreen();
 
-    osDelay(10);
+    osDelay(5);
   }
   /* USER CODE END StartButtons */
 }
@@ -554,6 +562,7 @@ void StartDisplay(void const * argument)
   for(;;)
   {
 	drawScreen();
+	ETAS_disconnection_funct();
     osDelay(100);
   }
   /* USER CODE END StartDisplay */

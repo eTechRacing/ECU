@@ -1,5 +1,5 @@
-../Core/Src/DASH/etr_carstate.c:43:6:resetAllSignals	1
-../Core/Src/DASH/etr_carstate.c:174:6:init_rules	1
-../Core/Src/DASH/etr_carstate.c:184:6:refreshGPIOs	9
-../Core/Src/DASH/etr_carstate.c:207:6:refreshScreen	35
-../Core/Src/DASH/etr_carstate.c:437:6:drawScreen	21
+../Core/Src/DASH/etr_carstate.c:47:6:resetAllSignals	1
+../Core/Src/DASH/etr_carstate.c:178:6:init_rules	1
+../Core/Src/DASH/etr_carstate.c:188:6:refreshGPIOs	9
+../Core/Src/DASH/etr_carstate.c:208:6:refreshScreen	72
+../Core/Src/DASH/etr_carstate.c:580:6:drawScreen	37

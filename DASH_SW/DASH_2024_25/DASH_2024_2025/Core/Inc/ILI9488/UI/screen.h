@@ -23,8 +23,8 @@ void carState_6 (void);
 void carState_9 (void);
 
 void carState_12_DYNAMIC (int screen, int column);
-void carState_12_DRIVER (int screen, int column);
-
+void carState_12_DRIVER (int n_column);
+void carState4_SC3(void);
 void carState_14 (void);
 
 void carState_15 (int n_race);

@@ -23,3 +23,14 @@ void Init_CAN_Filter(CAN_HandleTypeDef *hcan1){
     HAL_CAN_ConfigFilter(hcan1, &canfil1);
 }
 
+uint8_t Disconnection_ETAS=0;
+uint32_t ETAS_Tick=0;
+uint32_t aux_ETAS=0;
+
+void ETAS_disconnection_funct(){
+	Disconnection_ETAS = 0;
+	aux_ETAS = HAL_GetTick() - ETAS_Tick;
+	if(aux_ETAS > ETAS_MAX_TIME){
+	    Disconnection_ETAS = 1;
+	}
+}
