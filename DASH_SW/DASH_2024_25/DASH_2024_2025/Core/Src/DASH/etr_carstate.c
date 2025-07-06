@@ -573,7 +573,8 @@ void drawScreen(void) {
             break;
 
         case DASH_5_INVERTERS:
-        			carState_14 ();
+        			if(printStatus==0)carState_14 ();
+        			printStatus++;
             break;
 
         case DASH_6_RACING_MODE:
@@ -587,7 +588,8 @@ void drawScreen(void) {
             break;
 
         case DASH_7_ERROR:
-        			carState_21 ();
+        			if(printStatus==0)carState_21 ();
+        			printStatus++;
             break;
 
         default:
