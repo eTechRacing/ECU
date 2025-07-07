@@ -48,14 +48,16 @@
 		E10 // PUMP L OFF
 	}	DASH_Cooling;
 
+//---- REFRI Status enum
 	typedef enum{
-		L_FAN,
-		L_PUMP,
-		R_FAN,
-		R_PUMP,
-		ACCU
+		L_FAN,	//Left FAN status
+		L_PUMP,	//Left PUMP status
+		R_FAN,	//Right FAN status
+		R_PUMP,	//Right PUMP status
+		ACCU	//ACCU status
 	} REFRI_System;
 
+//---- RACE type enum
 	typedef enum{
 		SKIDPAD,
 		AUTOX,
@@ -63,10 +65,12 @@
 		ENDURANCE
 	}RACE_Class;
 
+//---- REFRI Struct of REFRI_System enum type
 	typedef struct {
 		REFRI_System system;
 	} REFRI_Setup;
 
+//---- Screen var's for states, screens & multiple-data screens
 	typedef struct {
 		DASH_CarState ActualState;
 		DASH_CarState PreviousState;
@@ -79,12 +83,13 @@
 		int driverSetup;
 	}	DASH_State;
 
+//---- VAR's to the state machine work
 	extern int printStatus;
 	extern DASH_State Screen;
 	extern uint8_t CoolingRequest;
 	extern int refri_status;
 
-	extern const int NUM_SCREENS_PER_STATE[];
+//---- FUNCTIONS
 	void resetAllSignals(void);
 	void refreshScreen(void);
 	void drawScreen(void);
