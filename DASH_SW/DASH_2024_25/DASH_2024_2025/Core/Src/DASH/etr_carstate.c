@@ -536,6 +536,7 @@ void refreshScreen(void) {
             }
 
             if (pendingButtonEvent == EVENT_BUTTON_OK) {
+            	printStatus =0;
             	if(Screen.ActualScreen==SCREEN_1){
             		Screen.PreviousScreen=Screen.ActualScreen;
             		Screen.ActualScreen++;
@@ -547,10 +548,11 @@ void refreshScreen(void) {
             		printStatus=0;
             	}
             }
-            break;
+
             if(Screen.ActualScreen == SCREEN_3){
             EnableDrive_Order = !HAL_GPIO_ReadPin(BUTTON_OK_GPIO_Port, BUTTON_OK_Pin);
             }
+            break;
         case DASH_5_INVERTERS:
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
 
