@@ -77,6 +77,8 @@ const char* floatToString (float value){
 void carState_0_SC0 (){
 	// ----- SCREEN 1 -----
 	ILI9488_FillScreen_DMA(0x0000);
+	ILI9488_DrawString(170, 219, "E", Font32, 0x07E0);
+	ILI9488_DrawString(170, 219," TECH", Font32,0xFFFF);
 	//ILI9488_DrawBitmapRGB565(10,75,460,150,logo);
 }
 //REVISAR
@@ -231,9 +233,9 @@ void carState_0_SC2_refri (){
 	/////////////////////////////
 	//Dynamix STATUS
 	int L_fanStatus=Fans_L;
-	int L_pumpStatus=Pump_L;
+	int L_pumpStatus=!Pump_L;
 	int R_fanStatus=Fans_R;
-	int R_pumpStatus=Pump_R;
+	int R_pumpStatus=!Pump_R;
 	int accuRefri_status=Refri_ACCU;
 	int L_fan_0, L_fan_1;
 	int L_pump_0, L_pump_1;
@@ -433,7 +435,7 @@ void carState_6 (){
 void carState_9 (){
 	ILI9488_FillScreen_DMA(0x0000);
 	ILI9488_DrawString(114, 108, "PRECHARGE", Font32, 0xFFFF);
-	ILI9488_DrawString(139, 250, "FINISHED", Font32, 0x07E0);
+	ILI9488_DrawString(139, 155, "FINISHED", Font32, 0x07E0);
 }
 
 /////////////////////////
@@ -455,7 +457,10 @@ void carState_12_DRIVER (int n_driver){
 ////////////////////////
 void carState_14 (){
 	ILI9488_FillScreen_DMA(0x0000);
-	ILI9488_DrawString(137, 100, "INVERTERS GETTING READY", Font24, 0xFFFF);
+
+	ILI9488_DrawString(114,87,"INVERTERS", Font32, 0x07E0);
+	ILI9488_DrawString(142,139,"GETTING", Font32, 0xFFFF);
+	ILI9488_DrawString(170,191,"READY", Font32, 0x07E0);
 }
 
 /////////////////////////
@@ -471,23 +476,24 @@ void carState_15 (int n_race){
 		ILI9488_Square(0,0,479,1,0xF800);
 		ILI9488_Square(478,0,479,319,0xF800);
 		ILI9488_Square(0,319,479,319,0xF800);
-	}else if(printStatus==1){
+
 		ILI9488_DrawBitmapMono(57, 30, skidpad, 125, 125, 0xFC00);
 		ILI9488_DrawBitmapMono(297, 20, autox, 125, 125, 0x07E0);
 		ILI9488_DrawBitmapMono(57, 190, endurance, 125, 125, 0x001F);
 		ILI9488_DrawBitmapMono(297,190, acceleration, 125, 125, 0xF800);
 
-		ILI9488_DrawStringBold(71,5,"SKIDPAD",Font16,0xFFFF);
+		ILI9488_DrawStringBold(71,5,"WORKSHOP",Font16,0xFFFF);
 		ILI9488_DrawStringBold(325, 5, "AUTOX", Font16, 0xFFFF);
 		ILI9488_DrawStringBold(57, 165, "ENDURANCE", Font16, 0xFFFF);
 		ILI9488_DrawStringBold(276, 165, "ACCELERATION", Font16, 0xFFFF);
-	}else{
+	}else if (printStatus>0){
+		if(Screen.RaceSettings==1){
 		switch(n_race){
 			case(0):
 //				ILI9488_DrawStringBold(325, 5, "AUTOX", Font16, 0xFFFF); //Avoid false visual active n_race in Screen
-				ILI9488_DrawStringBold(71,5,"SKIDPAD",Font16,0xF800);
-				ILI9488_DrawStringBold(71,5,"SKIDPAD",Font16,0xFFFF);
-				RacingMode=2;
+				ILI9488_DrawStringBold(71,5,"WORKSHOP",Font16,0xF800);
+				ILI9488_DrawStringBold(71,5,"WORKSHOP",Font16,0xFFFF);
+				RacingMode=1;
 
 			break;
 			case(1):
@@ -510,7 +516,7 @@ void carState_15 (int n_race){
 				ILI9488_DrawStringBold(276, 165, "ACCELERATION", Font16, 0xFFFF);
 				RacingMode=3;
 			break;
-
+		}
 		}
 
 	}
@@ -528,6 +534,7 @@ void carState4_SC3 (){
 ////////////////////////
 void carState_21 (){
 	ILI9488_FillScreen_DMA(0x0000);
-	ILI9488_DrawString(137, 100, "ERROR SOMETHING WENT RONG", Font24, 0xFFFF);
+	ILI9488_DrawString(170, 139, "ERROR", Font32, 0xF800);
+
 }
 

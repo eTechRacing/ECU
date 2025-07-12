@@ -80,6 +80,8 @@
 		REFRI_Setup refriSetup;
 		int RefriSettings;
 		RACE_Class raceSetup;
+		int RaceSettings;
+		int DriverSettings;
 		int driverSetup;
 	}	DASH_State;
 
