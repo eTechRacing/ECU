@@ -696,6 +696,7 @@ void StartCAN(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+
 //	  switch (CAN_FSM_STATE) {
 //	  case RAW_RECU_Data:
 //		  message_cantx_RAW_RECU_Data(TxHeader, hcan1, TxMailbox, TxData);
@@ -708,11 +709,12 @@ void StartCAN(void const * argument)
 //		  vTaskDelay(20);
 //	  break;
 //	  }
+
 	  Rear_Alive ++;
 	  message_cantx_STAT_RECU_Keep_Alive(hcan1);
 	  vTaskDelay(50);
 	  Rear_Alive ++;
-	  Susp_R_L_Bits ++;
+	  error_handle();
 	  message_cantx_RAW_RECU_Data(hcan1);
 	  message_cantx_STAT_RECU_Keep_Alive(hcan1);
 	  vTaskDelay(50);

@@ -563,6 +563,7 @@ void StartCAN(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+	  error_handle();
 	  flag ++;
 	  if (CANcount == 9) {
 		  Front_Alive ++;

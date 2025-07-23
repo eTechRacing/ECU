@@ -7,22 +7,50 @@
 extern CAN_TxHeaderTypeDef TxHeader;
 extern uint32_t TxMailbox;
 extern uint8_t TxData[8];
+extern uint8_t error_count;
 
 //Variables----------------------------------------------------------------------------------------------
 
-extern int8_t New_Signal_193;
+extern uint8_t ETAS_Warning;
 extern uint8_t el_AUTO_STATUS;
-extern int8_t Inv_R_Iq;
 extern int8_t Inv_R_Icommand;
 extern int8_t Inv_R_Iactual;
-extern int8_t Inv_L_Iq;
 extern int8_t Inv_L_Icommand;
 extern int8_t Inv_L_Iactual;
 extern uint16_t SOE;
 extern uint16_t ETAS_MSG_Counter;
+extern uint16_t Highest_CellTemp;
+extern uint16_t SOC_High;
+extern uint16_t Lowest_CellVoltage;
+extern uint8_t DeltaSOC_LastLap;
+extern uint32_t Accu_Current;
+extern uint8_t Reg_Level;
+extern uint8_t BB_Dash;
+extern uint8_t Disable_Regen;
+extern uint8_t Sensorics_Mode;
+extern uint8_t tel_DeltaSOC_LastLap;
+extern uint16_t BrakePressure2;
+extern uint16_t BrakePressure1;
+extern uint32_t Accu_Current;
+extern uint8_t Warning_Low_Voltage;
+extern uint8_t Warning_Inv_Temp;
+extern uint8_t Warning_Mot_Temp;
+extern uint8_t Warning_Accu_Temp;
+extern uint8_t tel_VoltageCell_Lowest;
+extern uint16_t tel_AccuVoltage;
+extern uint16_t tel_SOC_Low;
+extern int8_t tel_IqR;
+extern int8_t tel_IqL;
+extern uint8_t tel_VEL;
+extern uint16_t tel_TempCell_Highest;
+extern uint16_t tel_TempMotor_R;
+extern uint16_t tel_TempIGBT_R;
+extern uint16_t tel_TempMotor_L;
+extern uint16_t tel_TempIGBT_L;
 extern uint8_t BMS_Alive;
 extern uint8_t BMS_Balancing_Enable;
 extern uint8_t BMS_Charge_Flag;
+extern uint8_t BMS_OK;
 extern uint8_t BMS_CAN_Disconnection;
 extern uint8_t BMS_Voltage_Disconnection;
 extern uint8_t BMS_NTC_Disconnection;
@@ -46,6 +74,11 @@ extern uint8_t Charger_PrechargeOK;
 extern uint8_t Charger_AIRs_State;
 extern uint8_t Charger_AIRs_Request;
 extern uint8_t Charger_Sync;
+extern uint8_t VDC_RB_TqD;
+extern uint8_t VDC_RB_TqBP;
+extern uint8_t VDC_BP_SatUp;
+extern uint8_t VDC_BP_SatDown;
+extern uint8_t VDC_AP_SatRB;
 extern uint8_t VDC_Steering_Deadzone;
 extern uint8_t VDC_Min_Tyre_Slip;
 extern uint8_t VDC_Max_Tyre_Slip;
@@ -53,11 +86,14 @@ extern uint8_t VDC_Max_TV_DiffTq;
 extern uint8_t VDC_Max_Steering_Angle;
 extern uint8_t VDC_AP_SatUp;
 extern uint8_t VDC_AP_SatDown;
+extern uint8_t RemainLaps;
+extern uint8_t DeltaSOC_LastLap;
+extern uint8_t AvgVEL_LastLap;
 extern uint16_t TotalTime;
 extern uint8_t LapCount;
 extern uint16_t LapTime;
 extern uint16_t Average_CellTemp;
-extern uint16_t Accumulator_Voltage;
+extern uint32_t Accumulator_Voltage;
 extern uint16_t Accumulator_Current;
 extern uint8_t Shutdown_PackageIntck;
 extern uint8_t Shutdown_IMD;
@@ -78,7 +114,7 @@ extern uint16_t BMS_5V;
 extern uint16_t BMS_12V;
 extern uint8_t BMS_Alive;
 extern uint8_t Precharge_Percentage;
-extern int16_t Power;
+extern int16_t Power_Accu;
 extern uint16_t SOC_High;
 extern uint16_t SOC_Low;
 extern uint16_t SOC_Avg;
@@ -93,7 +129,7 @@ extern int16_t el_Vel_GPS_E;
 extern int16_t el_Vel_GPS_D;
 extern uint8_t InvertersAction;
 extern uint8_t Relay_Error;
-extern uint8_t Regenerative_Enable;
+extern uint8_t Regen_Enabled;
 extern uint8_t TC_Warning;
 extern uint8_t Sensorics_Mode;
 extern uint8_t el_Vel_OK;
@@ -125,6 +161,7 @@ extern int8_t SteeringSensor_Value;
 extern uint8_t BrakePedal_Value;
 extern uint8_t APPS2_Value;
 extern uint8_t APPS1_Value;
+extern uint8_t Refri_ACCU;
 extern uint8_t Pump_R;
 extern uint8_t Pump_L;
 extern uint8_t Button_2;
@@ -203,6 +240,12 @@ extern uint8_t ETAS_Sync_X;
 //Defines-----------------------------------------------------------------------------------------------
 
 #define VECTOR__INDEPENDENT_SIG_MSG_id 3221225472;
+#define PROC_ETAS_VDC_Pressure_id 11;
+#define CAB300_id 960;
+#define PROC_ETAS_Warning_id 12;
+#define TEL_ETAS_Accu_id 15;
+#define TEL_ETAS_Info_id 14;
+#define TEL_ETAS_Temps_id 13;
 #define NM_BMS_Charger_Keep_Alive_id 159;
 #define STAT_BMS_SFR_id 149;
 #define CHARGER_Battery_Current_id 148;
@@ -246,6 +289,12 @@ extern uint8_t ETAS_Sync_X;
 //TX-----------------------------------------------------------------------------------------------------
 
 void message_cantx_VECTOR__INDEPENDENT_SIG_MSG(CAN_HandleTypeDef hcan);
+void message_cantx_PROC_ETAS_VDC_Pressure(CAN_HandleTypeDef hcan);
+void message_cantx_CAB300(CAN_HandleTypeDef hcan);
+void message_cantx_PROC_ETAS_Warning(CAN_HandleTypeDef hcan);
+void message_cantx_TEL_ETAS_Accu(CAN_HandleTypeDef hcan);
+void message_cantx_TEL_ETAS_Info(CAN_HandleTypeDef hcan);
+void message_cantx_TEL_ETAS_Temps(CAN_HandleTypeDef hcan);
 void message_cantx_NM_BMS_Charger_Keep_Alive(CAN_HandleTypeDef hcan);
 void message_cantx_STAT_BMS_SFR(CAN_HandleTypeDef hcan);
 void message_cantx_CHARGER_Battery_Current(CAN_HandleTypeDef hcan);
@@ -289,6 +338,12 @@ void message_cantx_STAT_ETAS_Sync(CAN_HandleTypeDef hcan);
 //RX-----------------------------------------------------------------------------------------------------
 
 void message_canrx_VECTOR__INDEPENDENT_SIG_MSG(uint8_t *RxData);
+void message_canrx_PROC_ETAS_VDC_Pressure(uint8_t *RxData);
+void message_canrx_CAB300(uint8_t *RxData);
+void message_canrx_PROC_ETAS_Warning(uint8_t *RxData);
+void message_canrx_TEL_ETAS_Accu(uint8_t *RxData);
+void message_canrx_TEL_ETAS_Info(uint8_t *RxData);
+void message_canrx_TEL_ETAS_Temps(uint8_t *RxData);
 void message_canrx_NM_BMS_Charger_Keep_Alive(uint8_t *RxData);
 void message_canrx_STAT_BMS_SFR(uint8_t *RxData);
 void message_canrx_CHARGER_Battery_Current(uint8_t *RxData);
@@ -329,4 +384,7 @@ void message_canrx_RAW_FECU_Data2(uint8_t *RxData);
 void message_canrx_RAW_FECU_Data1(uint8_t *RxData);
 void message_canrx_STAT_ETAS_Sync(uint8_t *RxData);
 
-#endif /* INC_CAN_X_2025_H_ */
+//error--------------------------------------------------------------------------------------------------
+void error_handle(void);
+
+#endif /* INC_CAN-X_2025_H_ */

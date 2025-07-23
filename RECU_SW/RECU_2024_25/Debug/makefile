@@ -64,8 +64,8 @@ all: main-build
 main-build: RECU_2024_25.elf secondary-outputs
 
 # Tool invocations
-RECU_2024_25.elf RECU_2024_25.map: $(OBJS) $(USER_OBJS) C:\Users\Pol\STM32CubeIDE\workspace_1.14.1\RECU_2024_25\STM32L496VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "RECU_2024_25.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Pol\STM32CubeIDE\workspace_1.14.1\RECU_2024_25\STM32L496VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RECU_2024_25.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+RECU_2024_25.elf RECU_2024_25.map: $(OBJS) $(USER_OBJS) C:\Users\User\Documents\GitHub\ECU\RECU_SW\RECU_2024_25\STM32L496VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "RECU_2024_25.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\User\Documents\GitHub\ECU\RECU_SW\RECU_2024_25\STM32L496VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RECU_2024_25.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

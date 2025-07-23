@@ -8,8 +8,8 @@
 ../Core/Src/main.c:617:13:MX_GPIO_Init	1
 ../Core/Src/main.c:662:6:HAL_CAN_RxFifo0MsgPendingCallback	6
 ../Core/Src/main.c:693:6:StartCAN	1
-../Core/Src/main.c:730:6:StartADC	1
-../Core/Src/main.c:753:6:StartShutdown	1
-../Core/Src/main.c:776:6:StartControl	19
-../Core/Src/main.c:867:6:HAL_TIM_PeriodElapsedCallback	2
-../Core/Src/main.c:884:6:Error_Handler	1
+../Core/Src/main.c:732:6:StartADC	1
+../Core/Src/main.c:755:6:StartShutdown	1
+../Core/Src/main.c:778:6:StartControl	19
+../Core/Src/main.c:869:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:886:6:Error_Handler	1
