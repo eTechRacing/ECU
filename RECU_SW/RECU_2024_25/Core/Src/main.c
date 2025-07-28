@@ -153,9 +153,10 @@ int main(void)
   HAL_TIM_Base_Start(&htim8);
 
   //-------------PWM--------------------------------
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
-
   flag = 0;
   CAN_FSM_STATE = RAW_RECU_Data;
   Rear_Alive = 0;
@@ -516,6 +517,14 @@ static void MX_TIM1_Init(void)
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
   sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
   {
     Error_Handler();
@@ -627,7 +636,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, BL_Pin|PUMPR_Pin|PUMPL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(BL_GPIO_Port, BL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
@@ -640,12 +649,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BL_Pin PUMPR_Pin PUMPL_Pin */
-  GPIO_InitStruct.Pin = BL_Pin|PUMPR_Pin|PUMPL_Pin;
+  /*Configure GPIO pin : BL_Pin */
+  GPIO_InitStruct.Pin = BL_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+  HAL_GPIO_Init(BL_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LED_Pin */
   GPIO_InitStruct.Pin = LED_Pin;
@@ -759,8 +768,8 @@ void StartShutdown(void const * argument)
   for(;;)
   {
 	  Shutdown_TSMS_TSMP = HAL_GPIO_ReadPin(TSMS_TSMP_GPIO_Port, TSMS_TSMP_Pin);
-	  Shutdown_RightTS = HAL_GPIO_ReadPin(RightTS_GPIO_Port, RightTS_Pin);
-	  Shutdown_LeftTS = HAL_GPIO_ReadPin(LeftTS_GPIO_Port, LeftTS_Pin);
+	  Shutdown_LeftTS = HAL_GPIO_ReadPin(RightTS_GPIO_Port, RightTS_Pin);
+	  Shutdown_RightTS = HAL_GPIO_ReadPin(LeftTS_GPIO_Port, LeftTS_Pin);
 	  Shutdown_HVD = HAL_GPIO_ReadPin(HVD_GPIO_Port, HVD_Pin);
 	  Shutdown_HVBox = HAL_GPIO_ReadPin(HVBox_GPIO_Port, HVBox_Pin);
     vTaskDelay(10);
@@ -843,15 +852,15 @@ void StartControl(void const * argument)
 	 }
 
 	 if (Pump_R == 1) {
-		  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_9, 0); //PUMPR
+		 __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 1360); //PUMPR
 	 } else if (Pump_R == 0) {
-		  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_9, 1); //PUMPR
+		 __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 4000); //PUMPR
 	 }
 
 	 if (Pump_L == 1) {
-		  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, 0); //PUMPL
+		 __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 1360); //PUMPL
 	 } else if (Pump_L == 0) {
-		  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, 1); //PUMPL
+		 __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 4000); //PUMPL
 	 }
     osDelay(25);
   }

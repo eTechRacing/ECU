@@ -1586,7 +1586,7 @@ void message_canrx_STAT_ETAS_Sync(uint8_t *RxData) {
 }
 //Error functions----------------------------------------------------------------------------------------
 void error_handle(void) {
-    if (error_count > 10) {
+    if (error_count > 20) {
         error_count = 0;
         NVIC_SystemReset();
     }
