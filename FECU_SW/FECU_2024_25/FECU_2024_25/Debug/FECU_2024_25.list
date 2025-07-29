@@ -801,10 +801,10 @@ void message_canrx_STAT_ETAS_Sync(uint8_t *RxData) {
 void error_handle(void) {
  8000704:	b580      	push	{r7, lr}
  8000706:	af00      	add	r7, sp, #0
-    if (error_count > 20) {
+    if (error_count > 50) {
  8000708:	4b05      	ldr	r3, [pc, #20]	@ (8000720 <error_handle+0x1c>)
  800070a:	781b      	ldrb	r3, [r3, #0]
- 800070c:	2b14      	cmp	r3, #20
+ 800070c:	2b32      	cmp	r3, #50	@ 0x32
  800070e:	d904      	bls.n	800071a <error_handle+0x16>
         error_count = 0;
  8000710:	4b03      	ldr	r3, [pc, #12]	@ (8000720 <error_handle+0x1c>)
