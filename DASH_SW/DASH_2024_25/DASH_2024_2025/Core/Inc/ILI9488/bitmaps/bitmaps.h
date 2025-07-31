@@ -9,6 +9,7 @@ typedef struct {
 	const uint8_t *table;
 }FontDef;
 
+extern const uint8_t logo2[];
 extern const uint16_t logo[];
 extern const uint8_t skidpad[];
 extern const uint8_t autox[];
