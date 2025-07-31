@@ -1,5 +1,5 @@
 Core/Src/CAN/CAN_X_2025.o: ../Core/Src/CAN/CAN_X_2025.c \
- ../Core/Inc/CAN/CAN_X_2025.h ../Core/Inc/main.h \
+ ../Core/Inc/CAN\CAN_X_2025.h ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -29,7 +29,7 @@ Core/Src/CAN/CAN_X_2025.o: ../Core/Src/CAN/CAN_X_2025.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h
-../Core/Inc/CAN/CAN_X_2025.h:
+../Core/Inc/CAN\CAN_X_2025.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:

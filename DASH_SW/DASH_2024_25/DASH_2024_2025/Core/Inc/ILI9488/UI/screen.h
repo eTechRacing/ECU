@@ -31,4 +31,6 @@ void carState_15 (int n_race);
 
 void carState_21 (void);
 
+void screen_workshop(void);
+void screen_skipad(void);
 #endif

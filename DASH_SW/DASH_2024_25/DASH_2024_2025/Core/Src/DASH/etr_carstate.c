@@ -39,19 +39,16 @@ DASH_State Screen = {
 		.refriSetup.system = L_FAN,
 		.RefriSettings = 0,
 		.raceSetup = 0,
-		.RaceSettings = 0,
+		.RaceSettings = 1,
 		.driverSetup = 0
 };
 //-------------------------------------------------------------
 
 
 void resetAllSignals(void) {
-    New_Signal_193 = 0;
     el_AUTO_STATUS = 0;
-    Inv_R_Iq = 0;
     Inv_R_Icommand = 0;
     Inv_R_Iactual = 0;
-    Inv_L_Iq = 0;
     Inv_L_Icommand = 0;
     Inv_L_Iactual = 0;
     SOE = 0;
@@ -112,7 +109,6 @@ void resetAllSignals(void) {
     BMS_5V = 0;
     BMS_12V = 0;
     Precharge_Percentage = 0;
-    Power = 0;
     SOC_High = 0;
     SOC_Low = 0;
     SOC_Avg = 0;
@@ -127,7 +123,6 @@ void resetAllSignals(void) {
     el_Vel_GPS_D = 0;
     InvertersAction = 0;
     Relay_Error = 0;
-    Regenerative_Enable = 0;
     TC_Warning = 0;
     Sensorics_Mode = 0;
     el_Vel_OK = 0;
@@ -217,9 +212,10 @@ void refreshScreen(void) {
 		Screen.refriSetup.system = L_FAN;
 		Screen.RefriSettings = 0;
 		Screen.RaceSettings = 0;
-		Screen.raceSetup = 0;
+		Screen.raceSetup = 1;
 		Screen.DriverSettings = 0;
 		Screen.driverSetup = 0;
+
 
 
     }
@@ -408,6 +404,11 @@ void refreshScreen(void) {
             		case(0):
 						if(Screen.ActualScreen == SCREEN_3){
 		            		Screen.RefriSettings = 1;
+		            		Fans_L=1;
+							Fans_R=1;
+							Pump_L=1;
+							Pump_R=1;
+							Refri_ACCU=1;
 		            	}
 
             			break;
@@ -500,30 +501,23 @@ void refreshScreen(void) {
 
             }
             break;
+
           case DASH_4_RACING_MENU:
 		  if (pendingButtonEvent == EVENT_BUTTON_DOWN) {
-
 			  switch(Screen.RaceSettings){
 				  case(0):
-						  switch(Screen.DriverSettings){
-						  case(0):
-								  printStatus=0;
+
+
 						  	  if(Screen.ActualScreen == SCREEN_3){
 						  		  Screen.PreviousScreen=Screen.ActualScreen;
 						  		  Screen.ActualScreen=SCREEN_1;
-						  	  }else{
+						  		  printStatus=0;
+						  	  }else if(Screen.ActualScreen!=SCREEN_2 || Screen.DriverSettings==0){
+
 						  		  Screen.PreviousScreen = Screen.ActualScreen;
 						  		  Screen.ActualScreen++;
+						  		  printStatus=0;
 						  	  }
-						   break;
-						  case(1):
-								  if(Screen.ActualScreen==SCREEN_2){
-									  if(Screen.driverSetup>0){
-										  Screen.driverSetup--;
-									  }
-								  }
-						  break;
-						  }
 
 			  	  	  break;
 				  case(1):
@@ -538,37 +532,21 @@ void refreshScreen(void) {
 			  }
 		  }
 		  if (pendingButtonEvent == EVENT_BUTTON_UP) {
-
 			  switch(Screen.RaceSettings){
 			  case(0):
-					  switch(Screen.DriverSettings){
-					  case(0):
-						  printStatus=0;
+
 						  if(Screen.ActualScreen == SCREEN_1){
 							  Screen.PreviousScreen=Screen.ActualScreen;
 						      Screen.ActualScreen=SCREEN_3;
-						  }else{
+						      printStatus=0;
+						  }else if(Screen.ActualScreen!=SCREEN_2 || Screen.DriverSettings==0){
 							  Screen.PreviousScreen = Screen.ActualScreen;
 							  Screen.ActualScreen--;
+							  printStatus=0;
 						  }
 					  break;
-					  case(1):
-					  	  if(Screen.ActualScreen==SCREEN_2){
-					  		  if(Screen.driverSetup<4){
-					  			  Screen.driverSetup++;
-					  		  }
-					  	  }
-					  break;
-					  }
-				printStatus=0;
-					  if(Screen.ActualScreen == SCREEN_1){
-						  Screen.PreviousScreen=Screen.ActualScreen;
-						  Screen.ActualScreen=SCREEN_3;
-					  }else{
-						  Screen.PreviousScreen = Screen.ActualScreen;
-						  Screen.ActualScreen--;
-					  }
-					  break;
+
+
 			  case(1):
 					  if(Screen.ActualScreen==SCREEN_1){
 						  if(Screen.raceSetup >=0)
@@ -579,21 +557,37 @@ void refreshScreen(void) {
 
 		  }
 		  if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
-
+//			  if(Screen.DriverSettings==1){
+//				  if(Screen.ActualScreen==SCREEN_2){
+//					  Screen.driverSetup+=1;
+//					  				  printStatus=1;
+//				  }
+//			  }
+			  Screen.driverSetup+=1;
 		  }
 		  if (pendingButtonEvent == EVENT_BUTTON_LEFT) {
+//			  if(Screen.DriverSettings==1 && Screen.ActualScreen==SCREEN_2){
+//				  if(Screen.driverSetup>0){
+//					  Screen.driverSetup+=1;
+//					  printStatus=1;
+//				  }
+//			  }
 
+			  Screen.driverSetup+=1;
 		  }
 		  if (pendingButtonEvent == EVENT_BUTTON_OK) {
 
-			  if(Screen.ActualScreen==SCREEN_1 && Screen.RaceSettings ==0){
+			  if(Screen.ActualScreen==SCREEN_1 && Screen.RaceSettings==0){
 				  Screen.RaceSettings = 1;
-			  }else if (Screen.ActualScreen==SCREEN_1 && Screen.RaceSettings ==1){
+			  }else if (Screen.ActualScreen==SCREEN_1 && Screen.RaceSettings==1){
 				  Screen.RaceSettings = 0;
 			  }else if(Screen.ActualScreen==SCREEN_2 && Screen.DriverSettings==0){
 				  Screen.DriverSettings = 1;
 			  }else if(Screen.ActualScreen==SCREEN_2 && Screen.DriverSettings==1){
 				  Screen.DriverSettings = 0;
+			  }else if(Screen.ActualScreen==SCREEN_3){
+				  Screen.DriverSettings=0;
+				  Screen.RaceSettings=0;
 			  }
 		  }
 		  if(Screen.ActualScreen == SCREEN_3){
@@ -667,8 +661,13 @@ void refreshScreen(void) {
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
 
             }
-            break;
 
+            if(pendingButtonEvent == EVENT_BUTTON_OK){
+            	printStatus=0;
+
+            }
+            EnableDrive_Order = !HAL_GPIO_ReadPin(BUTTON_OK_GPIO_Port, BUTTON_OK_Pin);
+            break;
         case DASH_7_ERROR:
 
             if (pendingButtonEvent == EVENT_BUTTON_RIGHT) {
@@ -767,7 +766,9 @@ void drawScreen(void) {
         case DASH_3_PRECHARGE_FINISHED:
         			if(printStatus==0) carState_9 ();
         			printStatus++;
+
             break;
+
 
         case DASH_4_RACING_MENU:
             switch (Screen.ActualScreen) {
@@ -789,7 +790,6 @@ void drawScreen(void) {
                 case SCREEN_3:
                 	if(printStatus==0)carState4_SC3();
                 	printStatus++;
-
                 	break;
                 default:
                 	break;
@@ -797,17 +797,21 @@ void drawScreen(void) {
             break;
 
         case DASH_5_INVERTERS:
-        			carState_14 ();
-        			printStatus=0;
+        			if(printStatus==0) carState_14 ();
+        			printStatus++;
 
             break;
 
         case DASH_6_RACING_MODE:
-            switch (Screen.ActualScreen) {
-                case SCREEN_1:
-                	if(printStatus==0)carState_15 (0);
+            switch (RacingMode) {
+                case 1: //WORKSHOP
+                	screen_workshop();
                 	printStatus++;
                     break;
+                case 2:
+                	screen_skipad();
+                	printStatus++;
+                	break;
                 default:
                 	break;
             }
