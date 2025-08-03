@@ -71,10 +71,6 @@ void Error_Handler(void);
 #define HVBox_GPIO_Port GPIOE
 #define BL_Pin GPIO_PIN_7
 #define BL_GPIO_Port GPIOE
-#define PUMPR_Pin GPIO_PIN_9
-#define PUMPR_GPIO_Port GPIOE
-#define PUMPL_Pin GPIO_PIN_11
-#define PUMPL_GPIO_Port GPIOE
 #define LED_Pin GPIO_PIN_6
 #define LED_GPIO_Port GPIOC
 

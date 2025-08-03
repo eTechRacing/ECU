@@ -18,13 +18,10 @@ uint16_t SOE;
 uint16_t ETAS_MSG_Counter;
 uint16_t Highest_CellTemp;
 uint16_t SOC_High;
-uint16_t Lowest_CellVoltage;
-uint8_t DeltaSOC_LastLap;
 uint32_t Accu_Current;
 uint8_t Reg_Level;
 uint8_t BB_Dash;
 uint8_t Disable_Regen;
-uint8_t Sensorics_Mode;
 uint8_t tel_DeltaSOC_LastLap;
 uint16_t BrakePressure2;
 uint16_t BrakePressure1;
@@ -84,7 +81,7 @@ uint8_t VDC_Max_Steering_Angle;
 uint8_t VDC_AP_SatUp;
 uint8_t VDC_AP_SatDown;
 uint8_t RemainLaps;
-uint8_t DeltaSOC_LastLap;
+uint8_t EnduranceFactor;
 uint8_t AvgVEL_LastLap;
 uint16_t TotalTime;
 uint8_t LapCount;
@@ -266,11 +263,6 @@ void message_cantx_VECTOR__INDEPENDENT_SIG_MSG(CAN_HandleTypeDef hcan) {
    TxData[0] = (TxData[0] & ~1) | (((SOC_High >> 9) << 0) & 1);
    TxData[1] = SOC_High >> 1;
    TxData[2] = (TxData[2] & ~128) | ((SOC_High << 7) & 128); 
-   TxData[0] = (TxData[0] & ~1) | (((Lowest_CellVoltage >> 15) << 0) & 1);
-   TxData[1] = Lowest_CellVoltage >> 7;
-   TxData[2] = (TxData[2] & ~254) | ((Lowest_CellVoltage << 1) & 254); 
-   TxData[0] = (TxData[0] & ~1) | (((DeltaSOC_LastLap >> 6) << 0) & 1);
-   TxData[1] = (TxData[1] & ~252) | ((DeltaSOC_LastLap << 2) & 252); 
    TxData[0] = (TxData[0] & ~1) | (((Accu_Current >> 31) << 0) & 1);
    TxData[1] = Accu_Current >> 23;
    TxData[2] = Accu_Current >> 15;
@@ -281,13 +273,8 @@ void message_cantx_VECTOR__INDEPENDENT_SIG_MSG(CAN_HandleTypeDef hcan) {
    TxData[0] = (TxData[0] & ~1) | (((BB_Dash >> 5) << 0) & 1);
    TxData[1] = (TxData[1] & ~248) | ((BB_Dash << 3) & 248); 
    TxData[0] = (TxData[0] & ~1) | (((Disable_Regen >> 0) << 0) & 1);
-   TxData[0] = (TxData[0] & ~1) | (((Sensorics_Mode >> 1) << 0) & 1);
-   TxData[1] = (TxData[1] & ~128) | ((Sensorics_Mode << 7) & 128); 
    TxData[0] = (TxData[0] & ~1) | (((tel_DeltaSOC_LastLap >> 6) << 0) & 1);
    TxData[1] = (TxData[1] & ~252) | ((tel_DeltaSOC_LastLap << 2) & 252); 
-   TxData[0] = (TxData[0] & ~1) | (((AvgVEL_LastLap >> 9) << 0) & 1);
-   TxData[1] = AvgVEL_LastLap >> 1;
-   TxData[2] = (TxData[2] & ~128) | ((AvgVEL_LastLap << 7) & 128); 
    if (HAL_CAN_AddTxMessage(&hcan, &TxHeader, TxData, &TxMailbox) != HAL_OK){
         error_count++;
     } else if (error_count > 0){
@@ -595,8 +582,8 @@ void message_cantx_PROC_ETAS_VDC_LapTiming(CAN_HandleTypeDef hcan) {
    TxHeader.StdId = PROC_ETAS_VDC_LapTiming_id;
    TxHeader.TransmitGlobalTime = DISABLE;
    TxData[5] = (TxData[5] & ~62) | (((RemainLaps >> 0) << 1) & 62);
-   TxData[4] = (TxData[4] & ~31) | (((DeltaSOC_LastLap >> 2) << 0) & 31);
-   TxData[5] = (TxData[5] & ~192) | ((DeltaSOC_LastLap << 6) & 192); 
+   TxData[4] = (TxData[4] & ~31) | (((EnduranceFactor >> 2) << 0) & 31);
+   TxData[5] = (TxData[5] & ~192) | ((EnduranceFactor << 6) & 192); 
    TxData[3] = (TxData[3] & ~31) | (((AvgVEL_LastLap >> 3) << 0) & 31);
    TxData[4] = (TxData[4] & ~224) | ((AvgVEL_LastLap << 5) & 224); 
    TxData[2] = (TxData[2] & ~255) | (((TotalTime >> 3) << 0) & 255);
@@ -1230,17 +1217,13 @@ void message_canrx_VECTOR__INDEPENDENT_SIG_MSG(uint8_t *RxData) {
    Inv_L_Iactual = ((RxData[0] & 1) << 7) | ((RxData[1] & 254) >> 1);   // Signal: Inv_L_Iactual Start Bit: 0, Length: 8 Byte Order: 0, Value Type: - Factor: 2.5 Offset: 0 Unit: A
    SOE = ((RxData[0] & 1) << 9) | (RxData[1] << 1) | ((RxData[2] & 128) >> 7);   // Signal: SOE Start Bit: 0, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: %
    ETAS_MSG_Counter = ((RxData[0] & 1) << 15) | (RxData[1] << 7) | ((RxData[2] & 254) >> 1);   // Signal: ETAS_MSG_Counter Start Bit: 0, Length: 16 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: -
-   Highest_CellTemp = ((RxData[0] & 1) << 9) | (RxData[1] << 1) | ((RxData[2] & 128) >> 7);   // Signal: Highest_CellTemp Start Bit: 0, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
+   Highest_CellTemp = ((RxData[0] & 1) << 9) | (RxData[1] << 1) | ((RxData[2] & 128) >> 7);   // Signal: Highest_CellTemp Start Bit: 0, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
    SOC_High = ((RxData[0] & 1) << 9) | (RxData[1] << 1) | ((RxData[2] & 128) >> 7);   // Signal: SOC_High Start Bit: 0, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: %
-   Lowest_CellVoltage = ((RxData[0] & 1) << 15) | (RxData[1] << 7) | ((RxData[2] & 254) >> 1);   // Signal: Lowest_CellVoltage Start Bit: 0, Length: 16 Byte Order: 0, Value Type: + Factor: 0.0001 Offset: 0 Unit: V
-   DeltaSOC_LastLap = ((RxData[0] & 1) << 6) | ((RxData[1] & 252) >> 2);   // Signal: DeltaSOC_LastLap Start Bit: 0, Length: 7 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 2 Unit: %
    Accu_Current = ((RxData[0] & 1) << 31) | (RxData[1] << 23) | (RxData[2] << 15) | (RxData[3] << 7) | ((RxData[4] & 254) >> 1);   // Signal: Accu_Current Start Bit: 0, Length: 32 Byte Order: 0, Value Type: + Factor: -0.001 Offset: 2147483.648 Unit: A
    Reg_Level = ((RxData[0] & 1) << 1) | ((RxData[1] & 128) >> 7);   // Signal: Reg_Level Start Bit: 0, Length: 2 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: Bit
    BB_Dash = ((RxData[0] & 1) << 5) | ((RxData[1] & 248) >> 3);   // Signal: BB_Dash Start Bit: 0, Length: 6 Byte Order: 0, Value Type: + Factor: 0.5 Offset: 60 Unit: Bit
    Disable_Regen = ((RxData[0] & 1) >> 0);   // Signal: Disable_Regen Start Bit: 0, Length: 1 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: Bit
-   Sensorics_Mode = ((RxData[0] & 1) << 1) | ((RxData[1] & 128) >> 7);   // Signal: Sensorics_Mode Start Bit: 0, Length: 2 Byte Order: 0, Value Type: + Factor: 1 Offset: 1 Unit: Bit
    tel_DeltaSOC_LastLap = ((RxData[0] & 1) << 6) | ((RxData[1] & 252) >> 2);   // Signal: tel_DeltaSOC_LastLap Start Bit: 0, Length: 7 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 2 Unit: %
-   AvgVEL_LastLap = ((RxData[0] & 1) << 9) | (RxData[1] << 1) | ((RxData[2] & 128) >> 7);   // Signal: AvgVEL_LastLap Start Bit: 0, Length: 10 Byte Order: 0, Value Type: - Factor: 0.1 Offset: 0 Unit: km/h
 }
 
 void message_canrx_PROC_ETAS_VDC_Pressure(uint8_t *RxData) {
@@ -1272,11 +1255,11 @@ void message_canrx_TEL_ETAS_Info(uint8_t *RxData) {
 }
 
 void message_canrx_TEL_ETAS_Temps(uint8_t *RxData) {
-   tel_TempCell_Highest = ((RxData[5] & 63) << 4) | ((RxData[6] & 240) >> 4);   // Signal: tel_TempCell_Highest Start Bit: 45, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
-   tel_TempMotor_R = ((RxData[3] & 1) << 10) | (RxData[4] << 2) | ((RxData[5] & 192) >> 6);   // Signal: tel_TempMotor_R Start Bit: 24, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
-   tel_TempIGBT_R = ((RxData[2] & 7) << 7) | ((RxData[3] & 254) >> 1);   // Signal: tel_TempIGBT_R Start Bit: 18, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
-   tel_TempMotor_L = ((RxData[1] & 63) << 5) | ((RxData[2] & 248) >> 3);   // Signal: tel_TempMotor_L Start Bit: 13, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
-   tel_TempIGBT_L = ((RxData[0] & 255) << 2) | ((RxData[1] & 192) >> 6);   // Signal: tel_TempIGBT_L Start Bit: 7, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
+   tel_TempCell_Highest = ((RxData[5] & 63) << 4) | ((RxData[6] & 240) >> 4);   // Signal: tel_TempCell_Highest Start Bit: 45, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
+   tel_TempMotor_R = ((RxData[3] & 1) << 10) | (RxData[4] << 2) | ((RxData[5] & 192) >> 6);   // Signal: tel_TempMotor_R Start Bit: 24, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
+   tel_TempIGBT_R = ((RxData[2] & 7) << 7) | ((RxData[3] & 254) >> 1);   // Signal: tel_TempIGBT_R Start Bit: 18, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
+   tel_TempMotor_L = ((RxData[1] & 63) << 5) | ((RxData[2] & 248) >> 3);   // Signal: tel_TempMotor_L Start Bit: 13, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
+   tel_TempIGBT_L = ((RxData[0] & 255) << 2) | ((RxData[1] & 192) >> 6);   // Signal: tel_TempIGBT_L Start Bit: 7, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
 }
 
 void message_canrx_NM_BMS_Charger_Keep_Alive(uint8_t *RxData) {
@@ -1339,18 +1322,18 @@ void message_canrx_PROC_ETAS_VDC_Params(uint8_t *RxData) {
    VDC_BP_SatUp = ((RxData[6] & 63) >> 0);   // Signal: VDC_BP_SatUp Start Bit: 53, Length: 6 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0.37 Unit: 1%
    VDC_BP_SatDown = ((RxData[5] & 15) << 2) | ((RxData[6] & 192) >> 6);   // Signal: VDC_BP_SatDown Start Bit: 43, Length: 6 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
    VDC_AP_SatRB = ((RxData[4] & 3) << 4) | ((RxData[5] & 240) >> 4);   // Signal: VDC_AP_SatRB Start Bit: 33, Length: 6 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
-   VDC_Steering_Deadzone = ((RxData[3] & 248) >> 3);   // Signal: VDC_Steering_Deadzone Start Bit: 31, Length: 5 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: ï¿½
+   VDC_Steering_Deadzone = ((RxData[3] & 248) >> 3);   // Signal: VDC_Steering_Deadzone Start Bit: 31, Length: 5 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: º
    VDC_Min_Tyre_Slip = ((RxData[0] & 3) << 4) | ((RxData[1] & 240) >> 4);   // Signal: VDC_Min_Tyre_Slip Start Bit: 1, Length: 6 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 1 Unit: -
    VDC_Max_Tyre_Slip = ((RxData[0] & 252) >> 2);   // Signal: VDC_Max_Tyre_Slip Start Bit: 7, Length: 6 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 1 Unit: -
    VDC_Max_TV_DiffTq = ((RxData[4] & 124) >> 2);   // Signal: VDC_Max_TV_DiffTq Start Bit: 38, Length: 5 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: Nm
-   VDC_Max_Steering_Angle = ((RxData[3] & 7) << 1) | ((RxData[4] & 128) >> 7);   // Signal: VDC_Max_Steering_Angle Start Bit: 26, Length: 4 Byte Order: 0, Value Type: + Factor: 1 Offset: 115 Unit: ï¿½
+   VDC_Max_Steering_Angle = ((RxData[3] & 7) << 1) | ((RxData[4] & 128) >> 7);   // Signal: VDC_Max_Steering_Angle Start Bit: 26, Length: 4 Byte Order: 0, Value Type: + Factor: 1 Offset: 115 Unit: º
    VDC_AP_SatUp = ((RxData[2] & 63) >> 0);   // Signal: VDC_AP_SatUp Start Bit: 21, Length: 6 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0.37 Unit: 1%
    VDC_AP_SatDown = ((RxData[1] & 15) << 2) | ((RxData[2] & 192) >> 6);   // Signal: VDC_AP_SatDown Start Bit: 11, Length: 6 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
 }
 
 void message_canrx_PROC_ETAS_VDC_LapTiming(uint8_t *RxData) {
    RemainLaps = ((RxData[5] & 62) >> 1);   // Signal: RemainLaps Start Bit: 45, Length: 5 Byte Order: 0, Value Type: + Factor: 1 Offset: 1 Unit: -
-   DeltaSOC_LastLap = ((RxData[4] & 31) << 2) | ((RxData[5] & 192) >> 6);   // Signal: DeltaSOC_LastLap Start Bit: 36, Length: 7 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 2 Unit: %
+   EnduranceFactor = ((RxData[4] & 31) << 2) | ((RxData[5] & 192) >> 6);   // Signal: EnduranceFactor Start Bit: 36, Length: 7 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0.5 Unit: %
    AvgVEL_LastLap = ((RxData[3] & 31) << 3) | ((RxData[4] & 224) >> 5);   // Signal: AvgVEL_LastLap Start Bit: 28, Length: 8 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 23 Unit: km/h
    TotalTime = ((RxData[2] & 255) << 3) | ((RxData[3] & 224) >> 5);   // Signal: TotalTime Start Bit: 23, Length: 11 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: s
    LapCount = ((RxData[1] & 31) >> 0);   // Signal: LapCount Start Bit: 12, Length: 5 Byte Order: 0, Value Type: + Factor: 1 Offset: 1 Unit: -
@@ -1358,7 +1341,7 @@ void message_canrx_PROC_ETAS_VDC_LapTiming(uint8_t *RxData) {
 }
 
 void message_canrx_CTRL_BMS_Accu_Data(uint8_t *RxData) {
-   Average_CellTemp = ((RxData[4] & 3) << 8) | (RxData[5] << 0);   // Signal: Average_CellTemp Start Bit: 33, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
+   Average_CellTemp = ((RxData[4] & 3) << 8) | (RxData[5] << 0);   // Signal: Average_CellTemp Start Bit: 33, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
    Accumulator_Voltage = ((RxData[0] & 7) << 18) | (RxData[1] << 10) | (RxData[2] << 2) | ((RxData[3] & 192) >> 6);   // Signal: Accumulator_Voltage Start Bit: 2, Length: 21 Byte Order: 0, Value Type: + Factor: 0.00015 Offset: 340 Unit: V
    Accumulator_Current = ((RxData[3] & 63) << 6) | ((RxData[4] & 252) >> 2);   // Signal: Accumulator_Current Start Bit: 29, Length: 12 Byte Order: 0, Value Type: + Factor: 0.19536 Offset: -400 Unit: A
    Shutdown_PackageIntck = ((RxData[0] & 32) >> 5);   // Signal: Shutdown_PackageIntck Start Bit: 5, Length: 1 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: Bit
@@ -1369,9 +1352,9 @@ void message_canrx_CTRL_BMS_Accu_Data(uint8_t *RxData) {
 
 void message_canrx_CTRL_BMS_Cell_Extremes(uint8_t *RxData) {
    Highest_CellVoltage = ((RxData[2] & 255) << 8) | (RxData[3] << 0);   // Signal: Highest_CellVoltage Start Bit: 23, Length: 16 Byte Order: 0, Value Type: + Factor: 0.0001 Offset: 0 Unit: V
-   Highest_CellTemp = ((RxData[5] & 63) << 4) | ((RxData[6] & 240) >> 4);   // Signal: Highest_CellTemp Start Bit: 45, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
+   Highest_CellTemp = ((RxData[5] & 63) << 4) | ((RxData[6] & 240) >> 4);   // Signal: Highest_CellTemp Start Bit: 45, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
    Lowest_CellVoltage = ((RxData[0] & 255) << 8) | (RxData[1] << 0);   // Signal: Lowest_CellVoltage Start Bit: 7, Length: 16 Byte Order: 0, Value Type: + Factor: 0.0001 Offset: 0 Unit: V
-   Lowest_CellTemp = ((RxData[4] & 255) << 2) | ((RxData[5] & 192) >> 6);   // Signal: Lowest_CellTemp Start Bit: 39, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
+   Lowest_CellTemp = ((RxData[4] & 255) << 2) | ((RxData[5] & 192) >> 6);   // Signal: Lowest_CellTemp Start Bit: 39, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
 }
 
 void message_canrx_STAT_DASH_Keep_Alive(uint8_t *RxData) {
@@ -1447,7 +1430,7 @@ void message_canrx_STAT_ETAS_Diagnostics(uint8_t *RxData) {
 void message_canrx_PROC_ETAS_VDC_Values(uint8_t *RxData) {
    Inv_Speed = ((RxData[5] & 127) >> 0);   // Signal: Inv_Speed Start Bit: 46, Length: 7 Byte Order: 0, Value Type: + Factor: 1 Offset: 0 Unit: km/h
    el_VEL = ((RxData[3] & 7) << 9) | (RxData[4] << 1) | ((RxData[5] & 128) >> 7);   // Signal: el_VEL Start Bit: 26, Length: 12 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: m/s
-   SteeringSensor_Value = ((RxData[2] & 7) << 5) | ((RxData[3] & 248) >> 3);   // Signal: SteeringSensor_Value Start Bit: 18, Length: 8 Byte Order: 0, Value Type: - Factor: 1 Offset: 0 Unit: ï¿½
+   SteeringSensor_Value = ((RxData[2] & 7) << 5) | ((RxData[3] & 248) >> 3);   // Signal: SteeringSensor_Value Start Bit: 18, Length: 8 Byte Order: 0, Value Type: - Factor: 1 Offset: 0 Unit: º
    BrakePedal_Value = ((RxData[1] & 3) << 5) | ((RxData[2] & 248) >> 3);   // Signal: BrakePedal_Value Start Bit: 9, Length: 7 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
    APPS2_Value = ((RxData[0] & 1) << 6) | ((RxData[1] & 252) >> 2);   // Signal: APPS2_Value Start Bit: 0, Length: 7 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
    APPS1_Value = ((RxData[0] & 254) >> 1);   // Signal: APPS1_Value Start Bit: 7, Length: 7 Byte Order: 0, Value Type: + Factor: 0.01 Offset: 0 Unit: 1%
@@ -1513,16 +1496,16 @@ void message_canrx_CTRL_ELLIPSE_Vel_Valid(uint8_t *RxData) {
 }
 
 void message_canrx_PROC_ETAS_Inverter_R_Data(uint8_t *RxData) {
-   Inv_R_TempMotor = ((RxData[1] & 63) << 5) | ((RxData[2] & 248) >> 3);   // Signal: Inv_R_TempMotor Start Bit: 13, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
+   Inv_R_TempMotor = ((RxData[1] & 63) << 5) | ((RxData[2] & 248) >> 3);   // Signal: Inv_R_TempMotor Start Bit: 13, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
    current_R = ((RxData[3] & 7) << 8) | (RxData[4] << 0);   // Signal: current_R Start Bit: 26, Length: 11 Byte Order: 0, Value Type: - Factor: 0.1 Offset: 0 Unit: A
-   Inv_R_TempIGBT = ((RxData[0] & 255) << 2) | ((RxData[1] & 192) >> 6);   // Signal: Inv_R_TempIGBT Start Bit: 7, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
+   Inv_R_TempIGBT = ((RxData[0] & 255) << 2) | ((RxData[1] & 192) >> 6);   // Signal: Inv_R_TempIGBT Start Bit: 7, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
    RR_Vel_ms_Wheel = ((RxData[2] & 7) << 5) | ((RxData[3] & 248) >> 3);   // Signal: RR_Vel_ms_Wheel Start Bit: 18, Length: 8 Byte Order: 0, Value Type: - Factor: 0.1 Offset: 12 Unit: m/s
 }
 
 void message_canrx_PROC_ETAS_Inverter_L_Data(uint8_t *RxData) {
-   Inv_L_TempMotor = ((RxData[1] & 63) << 5) | ((RxData[2] & 248) >> 3);   // Signal: Inv_L_TempMotor Start Bit: 13, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
+   Inv_L_TempMotor = ((RxData[1] & 63) << 5) | ((RxData[2] & 248) >> 3);   // Signal: Inv_L_TempMotor Start Bit: 13, Length: 11 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
    current_L = ((RxData[3] & 7) << 8) | (RxData[4] << 0);   // Signal: current_L Start Bit: 26, Length: 11 Byte Order: 0, Value Type: - Factor: 0.1 Offset: 0 Unit: A
-   Inv_L_TempIGBT = ((RxData[0] & 255) << 2) | ((RxData[1] & 192) >> 6);   // Signal: Inv_L_TempIGBT Start Bit: 7, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ï¿½C
+   Inv_L_TempIGBT = ((RxData[0] & 255) << 2) | ((RxData[1] & 192) >> 6);   // Signal: Inv_L_TempIGBT Start Bit: 7, Length: 10 Byte Order: 0, Value Type: + Factor: 0.1 Offset: 0 Unit: ºC
    RL_Vel_ms_Wheel = ((RxData[2] & 7) << 5) | ((RxData[3] & 248) >> 3);   // Signal: RL_Vel_ms_Wheel Start Bit: 18, Length: 8 Byte Order: 0, Value Type: - Factor: 0.1 Offset: 12 Unit: m/s
 }
 
@@ -1586,7 +1569,7 @@ void message_canrx_STAT_ETAS_Sync(uint8_t *RxData) {
 }
 //Error functions----------------------------------------------------------------------------------------
 void error_handle(void) {
-    if (error_count > 50) {
+    if (error_count > 200) {
         error_count = 0;
         NVIC_SystemReset();
     }

@@ -563,7 +563,7 @@ void StartCAN(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-	  flag ++;
+	  error_handle();
 	  if (CANcount == 9) {
 		  Front_Alive ++;
 		  message_cantx_RAW_FECU_Data2(hcan1);
