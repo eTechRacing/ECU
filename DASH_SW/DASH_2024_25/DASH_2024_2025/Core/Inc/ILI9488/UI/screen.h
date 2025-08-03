@@ -33,4 +33,8 @@ void carState_21 (void);
 
 void screen_workshop(void);
 void screen_skipad(void);
+void screen_acceleration(void);
+void screen_autox(void);
+void screen_endurance(void);
+
 #endif

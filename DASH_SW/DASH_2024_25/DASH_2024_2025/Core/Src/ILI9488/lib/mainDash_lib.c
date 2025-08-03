@@ -59,7 +59,7 @@ void ILI9488_Init(void) {
 	    ILI9488_SendData(0x66);    // 18 bits per pixel (RGB666)
 
 	    ILI9488_SendCommand(0x36); // MADCTL
-	    ILI9488_SendData(0xE8);    // Landscape + BGR (0xE8 or 0x28 for horizontal view depending on the side)
+	    ILI9488_SendData(0x28);    // Landscape + BGR (0xE8 or 0x28 for horizontal view depending on the side)
 
 	    ILI9488_SendCommand(0x29); // Display on
 	    HAL_Delay(20);
