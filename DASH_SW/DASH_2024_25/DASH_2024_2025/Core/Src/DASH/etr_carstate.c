@@ -812,8 +812,19 @@ void drawScreen(void) {
                 	screen_skipad();
                 	printStatus++;
                 	break;
-                default:
+                case 3:
+                	screen_acceleration();
+                	printStatus++;
                 	break;
+                case 4:
+                	screen_autox();
+                	printStatus++;
+                	break;
+                case 5:
+                	screen_endurance();
+                	printStatus++;
+                	break;
+			break;
             }
             break;
 

@@ -4,6 +4,7 @@
 #include "CAN/CAN_X_2025.h"
 #include "CAN/CAN.h"
 #include "DASH/etr_carstate.h"
+#include <string.h>
 const char* status[] = {
 		"ERROR", "OK"
 };
@@ -723,8 +724,8 @@ void screen_acceleration(){
 	ILI9488_DrawStringBold(346,134,b_sensorics,Font32,0xFFFF);
 
 }
-char tc_status;
-char reg_status;
+char tc_status[4];
+char reg_status[4];
 char b_laptime[20];
 void screen_autox(){
 	ILI9488_FillScreen_DMA(0x0000);
@@ -739,14 +740,14 @@ void screen_autox(){
 
 	//Traction Control
 	ILI9488_Square(0,0,239,99,0xF800);
-	if(TC_Warning==1){tc_status="ON";}else if(TC_Warning==0){tc_status="OFF";}
+	if(TC_Warning==1){strcpy(tc_status,"ON");}else if(TC_Warning==0){strcpy(tc_status,"OFF");}
 	ILI9488_DrawStringBold(36,29,"TC " ,Font32,0xFFFF);
-	ILI9488_DrawStringBolD(120,29,tc_status,Font32,0xFFFF);
+	ILI9488_DrawStringBold(120,29,tc_status,Font32,0xFFFF);
 
 
 	//Regenerative
 	ILI9488_Square(240,0,479,99,0x0FF0);
-	if(Regen_Enabled==1){reg_status="ON";}else if(Regen_Enabled==0){reg_status="OFF";}
+	if(Regen_Enabled==1){strcpy(reg_status,"ON");}else if(Regen_Enabled==0){strcpy(reg_status,"OFF");}
 	ILI9488_DrawStringBold(29,40,"REGEN",Font16,0x0000);
 	ILI9488_DrawStringBold(127,29,reg_status,Font32,0x0000);
 
