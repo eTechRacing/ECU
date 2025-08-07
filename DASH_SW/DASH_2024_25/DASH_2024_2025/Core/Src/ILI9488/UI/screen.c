@@ -487,15 +487,36 @@ void carState_9 (){
 //----- CAR_STATE - 12
 ////////////////////////
 void carState_12_DRIVER (int n_driver){
-	if(printStatus==0){
-		ILI9488_FillScreen_DMA(0x0000);
-		ILI9488_DrawString(137,100,"DRIVER",Font24,0xFFFF);
-	}else if(printStatus==1){
-		ILI9488_Square(250, 100, 267, 124, 0x0000);
-	}else{
-		ILI9488_DrawString(250,100,driver_name[n_driver],Font32,0xFFFF);
-		Driver=n_driver+1;
-	}
+//	if(printStatus==0){
+//		ILI9488_FillScreen_DMA(0x0000);
+//		ILI9488_DrawString(137,100,"DRIVER",Font24,0xFFFF);
+//	}else if(printStatus==1){
+//		ILI9488_Square(250, 100, 267, 124, 0x0000);
+//	}else{
+//		ILI9488_DrawString(250,100,driver_name[n_driver],Font32,0xFFFF);
+//		Driver=n_driver+1;
+//	}
+
+	ILI9488_FillScreen_DMA(0x0000);
+	ILI9488_Square(0,0,419,1,0xF800);//H1
+	ILI9488_Square(0,318,419,320,0xF800);//H4
+	ILI9488_Square(0,0,1,319,0xF800);//V1
+	ILI9488_Square(418,0,419,319,0xF800);//V4
+
+	ILI9488_Square(0,118,419,119,0xF800);//H2
+	ILI9488_Square(0,218,419,219,0xF800);//H3
+	ILI9488_Square(159,118,160,319,0xF800);//V2
+	ILI9488_Square(359,119,360,319,0xF800);//V3
+
+	ILI9488_DrawStringBold(30,10,"DRIVER SETTINGS",Font32,0xFFFF);
+
+	ILI9488_DrawString(24,193,"DRIVER 1",Font16,0xFFFF);
+	ILI9488_DrawString(184,193,"DRIVER 2",Font16,0xFFFF);
+	ILI9488_DrawString(344,193,"DRIVER 3",Font16,0xFFFF);
+	ILI9488_DrawString(24,294,"DRIVER 4",Font16,0xFFFF);
+	ILI9488_DrawString(184,294,"DRIVER 5",Font16,0xFFFF);
+	ILI9488_DrawString(344,294,"DRIVER 6",Font16,0xFFFF);
+
 }
 /////////////////////////
 //----- CAR_STATE - 14
