@@ -1,0 +1,16 @@
+../Core/Src/ILI9488/lib/mainDash_lib.c:21:6:HAL_SPI_TxCpltCallback	16	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:27:13:ILI9488_SendCommand	16	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:35:13:ILI9488_SendData	16	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:43:13:ILI9488_Reset	8	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:51:6:ILI9488_Init	8	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:69:13:ILI9488_SetWindow	24	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:86:6:ILI9488_DrawPixel	24	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:109:6:ILI9488_FillScreen_DMA	32	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:140:6:ILI9488_Square	40	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:170:6:ILI9488_DrawBitmapRGB565	40	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:201:6:ILI9488_DrawChar	112	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:225:6:ILI9488_DrawCharBold	128	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:252:6:ILI9488_DrawString	32	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:274:6:ILI9488_DrawStringBold	32	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:297:6:ILI9488_FillCircle	32	static
+../Core/Src/ILI9488/lib/mainDash_lib.c:307:6:ILI9488_DrawBitmapMono	40	static
