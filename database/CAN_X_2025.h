@@ -21,13 +21,10 @@ extern uint16_t SOE;
 extern uint16_t ETAS_MSG_Counter;
 extern uint16_t Highest_CellTemp;
 extern uint16_t SOC_High;
-extern uint16_t Lowest_CellVoltage;
-extern uint8_t DeltaSOC_LastLap;
 extern uint32_t Accu_Current;
 extern uint8_t Reg_Level;
 extern uint8_t BB_Dash;
 extern uint8_t Disable_Regen;
-extern uint8_t Sensorics_Mode;
 extern uint8_t tel_DeltaSOC_LastLap;
 extern uint16_t BrakePressure2;
 extern uint16_t BrakePressure1;
@@ -87,7 +84,7 @@ extern uint8_t VDC_Max_Steering_Angle;
 extern uint8_t VDC_AP_SatUp;
 extern uint8_t VDC_AP_SatDown;
 extern uint8_t RemainLaps;
-extern uint8_t DeltaSOC_LastLap;
+extern uint8_t EnduranceFactor;
 extern uint8_t AvgVEL_LastLap;
 extern uint16_t TotalTime;
 extern uint8_t LapCount;
@@ -387,4 +384,4 @@ void message_canrx_STAT_ETAS_Sync(uint8_t *RxData);
 //error--------------------------------------------------------------------------------------------------
 void error_handle(void);
 
-#endif /* INC_CAN-X_2025_H_ */
+#endif /* INC_CAN_X_2025_H_ */
